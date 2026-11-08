@@ -6,3 +6,13 @@ tmp
 .env
 .env.*
 .DS_Store
+.audit/
+.env
+.env.*
+!.env.example
+
+# Keep release summaries, not generated local QA artifacts.
+reports/**/*.json
+reports/**/*.png
+reports/**/*.log
+reports/**/*.txt

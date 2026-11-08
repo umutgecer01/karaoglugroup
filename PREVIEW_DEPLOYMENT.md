@@ -1,99 +1,63 @@
-# Karaoğlu Grup - Özel Ön İzleme Sitesi
+# Karaoğlu Group - Canlı Netlify Yayını
 
-## 🔒 Gizli Link Mantığı
+## Canlı Adres
 
-Bu site **şifresiz** ancak **arama motorlarından tamamen gizli** olarak yapılandırılmıştır.
-
-### Özellikler:
-- ✅ Siteden şifre veya login sistemi **yoktur**
-- ✅ Doğrudan açılır; hesap oluşturmaya gerek **yoktur**
-- ✅ Google, Bing ve diğer arama motorlarında **indekslenmez**
-- ✅ **Sadece link bilenlerin** erişebileceği premium ön izleme yapısı
-- ✅ Tüm butonlar tam olarak çalışır
-
-## 🚀 Deployment (Yayına Alma)
-
-### Vercel Kullanılıyorsa:
-```
-Production Domain: (Henüz bağlanmamış)
-Preview URL: https://karaoglu-grup-xxxxx.vercel.app
-```
-Rastgele generated preview link paylaşılır. Bu link tahmin edilmesi neredeyse imkansızdır.
-
-### Netlify Kullanılıyorsa:
-```
-Site URL: https://karaoglu-grup-preview.netlify.app
-```
-Özel subdomain tahmin edilmesi zor bir şekilde ayarlanabilir.
-
-## 🔍 Arama Motoru Gizleme Ayarları
-
-### Uygulanmış Konfigürasyonlar:
-
-1. **robots.txt** - Tüm crawler'ları engeller
-```
-User-agent: *
-Disallow: /
+```text
+https://karaoglugroupnet.netlify.app/
 ```
 
-2. **HTML Meta Etiketleri** - Noindex/Nofollow ayarları
-```html
-<meta name="robots" content="noindex, nofollow" />
-<meta name="googlebot" content="noindex, nofollow" />
+Bu proje React + Vite ile hazırlanır ve Netlify üzerinde `dist/` çıktısından yayınlanır.
+
+## GitHub Akışı
+
+- Repository: `https://github.com/umutgecer01/karaoglugroup.git`
+- Ana branch: `main`
+- CI: `.github/workflows/ci.yml`
+- Güvenlik kontrolü: `.github/workflows/security.yml`
+- Netlify deploy: `.github/workflows/netlify-deploy.yml`
+
+## Netlify Deploy
+
+GitHub Actions ile production deploy çalışması için repository secrets alanında şu değerler tanımlı olmalıdır:
+
+```text
+NETLIFY_AUTH_TOKEN
+NETLIFY_SITE_ID
 ```
 
-3. **Sitemap** - Arama motorlarına sunulmaz
+Secrets tanımlıysa `main` branch'e yapılan push sonrasında GitHub Actions build alır ve Netlify production adresine deploy eder.
 
-## 📞 Çalışan İşlevler
+## SEO ve Canlı URL
 
-Sitedeki tüm butonlar tamamen işlevseldir:
+Canlı Netlify adresi `site.config.mjs` içinde merkezi olarak tanımlıdır. Build öncesinde `npm run sync:site` çalışır ve public SEO dosyalarını aynı adrese göre günceller.
+
+Canlı URL entegrasyonunda kullanılan dosyalar:
+
+- `site.config.mjs`
+- `scripts/sync-site-metadata.mjs`
+- `index.html`
+- `public/robots.txt`
+- `public/sitemap.xml`
+- `netlify.toml`
+- `.github/workflows/netlify-deploy.yml`
+
+Kalıcı özel domain bağlanırsa `site.config.mjs` veya `VITE_SITE_URL` yeni domainle güncellenmelidir.
+
+## Çalışan İşlevler
 
 | İşlev | Link |
 |-------|------|
-| 📱 Hemen Ara | `tel:+905444438000` |
-| 💬 WhatsApp | `https://wa.me/905444438000` |
-| 📍 Yol Tarifi | Google Maps (Seyhan, Adana) |
-| 🌐 Instagram | https://www.instagram.com/karaoglugroup01/ |
-| 👍 Facebook | https://www.facebook.com/karaogluuotomotiv/ |
+| Hemen Ara | `tel:+905444438000` |
+| WhatsApp | `https://wa.me/905444438000` |
+| Yol Tarifi | Google Maps |
+| Instagram | `https://www.instagram.com/karaoglugroup01/` |
+| Facebook | `https://www.facebook.com/karaogluuotomotiv/` |
 
-## 📋 Paylaşım Talimatları
+## Kontrol Komutları
 
-**Müşteri/İş Ortağına Gönderilecek Mesaj:**
+```bash
+npm run build
+npm run lint:security
+```
 
-> "Karaoğlu Grup'un yeni kurumsal sitesinin ön izlemesine hoş geldiniz. 
-> 
-> 🔐 **Bu site gizli link mantığıyla korunmaktadır:**
-> - Şifre gerekli değildir
-> - Arama motorlarında görünmez
-> - Sadece bu linke sahip kişiler erişebilir
-> - Tüm bağlantılar canlı çalışmaktadır
-> 
-> **Site Linki:** https://[deployment-url]
-> 
-> Geri bildirim ve önerileriniz için lütfen [iletişim-bilgileri]"
-
-## 📊 Teknik Notlar
-
-- **Framework:** React + Vite
-- **Hosting:** Vercel / Netlify
-- **Dil Desteği:** Türkçe, İngilizce, Arapça
-- **Responsive:** Mobil ve masaüstü uyumlu
-- **Performance:** Optimized assets
-
-## 🛠️ Gelecekteki Ayarlamalar
-
-Production (canlı) siteye geçildiğinde:
-1. Canonical URL güncellenmesi
-2. robots.txt "Allow" yapıya dönüştürülmesi
-3. Sitemap aktifleştirilmesi
-4. Google Search Console onayı
-
-## 📝 Notlar
-
-- Bu dosya hızlı referans içindir
-- Deployment linki müşterilerle paylaşılmadan önce test edin
-- Herhangi bir sorun için iletişime geçin
-
----
-
-**Son Güncelleme:** 23 Haziran 2026
+Son güncelleme: 1 Temmuz 2026

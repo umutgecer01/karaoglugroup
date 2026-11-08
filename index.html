@@ -3,42 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#164970" />
+    <meta name="theme-color" content="#08141f" />
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <meta
       name="description"
-      content="Adana merkezli çok sektörlü kurumsal yapısıyla Karaoğlu Grup; otomotiv, filo kiralama, inşaat, petrol ve tarım alanlarında güvenilir çözümler sunar."
+      content="Adana merkezli çok sektörlü kurumsal yapısıyla Karaoğlu Group; otomotiv, filo kiralama, inşaat, petrol ve tarım alanlarında güvenilir çözümler sunar."
     />
     <meta
       name="keywords"
-      content="Karaoğlu Grup, Adana grup şirketi, otomotiv, inşaat, petrol, tarım, filo kiralama, kurumsal filo, uzun dönem kiralama, kurumsal hizmet"
+      content="Karaoğlu Group, Adana group şirketi, otomotiv, inşaat, petrol, tarım, filo kiralama, kurumsal filo, uzun dönem kiralama, kurumsal hizmet"
     />
-    <link rel="canonical" href="https://karaoglugrup.com/" />
+    <link rel="canonical" href="%SITE_URL%" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="tr_TR" />
-    <meta property="og:site_name" content="Karaoğlu Grup" />
-    <meta property="og:title" content="Karaoğlu Grup | Güvenilir, Güçlü ve Sürdürülebilir Çözümler" />
+    <meta property="og:site_name" content="Karaoğlu Group" />
+    <meta property="og:title" content="Karaoğlu Group | Güvenilir, Güçlü ve Sürdürülebilir Çözümler" />
     <meta
       property="og:description"
-      content="Karaoğlu Grup; otomotiv, inşaat, petrol, tarım ve filo kiralama alanlarında kurumsal hizmet sunan, Adana merkezli çok sektörlü grup."
+      content="Karaoğlu Group; otomotiv, inşaat, petrol, tarım ve filo kiralama alanlarında kurumsal hizmet sunan, Adana merkezli çok sektörlü bir grup şirketidir."
     />
-    <meta property="og:image" content="/images/karaoglu-why-bg.jpeg" />
+    <meta property="og:url" content="%SITE_URL%" />
+    <meta property="og:image" content="%SITE_IMAGE_URL%" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Karaoğlu Grup | Güvenilir, Güçlü ve Sürdürülebilir Çözümler" />
+    <meta name="twitter:title" content="Karaoğlu Group | Güvenilir, Güçlü ve Sürdürülebilir Çözümler" />
     <meta
       name="twitter:description"
-      content="Karaoğlu Grup; otomotiv, inşaat, petrol, tarım ve filo kiralama alanlarında kurumsal hizmet sunan grup."
+      content="Karaoğlu Group; otomotiv, inşaat, petrol, tarım ve filo kiralama alanlarında kurumsal hizmet sunan bir grup şirketidir."
     />
-    <meta name="twitter:image" content="/images/karaoglu-why-bg.jpeg" />
+    <meta name="twitter:image" content="%SITE_IMAGE_URL%" />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>Karaoğlu Grup | Otomotiv, İnşaat, Petrol, Tarım ve Filo Kiralama</title>
+    <link rel="icon" href="/favicon-v3.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Karaoğlu Group",
+        "alternateName": "Karaoğlu Otomotiv",
+        "url": "%SITE_URL%",
+        "logo": "%SITE_URL%images/karaoglu-logo.jpeg",
+        "foundingDate": "1993",
+        "telephone": "+905444438000",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Sanayi Sitesi, 46003. Sk. No:2",
+          "addressLocality": "Seyhan",
+          "addressRegion": "Adana",
+          "postalCode": "01100",
+          "addressCountry": "TR"
+        },
+        "sameAs": [
+          "https://www.instagram.com/karaoglugroup01/",
+          "https://www.facebook.com/karaogluuotomotiv/"
+        ]
+      }
+    </script>
+    <title>Karaoğlu Group | Otomotiv, İnşaat, Petrol, Tarım ve Filo Kiralama</title>
   </head>
   <body>
     <div id="root"></div>
+    <p id="startup-error" hidden role="alert">Sayfa yüklenemedi / Unable to load. <a href="">Yeniden yükle / Reload</a></p>
+    <noscript>Menüler için JavaScript gereklidir. / JavaScript is required for interactive menus. <a href="/tr/iletisim/">İletişim / Contact</a></noscript>
+    <form name="corporate-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="corporate-contact" />
+      <input name="bot-field" type="text" />
+      <input name="source" type="text" />
+      <input name="name" type="text" />
+      <input name="phone" type="tel" />
+      <input name="email" type="email" />
+      <input name="company" type="text" />
+      <input name="service" type="text" />
+      <textarea name="message"></textarea>
+      <input name="consent" type="checkbox" value="accepted" />
+    </form>
+    <form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+      <input type="hidden" name="form-name" value="career-application" />
+      <input name="bot-field" type="text" />
+      <input name="name" type="text" />
+      <input name="phone" type="tel" />
+      <input name="email" type="email" />
+      <input name="position" type="text" />
+      <input name="experience" type="text" />
+      <textarea name="message"></textarea>
+      <input name="cv" type="file" />
+      <input name="consent" type="checkbox" value="accepted" />
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

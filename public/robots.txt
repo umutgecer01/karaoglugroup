@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karaoglugroupnet.netlify.app/sitemap.xml

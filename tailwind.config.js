@@ -3,6 +3,26 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "Aptos",
+          "Segoe UI Variable Text",
+          "Segoe UI",
+          "Inter",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
+        display: [
+          "Aptos Display",
+          "Segoe UI Variable Display",
+          "Segoe UI",
+          "Inter",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
+      },
       colors: {
         ink: "#143956",
         graphite: "#205984",

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Karaoglu Group">
+  <rect width="64" height="64" rx="10" fill="#0b3444"/>
+  <polygon points="8,8 55,56 33,56 8,31" fill="#f7fbff"/>
+  <polygon points="8,36 28,56 8,56" fill="#f47a18"/>
+  <polygon points="29,8 59,8 39,30 25,18" fill="#f47a18"/>
+</svg>

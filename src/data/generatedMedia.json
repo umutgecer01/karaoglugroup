@@ -1,0 +1,312 @@
+{
+  "/images/agriculture-1.jpg": {
+    "width": 1408,
+    "height": 530,
+    "originalBytes": 396123,
+    "variants": [
+      {
+        "src": "/images/agriculture-1-640.webp",
+        "width": 640,
+        "height": 241,
+        "bytes": 42322
+      },
+      {
+        "src": "/images/agriculture-1-1408.webp",
+        "width": 1408,
+        "height": 530,
+        "bytes": 214168
+      }
+    ]
+  },
+  "/images/agriculture-2.jpg": {
+    "width": 1408,
+    "height": 622,
+    "originalBytes": 462837,
+    "variants": [
+      {
+        "src": "/images/agriculture-2-640.webp",
+        "width": 640,
+        "height": 283,
+        "bytes": 53588
+      },
+      {
+        "src": "/images/agriculture-2-1408.webp",
+        "width": 1408,
+        "height": 622,
+        "bytes": 250804
+      }
+    ]
+  },
+  "/images/agriculture-3.jpg": {
+    "width": 1408,
+    "height": 611,
+    "originalBytes": 422893,
+    "variants": [
+      {
+        "src": "/images/agriculture-3-640.webp",
+        "width": 640,
+        "height": 278,
+        "bytes": 47218
+      },
+      {
+        "src": "/images/agriculture-3-1408.webp",
+        "width": 1408,
+        "height": 611,
+        "bytes": 227212
+      }
+    ]
+  },
+  "/images/automotive-gallery-1.jpg": {
+    "width": 960,
+    "height": 540,
+    "originalBytes": 133710,
+    "variants": [
+      {
+        "src": "/images/automotive-gallery-1-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 34604
+      },
+      {
+        "src": "/images/automotive-gallery-1-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 53936
+      },
+      {
+        "src": "/images/automotive-gallery-1-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 115168
+      }
+    ]
+  },
+  "/images/automotive-gallery-3.jpg": {
+    "width": 960,
+    "height": 540,
+    "originalBytes": 91191,
+    "variants": [
+      {
+        "src": "/images/automotive-gallery-3-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 37816
+      },
+      {
+        "src": "/images/automotive-gallery-3-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 77844
+      }
+    ]
+  },
+  "/images/construction-1.jpg": {
+    "width": 760,
+    "height": 1014,
+    "originalBytes": 172829,
+    "variants": [
+      {
+        "src": "/images/construction-1-640.webp",
+        "width": 640,
+        "height": 854,
+        "bytes": 173250
+      },
+      {
+        "src": "/images/construction-1-760.webp",
+        "width": 760,
+        "height": 1014,
+        "bytes": 249056
+      }
+    ]
+  },
+  "/images/construction-2.jpg": {
+    "width": 760,
+    "height": 872,
+    "originalBytes": 147807,
+    "variants": [
+      {
+        "src": "/images/construction-2-640.webp",
+        "width": 640,
+        "height": 734,
+        "bytes": 133562
+      },
+      {
+        "src": "/images/construction-2-760.webp",
+        "width": 760,
+        "height": 872,
+        "bytes": 194986
+      }
+    ]
+  },
+  "/images/construction-3.jpg": {
+    "width": 760,
+    "height": 884,
+    "originalBytes": 126575,
+    "variants": [
+      {
+        "src": "/images/construction-3-640.webp",
+        "width": 640,
+        "height": 744,
+        "bytes": 120206
+      },
+      {
+        "src": "/images/construction-3-760.webp",
+        "width": 760,
+        "height": 884,
+        "bytes": 171084
+      }
+    ]
+  },
+  "/images/fleet-rental-1.jpg": {
+    "width": 1200,
+    "height": 481,
+    "originalBytes": 109987,
+    "variants": [
+      {
+        "src": "/images/fleet-rental-1-640.webp",
+        "width": 640,
+        "height": 257,
+        "bytes": 35300
+      },
+      {
+        "src": "/images/fleet-rental-1-1200.webp",
+        "width": 1200,
+        "height": 481,
+        "bytes": 103096
+      }
+    ]
+  },
+  "/images/fleet-rental-2.jpg": {
+    "width": 1200,
+    "height": 449,
+    "originalBytes": 127915,
+    "variants": [
+      {
+        "src": "/images/fleet-rental-2-640.webp",
+        "width": 640,
+        "height": 239,
+        "bytes": 44442
+      },
+      {
+        "src": "/images/fleet-rental-2-1200.webp",
+        "width": 1200,
+        "height": 449,
+        "bytes": 123410
+      }
+    ]
+  },
+  "/images/fleet-rental-3.jpg": {
+    "width": 1200,
+    "height": 437,
+    "originalBytes": 88226,
+    "variants": [
+      {
+        "src": "/images/fleet-rental-3-640.webp",
+        "width": 640,
+        "height": 233,
+        "bytes": 28310
+      },
+      {
+        "src": "/images/fleet-rental-3-1200.webp",
+        "width": 1200,
+        "height": 437,
+        "bytes": 79514
+      }
+    ]
+  },
+  "/images/fleet-rental-video-poster.jpg": {
+    "width": 1280,
+    "height": 568,
+    "originalBytes": 64124,
+    "variants": [
+      {
+        "src": "/images/fleet-rental-video-poster-640.webp",
+        "width": 640,
+        "height": 284,
+        "bytes": 18792
+      },
+      {
+        "src": "/images/fleet-rental-video-poster-1280.webp",
+        "width": 1280,
+        "height": 568,
+        "bytes": 46394
+      }
+    ]
+  },
+  "/images/karaoglu-why-bg.jpeg": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 229484,
+    "variants": [
+      {
+        "src": "/images/karaoglu-why-bg-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 36218
+      },
+      {
+        "src": "/images/karaoglu-why-bg-1408.webp",
+        "width": 1408,
+        "height": 792,
+        "bytes": 111762
+      }
+    ]
+  },
+  "/images/petrol-energy-1.jpg": {
+    "width": 960,
+    "height": 292,
+    "originalBytes": 45729,
+    "variants": [
+      {
+        "src": "/images/petrol-energy-1-640.webp",
+        "width": 640,
+        "height": 195,
+        "bytes": 25290
+      },
+      {
+        "src": "/images/petrol-energy-1-960.webp",
+        "width": 960,
+        "height": 292,
+        "bytes": 50214
+      }
+    ]
+  },
+  "/images/petrol-energy-2.jpg": {
+    "width": 960,
+    "height": 492,
+    "originalBytes": 79645,
+    "variants": [
+      {
+        "src": "/images/petrol-energy-2-640.webp",
+        "width": 640,
+        "height": 328,
+        "bytes": 45186
+      },
+      {
+        "src": "/images/petrol-energy-2-960.webp",
+        "width": 960,
+        "height": 492,
+        "bytes": 92400
+      }
+    ]
+  },
+  "/images/petrol-energy-3.jpg": {
+    "width": 960,
+    "height": 404,
+    "originalBytes": 72368,
+    "variants": [
+      {
+        "src": "/images/petrol-energy-3-640.webp",
+        "width": 640,
+        "height": 269,
+        "bytes": 38902
+      },
+      {
+        "src": "/images/petrol-energy-3-960.webp",
+        "width": 960,
+        "height": 404,
+        "bytes": 77818
+      }
+    ]
+  }
+}
