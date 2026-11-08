@@ -22,7 +22,8 @@ export const pagePaths = {
 
 export function pagePath(view, language = 'tr') {
   const lang = normalizeLanguage(language);
-  const slug = pagePaths[view]?.[lang === 'tr' ? 0 : 1];
+  const slug = typeof view === 'string' && Object.hasOwn(pagePaths, view)
+    ? pagePaths[view][lang === 'tr' ? 0 : 1] : undefined;
   return `/${lang}/${slug === undefined ? '404/' : slug ? `${slug}/` : ''}`;
 }
 
@@ -42,6 +43,9 @@ export function resolveRoute(pathname = '/', search = '', hash = '', fallbackLan
   const slug = segments.slice(1).join('/');
   let view = pathname === '/' ? 'home' : 'not-found';
   if (isLocalized) view = Object.keys(pagePaths).find(key => pagePaths[key][language === 'tr' ? 0 : 1] === slug) || 'not-found';
-  if (hash && hash !== '#main-content') view = legacyViews[hash.slice(1).toLowerCase()] || 'not-found';
+  if (hash && hash !== '#main-content') {
+    const key = hash.slice(1).toLowerCase();
+    view = Object.hasOwn(legacyViews, key) ? legacyViews[key] : 'not-found';
+  }
   return { language, view };
 }

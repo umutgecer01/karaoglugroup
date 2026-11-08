@@ -1,4 +1,5 @@
 // Local Chrome DevTools client. No browser package or external service is needed.
+import { callBrowserFunction } from './browser-call.mjs';
 export async function browserSession() {
   const target = await fetch('http://127.0.0.1:9222/json/new?about:blank', { method: 'PUT' }).then(r => r.json());
   const socket = new WebSocket(target.webSocketDebuggerUrl);
@@ -31,7 +32,7 @@ export async function browserSession() {
   await send('Network.enable');
   // QA must never send a form or request an embedded external map.
   await send('Network.setBlockedURLs', { urls: ['*google.com*', '*googleapis.com*', '*gstatic.com*'] });
-  return { send, evaluate, events, close: async () => { socket.close(); await fetch(`http://127.0.0.1:9222/json/close/${target.id}`); } };
+  return { send, evaluate, call: (fn, ...args) => callBrowserFunction(send, fn, args), events, close: async () => { socket.close(); await fetch(`http://127.0.0.1:9222/json/close/${target.id}`); } };
 }
 
 export const pause = ms => new Promise(resolve => setTimeout(resolve, ms));

@@ -8,7 +8,12 @@ export const defaultLanguage = "tr";
 
 export function normalizeLanguage(value) {
   const normalized = typeof value === "string" ? value.trim().toLowerCase() : "";
-  return languages.some((language) => language.code === normalized) ? normalized : defaultLanguage;
+  // Select a trusted constant; never pass URL/storage text through to hrefs.
+  switch (normalized) {
+    case 'en': return 'en';
+    case 'ar': return 'ar';
+    default: return 'tr';
+  }
 }
 
 export function getStoredLanguage() {

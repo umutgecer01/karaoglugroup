@@ -8,6 +8,48 @@ import { en } from '../src/data/translations/en.js';
 import { ar } from '../src/data/translations/ar.js';
 import { getServiceGallery } from '../src/data/serviceGallery.js';
 import { formsEnabled, submitNetlifyForm, isValidEmail, isValidPhone, isAllowedCvFile, MAX_CV_SIZE_BYTES } from '../src/utils/netlifyForms.js';
+import { normalizeLanguage } from '../src/utils/i18n.js';
+import { decodeHtmlEntities } from './html-entities.mjs';
+import { callBrowserFunction } from './browser-call.mjs';
+
+test('HTML entities decode a single layer, preserving nested and unknown references', () => {
+  assert.equal(decodeHtmlEntities('&amp;&quot;&#x27;&lt;&gt;'), '&"\'<>');
+  assert.equal(decodeHtmlEntities('&amp;lt;script&amp;gt;'), '&lt;script&gt;');
+  assert.equal(decodeHtmlEntities('&amp;quot;&amp;#x27;&amp;amp;'), '&quot;&#x27;&amp;');
+  assert.equal(decodeHtmlEntities('&unknown; plain العربية Türkçe'), '&unknown; plain العربية Türkçe');
+});
+
+test('URL and storage language text selects only trusted localized routes', () => {
+  const origin = 'https://example.invalid';
+  for (const input of ['//evil.invalid', 'https://evil.invalid', '\\\\evil.invalid', 'javascript:alert(1)', '%2f%2fevil.invalid', 'en/../../evil', 'constructor', '__proto__', '', null, {}, 'EN', ' ar ']) {
+    assert.ok(['tr', 'en', 'ar'].includes(normalizeLanguage(input)));
+    for (const view of [...Object.keys(pagePaths), '__proto__', 'constructor', '//evil.invalid']) {
+      const path = pagePath(view, input);
+      const url = new URL(path, origin);
+      assert.equal(url.origin, origin);
+      assert.match(path, /^\/(tr|en|ar)\/[a-z0-9-]*\/?$/);
+    }
+  }
+  assert.equal(normalizeLanguage(' EN '), 'en');
+  assert.equal(normalizeLanguage('AR'), 'ar');
+  assert.equal(pagePath('__proto__', 'en'), '/en/404/');
+  assert.deepEqual(resolveRoute('/', '', '#constructor'), {view:'not-found', language:'tr'});
+});
+
+test('CDP function arguments cannot become executable function source', async () => {
+  const payload = '\");globalThis.compromised=true;//\\`\nالعربية';
+  const calls = [];
+  const send = async (method, params) => {
+    calls.push({method, params});
+    return method === 'Runtime.evaluate' ? {result:{objectId:'context'}} : {result:{value:payload}};
+  };
+  assert.equal(await callBrowserFunction(send, value => value, [payload]), payload);
+  assert.equal(calls[0].params.expression, 'globalThis');
+  assert.equal(calls[1].method, 'Runtime.callFunctionOn');
+  assert.deepEqual(calls[1].params.arguments, [{value:payload}]);
+  assert.ok(!calls[1].params.functionDeclaration.includes(payload));
+  await assert.rejects(callBrowserFunction(async () => ({exceptionDetails:{text:'blocked'}}), () => true), /context unavailable/);
+});
 
 test('production-disabled form transport rejects without making a network request', async () => {
   assert.equal(formsEnabled, false);

@@ -6,9 +6,9 @@ import { pageMetadata } from '../src/utils/metadata.js';
 import { tr } from '../src/data/translations/tr.js';
 import { en } from '../src/data/translations/en.js';
 import { ar } from '../src/data/translations/ar.js';
+import { decodeHtmlEntities as unescape } from './html-entities.mjs';
 
 const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(match => [match[1].toLowerCase(), match[2]]));
-const unescape = value => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#x27;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>');
 test('preview headers retain security/cache rules and production has no preview header file', async () => {
   if (['deploy-preview','branch-deploy'].includes(process.env.CONTEXT)) {
     const headers = await readFile('dist/_headers','utf8');

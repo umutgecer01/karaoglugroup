@@ -7,9 +7,9 @@ import { en } from '../src/data/translations/en.js';
 import { ar } from '../src/data/translations/ar.js';
 const b = await browserSession();
 const checks = [];
-const waitFor = async expression => {
-  for (let i = 0; i < 100; i++) { if (await b.evaluate(expression)) return; await pause(80); }
-  throw new Error(`Timed out: ${expression}`);
+const waitFor = async (predicate, ...args) => {
+  for (let i = 0; i < 100; i++) { if (await b.call(predicate, ...args)) return; await pause(80); }
+  throw new Error('Timed out waiting for browser state');
 };
 try {
   await b.send('Page.addScriptToEvaluateOnNewDocument', { source: "localStorage.setItem('karaoglu-privacy-consent','1')" });
@@ -19,11 +19,19 @@ try {
     await b.send('Page.navigate', { url: `http://127.0.0.1:4175${pagePath(view,'tr')}` });
     // SSR already exposes a native select. Wait until React has attached its
     // onChange handler rather than firing an event during bootstrap.
-    await waitFor(`location.pathname===${JSON.stringify(pagePath(view,'tr'))} && document.readyState==='complete' && (()=>{const s=document.querySelector('header select');return s && Object.entries(s).some(([key,value])=>key.startsWith('__reactProps$') && typeof value?.onChange==='function');})()`);
+    await waitFor(path => {
+      const select = document.querySelector('header select');
+      return location.pathname === path && document.readyState === 'complete' && select
+        && Object.entries(select).some(([key, value]) => key.startsWith('__reactProps$') && typeof value?.onChange === 'function');
+    }, pagePath(view, 'tr'));
     for (const language of ['en','ar','tr']) {
-      await b.evaluate(`(()=>{const s=document.querySelector('header select');s.value=${JSON.stringify(language)};s.dispatchEvent(new Event('change',{bubbles:true}));})()`);
-      await waitFor(`document.documentElement.lang===${JSON.stringify(language)} && location.pathname===${JSON.stringify(pagePath(view,language))}`);
-      await waitFor(`!!document.querySelector('h1')?.textContent?.trim()`);
+      await b.call(value => {
+        const select = document.querySelector('header select');
+        select.value = value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      }, language);
+      await waitFor((lang, path) => document.documentElement.lang === lang && location.pathname === path, language, pagePath(view, language));
+      await waitFor(() => !!document.querySelector('h1')?.textContent?.trim());
       const state = await b.evaluate(`({path:location.pathname,lang:document.documentElement.lang,dir:document.documentElement.dir,canonical:document.querySelector('link[rel="canonical"]').href,title:document.title,h1:document.querySelector('h1')?.textContent.trim(),visibleHeading:document.querySelector('h1')?.innerText,headingTop:document.querySelector('h1')?.getBoundingClientRect().top})`);
       assert.equal(new URL(state.canonical).pathname, pagePath(view,language));
       assert.equal(state.dir, language==='ar'?'rtl':'ltr');
@@ -43,7 +51,7 @@ try {
   await b.evaluate(`document.querySelector('video').scrollIntoView({block:'center',behavior:'instant'})`);
   const pos=await b.evaluate(`(()=>{const r=document.querySelector('video').parentElement.querySelector('button').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()`);
   for(const type of ['mousePressed','mouseReleased']) await b.send('Input.dispatchMouseEvent',{type,...pos,button:'left',clickCount:1});
-  await waitFor(`document.querySelector('video').currentTime>0`);
+  await waitFor(() => document.querySelector('video').currentTime > 0);
   const playing=await b.evaluate(`({time:document.querySelector('video').currentTime,controls:document.querySelector('video').controls,paused:document.querySelector('video').paused})`);
   assert.equal(playing.controls,true);
   await b.evaluate('window.scrollTo(0,document.body.scrollHeight)');
