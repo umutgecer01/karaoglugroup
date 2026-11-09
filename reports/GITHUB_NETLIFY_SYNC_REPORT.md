@@ -53,3 +53,17 @@ Kullanıcı bu çalışma düzeninde tamamlanan değişikliklerin release dalın
 - Canlı yayın geçmişi: [PRODUCTION_DEPLOYMENT_REPORT.md](PRODUCTION_DEPLOYMENT_REPORT.md).
 
 Formlar `VITE_NETLIFY_FORMS_ENABLED=false` kalır. Bu kayıt düzeni gerçek mesaj/CV gönderimi veya form aktivasyonu yapmaz.
+
+## Bu kurulumun gerçek doğrulaması
+
+Kaynak/otomasyon commit'i **`cb3485df73001e2fdf446e8abe4237a7eb99599e`**, `sync:preview` komutuyla gerçekten test edilip release dalına gönderildi. Komutun test/commit/push akışı yalnızca öneri olarak bırakılmadı.
+
+- Temiz Node 22 kurulumu: 209 paket, audit 0. İlk kurulum açık yerel Vite esbuild kilidine takıldı; yalnızca bu workspace'in geliştirme sunucusu durdurulup kurulumdan sonra aynı `0.0.0.0:5173` adresinde yeniden açıldı ve HTTP 200 doğrulandı.
+- `security:check`, build, **13/13** regresyon ve **4/4** statik HTML/SEO/form kontrolü başarılı.
+- Uzak [CI](https://github.com/umutgecer01/karaoglugroup/actions/runs/42586379974), [Security](https://github.com/umutgecer01/karaoglugroup/actions/runs/42586379950), [CodeQL](https://github.com/umutgecer01/karaoglugroup/actions/runs/42586379960) ve [CodeQL findings check'i](https://github.com/umutgecer01/karaoglugroup/runs/129057497784) başarılı; yeni CodeQL bulgusu yok.
+- Netlify geliştirme projesi otomatik olarak **`6af1848675a5aadcccdaa845`** deployment'ını üretti; commit status'ü `success`, header/redirect kuralları başarılı. [Test edilen deployment](https://6af1848675a5aadcccdaa845--karaoglugroup.netlify.app/).
+- Değişen Değerlerimiz/Values kartları TR/EN/AR ve 11 genişlikte **33/33** kontrolü geçti; minimum yükseklik, aynı satır yüksekliği, taşma, lang/dir/canonical/noindex ve kapalı form doğrulandı. Bu dar değişiklik için eski 594 kontrol tekrar yapılmış gibi gösterilmedi.
+- Resmî Netlify yardımcı kütüphanesinin `LocalState` kaydı, yetkili API ile doğrulanan preview ID'siyle ayarlandı. `.netlify/state.json` yalnızca yerelde, Git dışında kalır; uzak site bağlantısı/ayarları değiştirilmedi. CLI'ın ilk ağ hatası site ayarı değişikliği olarak değerlendirilmedi.
+- Son salt okunur API kontrolünde canlı production hâlâ **`6af17892dbe0ae394ffc49ca`**, eski Git build'leri kapalı; yeni geliştirme projesinin build'leri açık ve base production yayını yok. **Bu kurulum canlıya yeni deployment yapmadı.**
+
+Bu bölümdeki kaynak testleri `cb3485d` sürümüne aittir; sonuçları kaydeden sonraki yalnızca dokümantasyon commit'leri uygulama kodunu değiştirmez. En güncel head'in pipeline durumu PR/Netlify geçmişinden takip edilir. Yerel ham kanıtlar `reports/sync-integration/` altında, Git dışındadır. Ortamda bazı native API okumaları zaman aşımına uğradı; GitHub CI/CodeQL/Netlify commit durumları bağlı GitHub aracıyla doğrulandı.
