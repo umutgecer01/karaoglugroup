@@ -1,5 +1,7 @@
 # KARAOĞLU GROUP — Onaylı release push ve son preview doğrulaması
 
+> 9 Kasım 2026 güncellemesi: Bu dosya önceki preview aşamasının tarihsel raporudur. Proje erişimi doğrulandı, GitHub/preview eski production projesinde birleştirildi ve kullanıcının son onayıyla güncel sürüm canlıya alındı. Güncel yayın ve test kaydı: [LATEST_PRODUCTION_RELEASE_REPORT.md](LATEST_PRODUCTION_RELEASE_REPORT.md).
+
 > 9 Kasım güncellemesi: Kullanıcı onayıyla eski Netlify projesinin otomatik Git build'leri durduruldu ve `c45a5c0` production paketi mevcut canlı adreste yayımlandı. [Güncel production raporu](PRODUCTION_DEPLOYMENT_REPORT.md). Aşağıdaki içerik 8 Kasım release/preview kaydıdır.
 
 8 Kasım 2026 — Europe/Istanbul

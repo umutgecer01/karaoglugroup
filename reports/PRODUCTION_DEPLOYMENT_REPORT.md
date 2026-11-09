@@ -1,5 +1,7 @@
 # KARAOĞLU GROUP — Onaylı production yayını
 
+> Güncel yayın: Kullanıcının “yayınla son halini” onayıyla 9 Kasım 2026 12:14:29 İstanbul saatinde `6ca07f9` kaynaklı yeni sürüm yayınlandı ve kilitlendi. Git build/preview entegrasyonu açık tutuldu. Bu dosyanın aşağıdaki bölümleri önceki `c45a5c0` yayınının tarihsel kaydıdır. Güncel ayrıntılar: [LATEST_PRODUCTION_RELEASE_REPORT.md](LATEST_PRODUCTION_RELEASE_REPORT.md).
+
 9 Kasım 2026 — Europe/Istanbul
 
 **YAYINLANDI ve kapsamdaki yayın sonrası kontroller başarılı:** [https://karaoglugroupnet.netlify.app/](https://karaoglugroupnet.netlify.app/). Kullanıcının son açık onayıyla eski projenin otomatik Git build'leri durduruldu ve doğrulanmış production paketi yayımlandı. Canlı URL'de 594 responsive, 101 kaynak, 51 dil geçişi ve 38 smoke kontrolü tamamlandı.
