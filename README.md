@@ -59,12 +59,12 @@ Bu adres build sırasında `index.html`, `robots.txt` ve `sitemap.xml` çıktıl
 GitHub Actions üzerinde CI, güvenlik kontrolü ve Netlify deploy iş akışı hazırdır.
 
 - Repository: `https://github.com/umutgecer01/karaoglugroup.git`
-- Geliştirme dalı `release/karaoglu-final-2026-11-08`, inceleme kaydı PR #1'dir. Commit ve push sonrasında CI/CodeQL çalışır, `karaoglugroup` Netlify projesi yeni Deploy Preview üretir.
+- Geliştirme dalı `release/karaoglu-final-2026-11-08`, inceleme kaydı PR #1'dir. Commit ve push sonrasında CI/CodeQL çalışır, `karaoglugroupnet` Netlify projesi yeni Deploy Preview üretir; mevcut canlı deployment kilitli kalır.
 - Tamamlanan değişikliği test edip kaydetmek ve GitHub'a göndermek için: `npm run sync:preview -- "Değişikliği açıklayan mesaj"`. PowerShell'de gerekirse `npm.cmd` kullanın. Script main/yanlış remote gönderimini, yerel araçları/credentials ve ham test çıktılarının kaydını engeller. GitHub kimlik doğrulaması yoksa token istemeden durur.
 - Script dosya kaydında arka planda çalışmaz; tamamlanan değişiklik için çağrılır. Codex çalışma kuralı `AGENTS.md` içinde her tamamlanan değişiklikte bu akışı uygulamasını belirtir. Commit geçmişi GitHub'da, preview/build geçmişi Netlify'da saklanır.
-- Production projesi `karaoglugroupnet`, ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`; eski Git build'leri kapalıdır. Yeni geliştirme/preview projesi ID'si `80b58d06-0cbb-432c-8193-17d34ba776df` olarak kalır.
+- Preview ve production aynı `karaoglugroupnet` projesindedir, ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`. Git build açık, canlı deployment kilitlidir; yeni build canlı içeriği otomatik değiştirmez. Diğer `karaoglugroup` projesi (`80b58d06-0cbb-432c-8193-17d34ba776df`) silinmeden korundu.
 - `.github/workflows/netlify-deploy.yml` **yalnızca manuel** çalıştırılır; main push otomatik production yayını tetiklemez. Production için ayrıca açık kullanıcı onayı gerekir. Repo bağlantısı, secrets veya main merge bu senkronizasyonun parçası değildir.
-- GitHub Actions production credentials/environment henüz kurulmadı; hazırmış gibi değerlendirmeyin. Onaylı yayın mevcut yetkili Netlify CLI oturumuyla, doğru eski Project ID ve ayrı production-context paketle yapılabilir.
+- GitHub Actions production credentials/environment henüz kurulmadı; hazırmış gibi değerlendirmeyin. Onaylı yayın mevcut yetkili Netlify CLI oturumuyla, doğru eski Project ID ve ayrı production-context paketle ve ayrıca onaylanmış yayın kilidi yönetimiyle yapılabilir. Kilit otomatik kaldırılmaz.
 - Netlify build ayarı `netlify.toml` içinde `npm run build` ve `dist` olarak yapılandırılmıştır.
 
 Son canlı yayın: [PRODUCTION_DEPLOYMENT_REPORT.md](reports/PRODUCTION_DEPLOYMENT_REPORT.md). Formlar teslimat/KVKK ve ayrı aktivasyon onayına kadar `false` kalır.

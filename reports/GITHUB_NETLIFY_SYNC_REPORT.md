@@ -1,5 +1,7 @@
 # GitHub / Netlify kayıt ve eşitleme düzeni
 
+> 9 Kasım 2026 güncellemesi: Aşağıdaki ilk kurulum sonuçları tarihseldir. Kullanıcının ayrıca verdiği onayla GitHub bağlantısı ve ana preview akışı `karaoglugroupnet` projesinde birleştirildi. Git build artık açık, mevcut canlı deployment kilitlidir. Güncel durum: [SAME_PROJECT_INTEGRATION_REPORT.md](SAME_PROJECT_INTEGRATION_REPORT.md).
+
 9 Kasım 2026 — Europe/Istanbul
 
 Kullanıcı seçimi: **tamamlanan değişiklik GitHub'a kaydedilir, preview oluşur; canlı yayın ayrıca onaylanır.** Bu dosya kalıcı çalışma düzenini ve yapılandırma değişikliklerini kayıt altına alır. Her commit'in gerçek CI/CodeQL/Netlify sonucunun kaydı GitHub PR ve Netlify deployment geçmişindedir.

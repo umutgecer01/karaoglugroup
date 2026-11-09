@@ -19,9 +19,9 @@ Bu proje React + Vite ile hazırlanır ve Netlify üzerinde `dist/` çıktısın
 
 ## Netlify Deploy
 
-Tamamlanan düzenlemeyi kaydetmek için `npm run sync:preview -- "Değişiklik açıklaması"` çalıştırılır. Node 22 kontrolleri geçerse commit/push yapılır. Mevcut PR güncellenir ve Netlify geliştirme projesi `80b58d06-0cbb-432c-8193-17d34ba776df` otomatik preview oluşturur.
+Tamamlanan düzenlemeyi kaydetmek için `npm run sync:preview -- "Değişiklik açıklaması"` çalıştırılır. Node 22 kontrolleri geçerse commit/push yapılır. Mevcut PR güncellenir ve aynı production projesi `karaoglugroupnet` (`b4753086-eb94-4a7e-b5f5-7270835fab3a`) otomatik preview oluşturur; canlı deployment kilitli kalır.
 
-Güncel preview: `https://deploy-preview-1--karaoglugroup.netlify.app/`. Sonucun güncel commit'e ait olduğu PR durumundan doğrulanmalıdır.
+Güncel preview: `https://deploy-preview-1--karaoglugroupnet.netlify.app/`. Sonucun güncel commit'e ait olduğu PR durumundan doğrulanmalıdır.
 
 GitHub Actions production yayını **yalnızca manuel** workflow_dispatch ile mümkündür; mevcut hesapta aşağıdaki credentials/environment kurulumu yapılmadı:
 
@@ -30,7 +30,7 @@ NETLIFY_AUTH_TOKEN
 NETLIFY_SITE_ID
 ```
 
-Main push artık production deploy tetiklemez. Canlı site için her sürümde ayrıca açık kullanıcı onayı gerekir. Eski production Project ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`; eski Git build'leri kapalı tutulur. Onaylı canlı sürüm ayrı production-context paketle bu açık Project ID'ye gönderilir; preview noindex paketi kullanılmaz. Secrets, repo bağlantısı veya DNS bu otomasyon tarafından değiştirilmez.
+Main push artık production deploy tetiklemez. Canlı site için her sürümde ayrıca açık kullanıcı onayı gerekir. Eski production Project ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`; Git build açık, mevcut canlı deployment kilitli tutulur. Diğer proje silinmez. Yayın kilidinin kaldırılması da ayrıca açık onay gerektirir. Onaylı canlı sürüm ayrı production-context paketle bu açık Project ID'ye gönderilir; preview noindex paketi kullanılmaz. Secrets, repo bağlantısı veya DNS bu otomasyon tarafından değiştirilmez.
 
 ## SEO ve Canlı URL
 
