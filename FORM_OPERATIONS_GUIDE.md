@@ -2,6 +2,8 @@
 
 9 Kasım 2026
 
+Kullanıcı alıcı e-posta adreslerini bu çalışma sırasında **“belirlenmedi”** olarak teyit etti. Adres veya gerçek bildirim yönlendirmesi oluşturulmadı. Yeni yerel taklit etkileşim paketi 138/138 geçti; gerçek teslimat kanıtı değildir. Ayrıntılı yerel/preview/production ayrımı [operasyon raporundadır](reports/KARAOGLU_FINAL_OPERATIONS_REPORT.md).
+
 **Gönderimler kapalıdır:** `VITE_NETLIFY_FORMS_ENABLED=false` korunur. Bu belge aktivasyon, gerçek mesaj/CV gönderimi, alıcı tanımlama veya hukuki metin yayını onayı değildir. Kaynak düzeltmeleri release/preview aşamasındadır; yeni production yayını ayrıca onay gerektirir.
 
 ## Mevcut teknik yapı

@@ -1,5 +1,7 @@
 # Netlify panelinde kalan işlemler — 8 Kasım 2026
 
+> Tarihsel aşama raporu. 9 Kasım'da yetkili erişim, doğru proje bağlantısı ve açık form detection/tam alan algılaması doğrulandı. Yeni güncel panel ve onay sırası [FORM_OPERATIONS_GUIDE.md](../FORM_OPERATIONS_GUIDE.md), [DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md) ve [KARAOGLU_FINAL_OPERATIONS_REPORT.md](KARAOGLU_FINAL_OPERATIONS_REPORT.md) içindedir. Aşağıdaki eski erişim/soft-404 bulguları güncel yayın durumu sayılmaz.
+
 Bu adımlar **uygulanmadı**. Hesap/panel ve yeni sürüme ait Deploy Preview erişimi yok. Mevcut public siteye yalnızca GET istekleri yapıldı; yayın, DNS, Git push veya form POST yapılmadı.
 
 ## Korunan yapılandırma

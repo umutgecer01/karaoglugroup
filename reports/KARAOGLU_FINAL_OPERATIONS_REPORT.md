@@ -8,7 +8,7 @@
 
 **A — TAMAMLANDI:** Mevcut proje ve tarihsel raporlar, kaynak/config/script/medya envanteri ve kullanıcının ZIP şablonu incelendi. ZIP yalnızca iki küçük metin dosyalı referans pakettir; eski varsayımlar yeni koda kopyalanmadı. Başlangıç çalışma ağacı temiz, release HEAD `d4287c5`; `origin` doğru depoya bağlı. Git bundle yedeği ve mevcut production paketi/manifest'i yerelde korundu.
 
-**B — TEKNİK OLARAK HAZIR:** Yeni güvenli release değişiklikleri aşağıda listelenir. Önizleme/uzak kontrol sonuçları son doğrulamada bu rapora eklenir.
+**B — TEKNİK OLARAK HAZIR:** Yeni release normal push ile gönderildi; gerçek önizleme ve CI/CodeQL doğrulandı. Production workflow kodu hazır; environment/token/main geçişi tamamlanmadı.
 
 **C — ONAY VEYA BİLGİ GEREKİYOR:** Bağımsız reviewer, production environment/token ve main merge kararı; form alıcıları/veri süreçleri; şirket/medya/hukuk teyitleri. Mevcut canlı adres değişmedi.
 
@@ -66,7 +66,7 @@ Mevcut tercihler penceresine kalıcı hareket azaltma seçeneği eklendi; kullan
 
 ## 14. Dil sistemi
 
-TR/EN/AR key eşitliği, metadata ve rota round-trip unit testleri geçti. Üç dilde form açıklamaları ve yeni motion tercih etiketleri var; RTL korunur. Aynı sayfada dil geçişi yerel etkileşim testinde ve route/static paketinde doğrulandı. Yeni 51 geçişlik bağımsız paketin tamamlandığı, ayrıca çalıştırılmadan iddia edilmez.
+TR/EN/AR key eşitliği, metadata ve rota round-trip unit testleri geçti. Üç dilde form açıklamaları ve yeni motion tercih etiketleri var; RTL korunur. Aynı sayfada dil geçişi yerel etkileşim testinde doğrulandı. Ayrıca gerçek yeni preview üzerinde bağımsız paket **51/51** aynı sayfada dil geçişini ve video/iletişim kontrollerini geçti; JSON ve ekran görüntüleri kaydedildi.
 
 ## 15. SEO ve Search Console
 
@@ -74,11 +74,28 @@ TR/EN/AR key eşitliği, metadata ve rota round-trip unit testleri geçti. Üç 
 
 ## 16. Performans sonuçları
 
-Hero WebP/preload/srcset, route bazlı JS, static HTML, cache kuralları ve isteğe bağlı video korundu. Bu ilk hazırlık kaydında yeni Lighthouse/LCP/CLS sonucu henüz yok; önceki 1.980/2.140 sn yerel değerleri yeni canlı saha sonucu olarak sunulmaz. Yeni ölçüm yapılırsa profil/tekrar/medyan ve ölçülen ortam son sonuç ekinde kaydedilir. Saha INP **N/A**; gerçek kullanıcı RUM/CrUX verisi yok.
+Hero WebP/preload/srcset, route bazlı JS, static HTML, cache ve isteğe bağlı video korundu. Resmî npm paketinden doğrulanan **Lighthouse 13.6.0** ayrı yerel araç klasörüne kuruldu. Gerçek `f746a39` Netlify preview permalink'inde her profil için **3 soğuk navigation koşusu**, toplam altı ölçüm yapıldı; varsayılan mobile simulated throttling ve desktop preset kullanıldı.
+
+| Medyan, üçer tekrar | Mobil | Masaüstü |
+| --- | --- | --- |
+| LCP | **2.035 sn** | **0.559 sn** |
+| CLS | **0.000** | **0.0064** |
+| TBT (INP değildir) | 0 ms | 0 ms |
+| Performance | 99/100 | 99/100 |
+| Otomatik accessibility | 100/100 | 100/100 |
+| Best practices | 100/100 | 100/100 |
+| SEO | 63/100 | 63/100 |
+| Toplam transfer | 800,511 byte | 764,931 byte |
+
+SEO puanı preview'un **kasıtlı noindex** durumundan düşüyor (`is-crawlable`); preview indexlemeye açılmadı. Accessibility 100 tam WCAG veya manuel/ekran okuyucu onayı değildir. LCP öğesi `.hero-image-frame picture img`; Lighthouse ilk HTML'de keşfedilebilir, lazy olmayan ve fetchpriority=high koşullarını doğruladı. Medya dosyaları/kalite değiştirilmedi.
+
+Eski 2.544/2.780 sn ve sonraki 1.980/2.140 sn özel **yerel CDP ölçümleridir**; yeni Netlify Lighthouse profilleriyle aynı yöntem değildir. Yüzdesel kazanç veya saha Core Web Vitals geçişi iddiası yapılmaz. Yeni laboratuvar medyanları 2.5 sn altında; **production saha LCP/CLS/INP N/A**, RUM/CrUX erişimi yok.
+
+Yeni build entry JS **280,363 byte / gzip 87,675**, CSS **61,189 / gzip 11,531**. Önceki canlı pakette entry JS 278,500 ve CSS 60,603 byte idi; güvenli form/motion ekleri JS'i 1,863 ve CSS'i 586 byte artırdı. Gzip yerelde hesaplandı; HTTP transferi diye sunulmaz. Kanıt: `reports/master-operations/lighthouse/summary.json` ve `preview-identity.json`.
 
 ## 17. Güvenlik ve CodeQL sonuçları
 
-Temiz npm ci: 209 paket, audit 0; Node22.23.4. npm test **29/29** (13 mevcut +2 CV +5 motion +9 publication guards), lint ve security:check başarılı. Kaynakta bilinen dört eski CodeQL düzeltmesi korundu. Başlangıç d4287c5 için uzak CodeQL başarılı; bu yeni değişikliklerin uzak CodeQL sonucu ancak release push sonrası kontrol edilip son eke yazılır. CSP gevşetilmedi; token/secrets/gerçek form verisi Git'e alınmadı.
+Temiz npm ci: 209 paket, audit 0; Node22.23.4. npm test **29/29** (13 mevcut +2 CV +5 motion +9 publication guards), lint ve security:check başarılı. Bilinen dört eski CodeQL düzeltmesi korundu. Yeni **f746a39473b3f19b59cd8d3e0ba7ccbe8d46ec52** için GitHub CI, Security, Analyze JavaScript ve **CodeQL — No new alerts** başarılı. Yeni yerel CodeQL CLI analizi ayrıca çalıştırılmadı; uzak sonuç yerel tarama diye sunulmaz. CSP gevşetilmedi; token/secrets/gerçek form verisi Git'e alınmadı.
 
 ## 18. Değiştirilen dosyalar
 
@@ -94,13 +111,19 @@ Yukarıdaki yerel ci/build/29 unit/lint/audit/4 statik/594 responsive/138 etkile
 
 Yerel statik sunucu cache/Netlify CDN davranışını taklit etmez; gerçek preview/production header testleri ayrı raporlanır. Ham QA JSON/log/PNG ve yerel araçlar Git dışında `reports/master-operations/` / `.audit/` altında kalır.
 
+**Gerçek yeni preview:** deployment **6af19d440fce5a7145662b7a**, f746a39 kaynağı, ready; aynı-proje GitHub status success. [Önizleme](https://deploy-preview-1--karaoglugroupnet.netlify.app/), [ölçülen sabit permalink](https://6af19d440fce5a7145662b7a--karaoglugroupnet.netlify.app/tr/). GET/HEAD paketi **54 sayfa, 102 kaynak, üç HTTP 404, 0 hata**, bir geçici ağ tekrarı. Noindex, canonical/hreflang, sitemap/robots, security ve cache başarılı. Ayrı tarayıcıda **15/15 motion/tercih**, **51/51 dil**, video poster/gerçek tıklama/pause ve iletişim linkleri başarılı. İlk preview motion denemesi SSR görünürken galeri hydration'ı bitmeden etkileşti; galeri effect'i beklenerek QA hazır olma koşulu düzeltildi, uygulama kodu değişmeden geçti.
+
+**Korunan mevcut production:** ayrı GET/HEAD denetimi **54 sayfa, 101 kaynak, üç HTTP 404, 0 hata**; yeni kodun production testi diye sunulmaz. API'de canlı kimliği hâlâ **6af18e98278ff0906ad9ca6a**, kilit true, Git build açık. Yeni production deployment yok. Yeni kodun 594 responsive matrisi **yerel** testtir; tamamı gerçek preview/production üzerinde yeniden çalışmış gibi gösterilmez.
+
+TR/AR mobil ekran görüntüleri açılarak incelendi; içerik, RTL, hero ve hizalar korunuyor. Preview alias'ında alt gri alan **Netlify Drawer** çerçevesine ait: `/.netlify/scripts/cdp` script'i ve CSP'nin izin vermediği `https://app.netlify.com/cdp/` iframe'i DOM'da doğrulandı. Ölçülen sabit permalink'te Drawer script/iframe yok. Bu preview hizmeti sorunu ürün CSS'iyle gizlenmedi ve production CSP gevşetilmedi. Panelde **Project configuration → Developer settings → Continuous deployment → Collaboration tools → Configure → Disable Netlify Drawer** adımı hazır; uygulanmadı. Drawer kapatılması ayrı panel işlemi olarak onay bekler; temiz inceleme için yukarıdaki sabit permalink kullanılabilir.
+
 ## 20. Bekleyen kullanıcı onayları
 
-**C — ONAY VEYA BİLGİ GEREKİYOR:** Main merge; reviewer/branch protection/environment kurulumu; production secret yazımı; bu yeni sürümün canlı yayını; iletişim/kariyer alıcıları; KVKK/veri sorumlusu/saklama/özel CV erişim kararı; izinli gerçek test ve teslimat; ayrıca form aktivasyonu; medya/kurumsal bilgi teyidi; Google ownership işlemleri. Bu onaylar birbirinin yerine kullanılamaz.
+**C — ONAY VEYA BİLGİ GEREKİYOR:** Main merge; reviewer/branch protection/environment kurulumu; production secret yazımı; bu yeni sürümün canlı yayını; iletişim/kariyer alıcıları; KVKK/veri sorumlusu/saklama/özel CV erişim kararı; izinli gerçek test ve teslimat; ayrıca form aktivasyonu; medya/kurumsal bilgi teyidi; Google ownership ve preview Drawer panel işlemi. Bu onaylar birbirinin yerine kullanılamaz.
 
 ## 21. Sonraki güvenli operasyon adımları
 
-1. Mevcut izinle release değişikliklerini normal push edin, PR #1 ve aynı projedeki noindex preview'u yeni SHA için doğrulayın.
+1. Teknik değişiklikler mevcut izinle release dalına **f746a39** olarak normal push edildi; PR #1 draft, yeni aynı-proje noindex preview ve CI/CodeQL doğrulandı. Bu sonuçları kaydeden sonraki dokümantasyon commit'i uygulama kodunu değiştirmez.
 2. Şirket uygun reviewer ve form/veri sorumlularını belirlesin; hazırlanan panel adımlarını gerekli açık onaylarla tamamlayın.
 3. Preview/CI/CodeQL ve içerik incelemesi sonrasında main'e kontrollü merge için ayrıca izin alın. Exact main SHA testleri başarılı olmadan manuel production workflow kapıları açılmaz.
 4. İlgili tam SHA için ayrı canlı yayın onayı alın. Mevcut kilit ve yedekler korunarak yalnızca tek publication kanalı kullanılsın; bu çalışma kendiliğinden yayın yapmaz.
