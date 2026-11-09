@@ -72,7 +72,8 @@ export function validateProductionHtml(html) {
   requireValue(/<meta\s+name="robots"\s+content="index, follow"/.test(html), 'Production content must be indexable.');
   requireValue(html.includes(`rel="canonical" href="${PRODUCTION_URL}/`), 'Production canonical is missing.');
   for (const form of html.matchAll(/<form\b[^>]*>([\s\S]*?)<\/form>/g)) {
-    for (const button of form[1].matchAll(/<button\b[^>]*type="submit"[^>]*>/g)) requireValue(/\bdisabled(?:="")?(?:\s|>)/.test(button[0]), 'Production forms must remain disabled.');
+    // A similarly named ARIA/data attribute does not disable a native button.
+    for (const button of form[1].matchAll(/<button\b[^>]*type="submit"[^>]*>/g)) requireValue(/\sdisabled(?:="")?(?:\s|>)/.test(button[0]), 'Production forms must remain disabled.');
   }
 }
 

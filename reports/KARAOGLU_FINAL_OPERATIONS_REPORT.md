@@ -130,3 +130,5 @@ TR/AR mobil ekran görüntüleri açılarak incelendi; içerik, RTL, hero ve hiz
 5. Formlar ayrı aktivasyon prosedürü tamamlanana kadar kapalı kalır.
 
 **Karar:** Mevcut site yayında ve korunuyor. Kalıcı otomasyonun panel/secret/main geçişi ve gerçek form kullanımı için **ONAY VE BİLGİ EKSİKLERİ VAR**; bunlar tamamlandı diye sunulmuyor. Teknik değişiklikler release/preview aşamasında hazırlanır.
+
+Son koruma incelemesinde publication HTML denetimi de sıkılaştırıldı: `aria-disabled`/`data-disabled` benzeri nitelikler gerçek native `disabled` yerine kabul edilmez. İki negatif örnek mevcut production guard testine eklendi. Bu değişiklik yalnızca yayın korumasını etkiler; f746a39 üzerinde ölçülen frontend/görseller değişmez. Sonuç belgesi 99f7f0c GitHub'a kaydedildi; o yalnızca dokümantasyon commit'inde push CI geçti, ayrıca PR/Netlify kontrolü oluşmadığı gözlendi. Güncel doğrulama, yayın koruması düzeltmesini de içeren sonraki release SHA'sı için ayrıca izlenir; eski kontrol yeni HEAD sonucu diye sunulmaz.

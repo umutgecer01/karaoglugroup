@@ -72,6 +72,8 @@ test('production HTML keeps forms closed and only expected Netlify opening-form 
   assert.doesNotThrow(() => validateProductionHtml(html));
   assert.throws(() => validateProductionHtml(html.replace('index, follow', 'noindex, nofollow')));
   assert.throws(() => validateProductionHtml(html.replace(' disabled=""', '')));
+  assert.throws(() => validateProductionHtml(html.replace(' disabled=""', ' aria-disabled=""')));
+  assert.throws(() => validateProductionHtml(html.replace(' disabled=""', ' data-disabled=""')));
   const processed = html.replace('<form name="corporate-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" noValidate="">', "<form method='POST' name='corporate-contact' noValidate>");
   assert.equal(normalizeNetlifyForms(html), normalizeNetlifyForms(processed));
   assert.notEqual(normalizeNetlifyForms(html), normalizeNetlifyForms(processed.replace(' disabled=""', '')));
