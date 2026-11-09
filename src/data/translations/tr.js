@@ -93,6 +93,10 @@ export const tr = {
   "languageSwitcher": {
     "ariaLabel": "Dil seçimi"
   },
+  "motionPreference": {
+    "label": "Hareketi azalt",
+    "description": "Otomatik görsel kaydırmayı ve dekoratif animasyonları durdurur. Tercihiniz bu tarayıcıda saklanır; cihazınızdaki hareketi azalt ayarı her zaman korunur."
+  },
   "privacyConsent": {
     "eyebrow": "Gizlilik ve çerezler",
     "title": "Gizliliğinize önem veriyoruz",
@@ -157,7 +161,7 @@ export const tr = {
     "emailPlaceholder": "ornek@mail.com",
     "messagePlaceholder": "Talebinizi kısaca açıklayın",
     "submit": "Talebi İlet",
-    "success": "Talebiniz başarıyla alınmıştır. En kısa sürede sizinle iletişime geçilecektir.",
+    "success": "Talebiniz alındı.",
     "consentError": "Devam edebilmek için onay vermeniz gerekmektedir.",
     "services": [
       "Otomotiv",
@@ -683,7 +687,7 @@ export const tr = {
     "positionsTitle": "Açık Pozisyonlar",
     "formTitle": "Kariyer Başvuru Formu",
     "formIntro": "Başvurunuz İnsan Kaynakları birimimize güvenli şekilde iletilir. Uygun pozisyon değerlendirmelerinde sizinle iletişime geçilir.",
-    "success": "Başvurunuz İnsan Kaynakları birimimize iletilmiştir. Uygun pozisyon değerlendirmelerinde sizinle en kısa sürede iletişime geçilecektir.",
+    "success": "Başvurunuz alındı.",
     "fields": {
       "name": "Ad Soyad",
       "phone": "Telefon",
@@ -793,7 +797,7 @@ export const tr = {
     "sahibinden": "Sahibinden Mağazamız",
     "formTitle": "İletişim Formu",
     "formIntro": "Talebiniz ilgili departmanımıza yönlendirilir ve kurumsal iletişim süreci içinde değerlendirilir.",
-    "success": "Talebiniz ilgili departmanımıza iletilmiştir. Uzman ekibimiz en kısa sürede sizinle iletişime geçecektir.",
+    "success": "Talebiniz alındı.",
     "form": {
       "name": "Ad Soyad",
       "phone": "Telefon",

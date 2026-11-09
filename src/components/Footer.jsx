@@ -49,7 +49,7 @@ const Footer = ({ t, onNavigate, onPrivacy }) => {
         </div>
 
         <div>
-          <h4 className="footer-title">{t?.footer?.menu || "Menü"}</h4>
+          <h2 className="footer-title">{t?.footer?.menu || "Menü"}</h2>
           <div className="mt-5 flex flex-col gap-3">
             {links.map((link) => (
               <a
@@ -65,7 +65,7 @@ const Footer = ({ t, onNavigate, onPrivacy }) => {
         </div>
 
         <div>
-          <h4 className="footer-title">{t?.footer?.services || "Faaliyet Alanları"}</h4>
+          <h2 className="footer-title">{t?.footer?.services || "Faaliyet Alanları"}</h2>
           <div className="mt-5 flex flex-col gap-3">
             {serviceKeys.map((key) => (
               <a
@@ -81,7 +81,7 @@ const Footer = ({ t, onNavigate, onPrivacy }) => {
         </div>
 
         <div>
-          <h4 className="footer-title">{t?.footer?.contact || "İletişim"}</h4>
+          <h2 className="footer-title">{t?.footer?.contact || "İletişim"}</h2>
           <div className="mt-5 space-y-3 text-sm text-white/70">
             <a href={company.phoneHref} className="flex items-center gap-3 transition hover:text-gold">
               <Phone size={16} className="text-gold" />

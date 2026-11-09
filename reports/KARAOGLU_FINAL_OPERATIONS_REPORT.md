@@ -1,0 +1,109 @@
+# KARAOĞLU GROUP — Final Development & Operations
+
+9 Kasım 2026 — Europe/Istanbul
+
+**Bu çalışma mevcut canlı yayını koruyarak teknik hazırlık yapar. Yeni production deployment, main merge, secret/hesap yapılandırması, form aktivasyonu veya gerçek gönderim yapılmaz.** Önceki yayın onayı bu yeni değişikliklerin canlıya alınmasına genişletilmedi.
+
+## 1. Genel proje durumu
+
+**A — TAMAMLANDI:** Mevcut proje ve tarihsel raporlar, kaynak/config/script/medya envanteri ve kullanıcının ZIP şablonu incelendi. ZIP yalnızca iki küçük metin dosyalı referans pakettir; eski varsayımlar yeni koda kopyalanmadı. Başlangıç çalışma ağacı temiz, release HEAD `d4287c5`; `origin` doğru depoya bağlı. Git bundle yedeği ve mevcut production paketi/manifest'i yerelde korundu.
+
+**B — TEKNİK OLARAK HAZIR:** Yeni güvenli release değişiklikleri aşağıda listelenir. Önizleme/uzak kontrol sonuçları son doğrulamada bu rapora eklenir.
+
+**C — ONAY VEYA BİLGİ GEREKİYOR:** Bağımsız reviewer, production environment/token ve main merge kararı; form alıcıları/veri süreçleri; şirket/medya/hukuk teyitleri. Mevcut canlı adres değişmedi.
+
+## 2. GitHub/Netlify kalıcı yapı
+
+Kalıcı kaynak `umutgecer01/karaoglugroup`. Production ve ana PR önizleme projesi `karaoglugroupnet`, ID **b4753086-eb94-4a7e-b5f5-7270835fab3a**. Git build **açık** (`stop_builds=false`), yayın **kilitli**. Bu, istemdeki eski `stop_builds=true` başlangıç varsayımından farklı ve API ile doğrulandı. İkincil `karaoglugroup` projesi `80b58d06-0cbb-432c-8193-17d34ba776df` korunur, production hedefi değildir. [Mimari](../GITHUB_NETLIFY_ARCHITECTURE.md).
+
+## 3. Eski ve yeni repo bağlantıları
+
+Eski `umutgecer01/karaoglu-group-website` deposu mevcut, arşivlenmemiş ve silinmedi. Production artık yeni `karaoglugroup → main` bağlantısını kullanıyor; bu çalışma bağlantıyı değiştirmedi. Main **47ba0c370e8f291faff198f895c503547b95b65f**, ilk yükleme. Güncel canlı uygulama kaynağı **6ca07f9aefcf84cc1ae56ecbabc0f19fd1b6a5f5**; başlangıç release HEAD d4287c5 aradaki yalnızca yayın belgelerini içeriyor. Canlı ile main eşit değildir. `c45a5c0` canlı kaynağın daha eski sürümüdür; sonrasında Corporate kartları ve kayıt/preview otomasyonu eklenmiştir. Güncel çalışma bu yeni tabanı korur.
+
+## 4. Production yayın yöntemi
+
+Mevcut canlı deployment **6af18e98278ff0906ad9ca6a**, ready/published/locked. Şu an tek aktif yöntem ayrıca onaylı yetkili CLI/API operasyonudur. Gelecek normal kanal için manuel GitHub Actions hazırlandı; henüz main'e alınmış/secret ile çalışır durumda sayılmaz. Production paketi ayrı context ile build edilir, SHA256 manifest'i doğrulanır; draft yüklenip incelendikten sonra yalnızca o deployment yayınlanıp kilitlenir. Genel yayın kilidi açılmaz. CLI ve Actions eşzamanlı kullanılmaz. [Yayın rehberi](../DEPLOYMENT_GUIDE.md), [geri dönüş planı](../ROLLBACK_GUIDE.md).
+
+## 5. GitHub Actions güvenliği
+
+Workflow yalnızca `workflow_dispatch` ile, main ve tam SHA/onay ifadesi ile çalışır. Exact main ve incelenen aynı-proje preview tree kimlikleri eşit olmalı. Remote CI/Security/CodeQL analizi ve açık high/critical Code Scanning kontrolü gerekir. Sabit doğru Project ID/API URL doğrulanır; environment reviewer/Prevent self-review yoksa işlem durur. Token yalnızca yayın adımının ortamındadır, CLI argümanına yazılmaz. Resmî CLI **27.16.2** sabit; concurrency iptal etmeden sıraya koyar. Hash manifest/checkpoint, gelecekteki workflow çalışmasında 30 günlük artifact olarak saklanır. Gerçek production workflow çalıştırılmadı. CI feature/* push testlerini de kapsar; üretim push tetikleyicisi eklenmedi.
+
+## 6. Secrets ve yetki durumu
+
+Yetkili GitHub API: public repo, admin/maintain/push true; main protection **404**, rulesets **boş**, environment listesi **boş**, repository secrets **boş**. Production environment ve secret endpoint'leri 404. Bunlar raporlandı; uzaktan ayar yazılmadı. Reviewer kullanıcı/takımının şirketçe belirlenmesi gerekir. Yerel resmî Netlify oturumu iki projeyi okuyabiliyor; mevcut olmayan GitHub production secret'ının erişimi doğrulanmış sayılamaz. Secret değerleri API'den geri okunamaz; hiçbir değer istenmedi/loglanmadı/koda yazılmadı. Repo webhook listesi boş, Netlify tarafında çalışan GitHub App hook'ları var; bu iki bilgi karıştırılmadı.
+
+## 7. Formların teknik durumu
+
+Üç arayüz formu korundu: hızlı iletişim, kurumsal iletişim ve kariyer. Netlify isimleri corporate-contact / career-application. Zorunlu alanların native required/ARIA açıklamaları ve pending aria-busy geliştirildi; CV hata ID'sindeki boş referans giderildi. Ortak CV doğrulaması boş/desteksiz/7 MB üzeri ve bilinen uzantı–MIME çelişkilerini reddeder. Tarayıcı doğrulaması backend güvenliği sayılmaz. Dokuz TR/EN/AR başarı ifadesi yalnızca alınan yanıtı anlatır; departman/e-posta teslimatı iddiası kaldırıldı. **VITE_NETLIFY_FORMS_ENABLED=false**.
+
+API'de use_forms=true ve ignore_html_forms=false: algılama açık. İki form, bütün alanları/cv ile kayıtlı, submissionCount 0. Submission veya CV içeriği okunmadı. Build'de form-name/data-netlify/honeypot/multipart union statik testlerle doğrulanır. [Form rehberi](../FORM_OPERATIONS_GUIDE.md).
+
+## 8. İletişim bildirimleri
+
+Netlify'deki dokuz hook yalnızca GitHub App deploy bildirimidir; form e-postası hook'u yok. Kullanıcı bu çalışmada alıcıları **“belirlenmedi”** olarak teyit etti. İletişim ve kariyer alıcıları ayrı hazırlanabilir; adres uydurulmadı veya public şirket verisinden tahmin edilmedi. Gerçek adres/ekip yetkisi ve ayrıca onay olmadan bildirim oluşturulmadı. HTTP 200 gelen kutusu teslimatını kanıtlamaz.
+
+## 9. Kariyer ve CV güvenliği
+
+Frontend PDF/DOC/DOCX, boş dosya ve 7 MB sınırı hazır. Gerçek CV gönderimi 0. Netlify'nin dosya linki/erişim/saklama davranışı için ek kişisel veri koruması gereklidir; frontend flag'i veya MIME kontrolü özel erişim/antivirüs sayılmaz. Şirketçe onaylı özel dosya işleme/erişim altyapısı, saklama–silme ve aktarım politikası doğrulanmadan kariyer açılmaz. Dosya URL'si oluşturulmadı/paylaşılmadı. [Resmî kaynaklar ve kontrol listesi](../FORM_OPERATIONS_GUIDE.md).
+
+## 10. KVKK/hukuki onay durumu
+
+Şirketin veri sorumlusu/tüzel unvanı, işleme amaçları, kariyer/CV erişimi, alıcı/aktarım, saklama süresi, silme ve hak başvuru kanalı için onaylı metinler eksik. Önceki içerik yayın izni, bağımsız hukuk uygunluğu teyidi değildir. Yeni hukuki metin uydurulmadı veya yayınlanmadı. Mevcut metinlere tam uyum sertifikası verilmez; şirket yetkilisi ve gerektiğinde hukuk uzmanı onayı gerekir.
+
+## 11. Kurumsal içerik eksikleri
+
+1993, 30+/+30, 1000+ ve yönetici/proje/faaliyet iddiaları kaynak ve teyit tablosuna işlendi; kullanıcı onaylı mevcut bilgiler değiştirilmedi. Tüzel şirket adı ve resmî e-posta gibi eksikler uydurulmadı. [CORPORATE_CONTENT_REVIEW.md](../CORPORATE_CONTENT_REVIEW.md).
+
+## 12. Medya ve görsel hakları
+
+16 logo dışı orijinal JPEG/JPG, logo ve MP4 teknik envanteri incelendi. Responsive WebP/srcset, öncelikli hero, lazy medya ve isteğe bağlı video korundu; yeniden encode/kalite düşürme yapılmadı. Bazı WebP dosyaları JPEG'den büyük; fırsat olarak kaydedildi. Kaynak/izin olmadan hiçbir tesis/araç görseli şirkete ait, stok veya AI diye kesin sınıflandırılmadı. [MEDIA_RIGHTS_REVIEW.md](../MEDIA_RIGHTS_REVIEW.md).
+
+## 13. Mobil/masaüstü sonuçları
+
+**Yerel production build:** 54 sayfa × 11 genişlik (320,360,375,390,414,430,768,1024,1280,1440,1920), **594/594** responsive; 101 dahili kaynak, gerçek 404, taşma/kırık görünür görsel/console hatası yok. **138/138** etkileşim/form kontrolü; etkin form senaryoları yalnızca ayrı localhost Vite oturumu ve taklit 500/200 yanıtlarıyla yapıldı, CDP gerçek POST'ları ayrıca engelledi.
+
+Mevcut tercihler penceresine kalıcı hareket azaltma seçeneği eklendi; kullanıcı tarafından kaldırılan galeri pause düğmesi geri eklenmedi. Cihaz tercihi her zaman korunur, kapalı storage'da ziyaret belleği çalışır; galeri reduced-motion durumunda elle kayar. **15/15** tarayıcı tercihi/footer kontrolü ve **5/5** unit testi geçti. Footer başlıkları aynı sınıflarla H2 oldu. Bu, tüm WCAG 2.2 AA veya kontrast/ekran okuyucu sertifikası değildir. Gerçek telefon/Safari/Firefox/Edge testi yapılmadı.
+
+## 14. Dil sistemi
+
+TR/EN/AR key eşitliği, metadata ve rota round-trip unit testleri geçti. Üç dilde form açıklamaları ve yeni motion tercih etiketleri var; RTL korunur. Aynı sayfada dil geçişi yerel etkileşim testinde ve route/static paketinde doğrulandı. Yeni 51 geçişlik bağımsız paketin tamamlandığı, ayrıca çalıştırılmadan iddia edilmez.
+
+## 15. SEO ve Search Console
+
+54 üretilen sayfada metadata/form statik testleri **4/4**, tek H1 ve hreflang/canonical yapısı başarılı. Kaynak/başlangıç HTML denetiminde dil bazında yinelenen title/description ve eksik img alt niteliği yok. Organization JSON parse edildi; doğrulanmamış şirket verisi eklenmedi. Production indexable, preview noindex politikası korunur. Search Console hesabı, ownership veya sitemap gönderimi yapılmadı; hazır adımlar: [SEARCH_CONSOLE_GUIDE.md](../SEARCH_CONSOLE_GUIDE.md).
+
+## 16. Performans sonuçları
+
+Hero WebP/preload/srcset, route bazlı JS, static HTML, cache kuralları ve isteğe bağlı video korundu. Bu ilk hazırlık kaydında yeni Lighthouse/LCP/CLS sonucu henüz yok; önceki 1.980/2.140 sn yerel değerleri yeni canlı saha sonucu olarak sunulmaz. Yeni ölçüm yapılırsa profil/tekrar/medyan ve ölçülen ortam son sonuç ekinde kaydedilir. Saha INP **N/A**; gerçek kullanıcı RUM/CrUX verisi yok.
+
+## 17. Güvenlik ve CodeQL sonuçları
+
+Temiz npm ci: 209 paket, audit 0; Node22.23.4. npm test **29/29** (13 mevcut +2 CV +5 motion +9 publication guards), lint ve security:check başarılı. Kaynakta bilinen dört eski CodeQL düzeltmesi korundu. Başlangıç d4287c5 için uzak CodeQL başarılı; bu yeni değişikliklerin uzak CodeQL sonucu ancak release push sonrası kontrol edilip son eke yazılır. CSP gevşetilmedi; token/secrets/gerçek form verisi Git'e alınmadı.
+
+## 18. Değiştirilen dosyalar
+
+- Manual production workflow, CI feature branch kapsamı, dört scripts/production-* koruma/işletim/test dosyası.
+- Üç form, FormField, ortak CV validator ve forms-readiness testi; dokuz mevcut başarı çevirisi.
+- MotionPreference bileşeni/controller/test, main başlangıcı, mevcut PrivacyConsent penceresi, footer H2, dar CSS reduced-motion kuralları ve iki yeni TR/EN/AR anahtarı.
+- package.json test listesi, AGENTS/README/PREVIEW_DEPLOYMENT ve mimari/yayın/checklist/rollback/form/kurumsal/medya/Search Console belgeleri.
+- Bu rapor ve önceki kurumsal teyit raporunun güncel belgeye işaretçisi. Netlify config/form flag ve şirket gerçekleri korunur. Tam dosya listesi normal Git diff/commit geçmişindedir.
+
+## 19. Başarılı/başarısız testler
+
+Yukarıdaki yerel ci/build/29 unit/lint/audit/4 statik/594 responsive/138 etkileşim/15 motion sonuçları yeni çalışma üzerinde gerçekten çalıştırıldı. İlk etkileşim denemesi sabit 450 ms dil yükleme beklentisinde durdu; gerçek durum beklemesiyle QA yardımcı kopyası düzeltildi ve 138 kontrol geçti. İlk motion denemesi OS tercihi değiştirilirken QA state hatasıyla durdu; kaynak değişmeden tekrar 15 kontrol geçti. Bu geçici QA hataları gizlenmedi. Yetkili gerçek form/CV teslimatı, yeni production yayını/rollback ve production workflow çalıştırması **YAPILMADI**.
+
+Yerel statik sunucu cache/Netlify CDN davranışını taklit etmez; gerçek preview/production header testleri ayrı raporlanır. Ham QA JSON/log/PNG ve yerel araçlar Git dışında `reports/master-operations/` / `.audit/` altında kalır.
+
+## 20. Bekleyen kullanıcı onayları
+
+**C — ONAY VEYA BİLGİ GEREKİYOR:** Main merge; reviewer/branch protection/environment kurulumu; production secret yazımı; bu yeni sürümün canlı yayını; iletişim/kariyer alıcıları; KVKK/veri sorumlusu/saklama/özel CV erişim kararı; izinli gerçek test ve teslimat; ayrıca form aktivasyonu; medya/kurumsal bilgi teyidi; Google ownership işlemleri. Bu onaylar birbirinin yerine kullanılamaz.
+
+## 21. Sonraki güvenli operasyon adımları
+
+1. Mevcut izinle release değişikliklerini normal push edin, PR #1 ve aynı projedeki noindex preview'u yeni SHA için doğrulayın.
+2. Şirket uygun reviewer ve form/veri sorumlularını belirlesin; hazırlanan panel adımlarını gerekli açık onaylarla tamamlayın.
+3. Preview/CI/CodeQL ve içerik incelemesi sonrasında main'e kontrollü merge için ayrıca izin alın. Exact main SHA testleri başarılı olmadan manuel production workflow kapıları açılmaz.
+4. İlgili tam SHA için ayrı canlı yayın onayı alın. Mevcut kilit ve yedekler korunarak yalnızca tek publication kanalı kullanılsın; bu çalışma kendiliğinden yayın yapmaz.
+5. Formlar ayrı aktivasyon prosedürü tamamlanana kadar kapalı kalır.
+
+**Karar:** Mevcut site yayında ve korunuyor. Kalıcı otomasyonun panel/secret/main geçişi ve gerçek form kullanımı için **ONAY VE BİLGİ EKSİKLERİ VAR**; bunlar tamamlandı diye sunulmuyor. Teknik değişiklikler release/preview aşamasında hazırlanır.

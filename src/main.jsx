@@ -3,7 +3,10 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import App, { loadLocale } from "./App.jsx";
 import { pagePath, resolveRoute } from './utils/routes.js';
 import { getStoredLanguage } from './utils/i18n.js';
+import { initializeMotionPreference } from './utils/motionPreference.js';
 import "./index.css";
+
+initializeMotionPreference();
 
 async function start() {
   const route = resolveRoute(window.location.pathname, window.location.search, window.location.hash, getStoredLanguage());

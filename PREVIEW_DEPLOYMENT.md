@@ -1,5 +1,7 @@
 # Karaoğlu Group — GitHub kayıt, preview ve onaylı yayın
 
+> Güncel manuel Actions hazırlığı, exact SHA/preview tree ve environment korumaları için [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md). Bu akış henüz main/environment/secret kurulumu tamamlanmış aktif production otomasyonu değildir. [Kapsamlı operasyon raporu](reports/KARAOGLU_FINAL_OPERATIONS_REPORT.md).
+
 ## Canlı Adres
 
 ```text

@@ -5,6 +5,11 @@ export const MAX_CV_SIZE_BYTES = 7 * 1024 * 1024;
 export const formsEnabled = import.meta.env?.VITE_NETLIFY_FORMS_ENABLED === 'true';
 
 const acceptedCvExtensions = [".pdf", ".doc", ".docx"];
+const acceptedCvTypes = {
+  '.pdf': 'application/pdf',
+  '.doc': 'application/msword',
+  '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+};
 
 export function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
@@ -16,9 +21,21 @@ export function isValidPhone(value) {
 }
 
 export function isAllowedCvFile(file) {
-  if (!file?.name) return false;
+  if (typeof file?.name !== 'string' || !file.name) return false;
   const name = file.name.toLowerCase();
-  return acceptedCvExtensions.some((extension) => name.endsWith(extension));
+  const extension = acceptedCvExtensions.find((value) => name.endsWith(value));
+  if (!extension) return false;
+  // Browsers may omit MIME or report a generic binary type. A known conflicting
+  // type is rejected here; neither the name nor browser MIME proves file safety.
+  const type = String(file.type || '').toLowerCase();
+  return !type || type === 'application/octet-stream' || type === acceptedCvTypes[extension];
+}
+
+export function cvValidationError(file) {
+  if (!file?.name || !Number.isFinite(file.size) || file.size <= 0) return 'required';
+  if (!isAllowedCvFile(file)) return 'type';
+  if (file.size > MAX_CV_SIZE_BYTES) return 'size';
+  return null;
 }
 
 export async function submitNetlifyForm(form, { multipart = false } = {}) {

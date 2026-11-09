@@ -57,6 +57,7 @@ export default function QuickContact({ t }) {
               data-netlify="true"
               netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
+              aria-busy={isSubmitting}
               noValidate
             >
               <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
@@ -84,7 +85,7 @@ export default function QuickContact({ t }) {
               </label>
               <label className="form-field sm:col-span-2">
                 <span>{t.heroForm.service}</span>
-                <select name="service" aria-invalid={!!errors.service} aria-describedby={errors.service ? 'quick-service-error' : undefined} defaultValue="">
+                <select name="service" required aria-invalid={!!errors.service} aria-describedby={errors.service ? 'quick-service-error' : undefined} defaultValue="">
                   <option value="" disabled>{t.heroForm.servicePlaceholder}</option>
                   {t.heroForm.services.map((service) => (
                     <option key={service}>{service}</option>
@@ -97,7 +98,7 @@ export default function QuickContact({ t }) {
                 <textarea name="message" maxLength={5000} rows="3" placeholder={t.heroForm.messagePlaceholder} />
               </label>
               <label className="form-consent sm:col-span-2">
-                <input type="checkbox" name="consent" aria-invalid={!!errors.consent} aria-describedby={errors.consent ? 'quick-consent-error' : undefined} value="accepted" />
+                <input type="checkbox" name="consent" required aria-invalid={!!errors.consent} aria-describedby={errors.consent ? 'quick-consent-error' : undefined} value="accepted" />
                 <span>{t.heroForm.consentLabel}</span>
                 {errors.consent ? <small id="quick-consent-error">{errors.consent}</small> : null}
               </label>

@@ -6,8 +6,7 @@ import { useState } from "react";
 import { careerPositionIds } from "../data/careerPositions.js";
 import {
   CAREER_FORM_NAME,
-  MAX_CV_SIZE_BYTES,
-  isAllowedCvFile,
+  cvValidationError,
   isValidEmail,
   isValidPhone,
 } from "../utils/netlifyForms.js";
@@ -28,14 +27,10 @@ export default function Career({ t }) {
     if (form.get("phone")?.trim() && !isValidPhone(form.get("phone"))) next.phone = t.common.phoneError;
     if (form.get("consent") !== "accepted") next.consent = t.career.fields.consentError;
 
-    const cv = form.get("cv");
-    if (!cv?.name || cv.size === 0) {
-      next.cv = t.career.fields.cvRequired;
-    } else if (!isAllowedCvFile(cv)) {
-      next.cv = t.career.fields.cvTypeError;
-    } else if (cv.size > MAX_CV_SIZE_BYTES) {
-      next.cv = t.career.fields.cvSizeError;
-    }
+    const cvError = cvValidationError(form.get("cv"));
+    if (cvError === 'required') next.cv = t.career.fields.cvRequired;
+    else if (cvError === 'type') next.cv = t.career.fields.cvTypeError;
+    else if (cvError === 'size') next.cv = t.career.fields.cvSizeError;
 
     return next;
   };
@@ -98,6 +93,7 @@ export default function Career({ t }) {
               netlify-honeypot="bot-field"
               encType="multipart/form-data"
               onSubmit={handleSubmit}
+              aria-busy={isSubmitting}
               noValidate
             >
               <input type="hidden" name="form-name" value={CAREER_FORM_NAME} />
@@ -118,7 +114,7 @@ export default function Career({ t }) {
                   <input name="email" maxLength={254} required type="email" autoComplete="email" placeholder={t.career.placeholders.email} />
                 </Field>
                 <Field label={t.career.fields.position} error={errors.position}>
-                  <select name="position" defaultValue="">
+                  <select name="position" required defaultValue="">
                     <option value="" disabled>
                       {t.career.placeholders.position}
                     </option>
@@ -132,7 +128,7 @@ export default function Career({ t }) {
               </div>
 
               <Field label={t.career.fields.experience} error={errors.experience}>
-                <select name="experience" defaultValue="">
+                <select name="experience" required defaultValue="">
                   <option value="" disabled>
                     {t.career.placeholders.experience}
                   </option>
@@ -160,7 +156,8 @@ export default function Career({ t }) {
                 <input
                   type="file"
                   name="cv"
-                  id="career-cv" aria-labelledby="career-cv-label" aria-describedby="career-cv-help career-cv-error" aria-invalid={!!errors.cv}
+                  required
+                  id="career-cv" aria-labelledby="career-cv-label" aria-describedby={errors.cv ? 'career-cv-help career-cv-error' : 'career-cv-help'} aria-invalid={!!errors.cv}
                   accept=".pdf,.doc,.docx"
                   className="mt-4 w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none file:cursor-pointer file:border-0 file:bg-amber/20 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white"
                   onChange={(event) => setCvName(event.target.files?.[0]?.name || "")}

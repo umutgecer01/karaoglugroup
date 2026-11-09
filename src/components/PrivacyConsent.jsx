@@ -1,6 +1,7 @@
 import { Cookie, ShieldCheck, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import Dialog from './Dialog.jsx';
+import MotionPreference from './MotionPreference.jsx';
 
 const CONSENT_STORAGE_KEY = "karaoglu-privacy-consent";
 
@@ -62,6 +63,7 @@ export default function PrivacyConsent({ t, open = false, onClose }) {
           </p>
         </div>
         <p className="privacy-consent__legal-note">{content.legalNote}</p>
+        <MotionPreference t={t} />
         <div className="privacy-consent__actions">
           <button type="button" className="btn-ghost" onClick={() => saveConsent("necessary")}>
             {content.necessary}

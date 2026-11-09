@@ -12,7 +12,7 @@ export function Field({ label, error, children }) {
 export function ConsentField({ label, error }) {
   const id = useId();
   return <label className="form-consent" htmlFor={id}>
-    <input id={id} type="checkbox" name="consent" value="accepted" aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} />
+    <input id={id} type="checkbox" name="consent" required value="accepted" aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} />
     <span>{label}</span>
     {error ? <small id={`${id}-error`}>{error}</small> : null}
   </label>;

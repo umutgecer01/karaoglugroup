@@ -2,6 +2,8 @@
 
 React + Vite tabanlı kurumsal Karaoğlu Group web sitesi.
 
+Güncel operasyon belgeleri: [son kapsamlı durum](reports/KARAOGLU_FINAL_OPERATIONS_REPORT.md), [yayın rehberi](DEPLOYMENT_GUIDE.md), [GitHub/Netlify mimarisi](GITHUB_NETLIFY_ARCHITECTURE.md), [yayın checklist](PRODUCTION_RELEASE_CHECKLIST.md), [geri dönüş](ROLLBACK_GUIDE.md), [form işletimi](FORM_OPERATIONS_GUIDE.md), [kurumsal teyit](CORPORATE_CONTENT_REVIEW.md), [medya hakları](MEDIA_RIGHTS_REVIEW.md) ve [Search Console](SEARCH_CONSOLE_GUIDE.md).
+
 Ana çalışma klasörü bu dizindir; Git geçmişi ve `origin` bağlantısı buradadır. Güncel uygulama `src/` ve `public/` üzerinden build edilir. Kardeş `release/` klasörü eski checkout'tur; yeni düzenlemeleri burada yapın.
 
 ## Kurulum

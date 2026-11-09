@@ -1506,3 +1506,16 @@ picture { display: block; }
 .form-field [aria-invalid="true"], .form-consent [aria-invalid="true"] { border-color: #fdba74; }
 .footer-social, footer a { min-height: 44px; }
 @media (max-width: 767px) { .section-band { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; } }
+
+/* A persistent setting in the existing preferences dialog supplements OS motion settings. */
+html[data-reduced-motion="true"] *,
+html[data-reduced-motion="true"] *::before,
+html[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-reduced-motion="true"] .service-showreel__track { animation: none !important; will-change: auto; }
+html[data-reduced-motion="true"] .service-showreel__group[aria-hidden="true"] { display: none; }
+html[data-reduced-motion="true"] .service-showreel__viewport { overflow-x: auto; }

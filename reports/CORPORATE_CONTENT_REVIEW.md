@@ -1,5 +1,7 @@
 # Kurumsal içerik ve onay bekleyen bilgiler
 
+> 9 Kasım 2026 güncellemesi: Önceki içerik yayın izni korunuyor; bağımsız iddia/medya hakkı teyidi yapılmış sayılmadı. Güncel operasyon denetimi: [kurumsal teyit kaydı](../CORPORATE_CONTENT_REVIEW.md), [medya envanteri](../MEDIA_RIGHTS_REVIEW.md). Aşağıdaki tarihsel bulgular ve şirket bilgileri silinmedi veya uydurma bilgilerle değiştirilmedi.
+
 8 Kasım 2026. Bu belge teyit listesidir; ticari/hukuki doğruluk onayı değildir. Gerçek şirket verileri ve mevcut içerik kullanıcı onayı olmadan değiştirilmedi.
 
 ## Kaynakta bulunan, bağımsız kanıtı bulunmayan iddialar

@@ -82,6 +82,7 @@ export default function Contact({ t }) {
               data-netlify="true"
               netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
+              aria-busy={isSubmitting}
               noValidate
             >
               <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
@@ -107,7 +108,7 @@ export default function Contact({ t }) {
                 </Field>
               </div>
               <Field label={t.contact.form.service} error={errors.service}>
-                <select name="service" defaultValue="">
+                <select name="service" required defaultValue="">
                   <option value="" disabled>
                     {t.contact.form.select}
                   </option>
@@ -117,7 +118,7 @@ export default function Contact({ t }) {
                 </select>
               </Field>
               <Field label={t.contact.form.message} error={errors.message}>
-                <textarea name="message" maxLength={5000} rows="5" placeholder={t.contact.form.messagePlaceholder} />
+                <textarea name="message" required maxLength={5000} rows="5" placeholder={t.contact.form.messagePlaceholder} />
               </Field>
               <ConsentField label={t.contact.form.consentLabel} error={errors.consent} />
               <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70" type="submit" disabled={isSubmitting || !formsEnabled}>

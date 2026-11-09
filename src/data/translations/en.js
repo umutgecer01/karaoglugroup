@@ -93,6 +93,10 @@ export const en = {
   "languageSwitcher": {
     "ariaLabel": "Language selection"
   },
+  "motionPreference": {
+    "label": "Reduce motion",
+    "description": "Stops automatic image scrolling and decorative animations. Your preference is saved in this browser; your device's reduced-motion setting is always respected."
+  },
   "privacyConsent": {
     "eyebrow": "Privacy and cookies",
     "title": "We value your privacy",
@@ -157,7 +161,7 @@ export const en = {
     "emailPlaceholder": "example@mail.com",
     "messagePlaceholder": "Write your request briefly",
     "submit": "Send",
-    "success": "Your request has been received. We will contact you as soon as possible.",
+    "success": "Your request has been received.",
     "consentError": "You need to fill out this field.",
     "services": [
       "Automotive",
@@ -678,7 +682,7 @@ export const en = {
     "positionsTitle": "Position areas",
     "formTitle": "Career Application Form",
     "formIntro": "Your application is securely forwarded to our Human Resources department and reviewed for suitable positions.",
-    "success": "Your application has been forwarded to our Human Resources department. We will contact you for suitable positions.",
+    "success": "Your application has been received.",
     "fields": {
       "name": "Full Name",
       "phone": "Phone",
@@ -788,7 +792,7 @@ export const en = {
     "sahibinden": "Our Sahibinden Store",
     "formTitle": "Contact Form",
     "formIntro": "Your request is forwarded to the relevant department and reviewed within our corporate communication process.",
-    "success": "Your request has been forwarded to the relevant department. We will contact you as soon as possible.",
+    "success": "Your request has been received.",
     "form": {
       "name": "Full Name",
       "phone": "Phone",
