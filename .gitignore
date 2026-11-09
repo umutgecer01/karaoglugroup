@@ -17,3 +17,13 @@ reports/**/*.png
 reports/**/*.log
 reports/**/*.txt
 reports/**/*.sarif
+
+# Local authentication material must never enter preview synchronization.
+.npmrc
+.pypirc
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519

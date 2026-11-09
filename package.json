@@ -9,7 +9,8 @@
     "prebuild": "npm run sync:site",
     "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0",
-    "test": "node --test scripts/core.test.mjs",
+    "test": "node --test scripts/core.test.mjs scripts/sync-preview.test.mjs",
+    "sync:preview": "node scripts/sync-preview.mjs",
     "lint:security": "eslint src eslint.config.js vite.config.js tailwind.config.js postcss.config.js --max-warnings=0",
     "security:audit": "npm audit --audit-level=moderate",
     "security:check": "npm run security:audit && npm run lint:security"

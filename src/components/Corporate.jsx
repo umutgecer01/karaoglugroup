@@ -340,9 +340,9 @@ export default function Corporate({ t, onNavigate, focus = "all" }) {
                     {c.commitmentText ? <p className="mt-4 text-sm leading-7 text-steel sm:text-base sm:leading-8">{c.commitmentText}</p> : null}
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid items-stretch gap-3 sm:grid-cols-2">
                     {commitments.map((item) => (
-                      <div key={item} className="flex gap-3 border-b border-white/10 pb-3 text-sm leading-6 text-platinum/85 last:border-b-0 sm:border-b-0 sm:pb-0">
+                      <div key={item} className="flex h-full min-h-20 gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-4 text-sm leading-6 text-platinum/85">
                         <CheckCircle2 className="mt-0.5 shrink-0 text-amber" size={18} />
                         <span>{item}</span>
                       </div>

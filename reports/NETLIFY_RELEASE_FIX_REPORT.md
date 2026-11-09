@@ -1,5 +1,7 @@
 # KARAOĞLU GROUP — Final Netlify release düzeltmeleri
 
+> Güncel sonuç: [FINAL_NETLIFY_RELEASE_STATUS.md](FINAL_NETLIFY_RELEASE_STATUS.md). Kullanıcı onayıyla `c45a5c0` gönderildi; uzak CodeQL/CI ve yeni gerçek preview testleri başarılı. Aşağıdaki içerik commit hazırlanırken kaydedilen yerel aşamadır.
+
 8 Kasım 2026 — Europe/Istanbul
 
 **Durum: Dört CodeQL bulgusu için güvenli düzeltmeler ve yerel testler tamamlandı. Yerel release düzeltmeleri push onayını bekliyor. Production'a hazır değil.**

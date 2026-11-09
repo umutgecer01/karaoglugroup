@@ -2,6 +2,8 @@
 
 React + Vite tabanlı kurumsal Karaoğlu Group web sitesi.
 
+Ana çalışma klasörü bu dizindir; Git geçmişi ve `origin` bağlantısı buradadır. Güncel uygulama `src/` ve `public/` üzerinden build edilir. Kardeş `release/` klasörü eski checkout'tur; yeni düzenlemeleri burada yapın.
+
 ## Kurulum
 
 ```bash
@@ -27,7 +29,7 @@ npm test
 npm run build
 ```
 
-Windows PowerShell script politikası `npm` komutunu engellerse `npm.cmd` kullanın. Netlify ve mevcut CI Node 22 kullanır; yerel denetim Node 26.13.0 ile çalıştırıldı. Yeni uygulama bağımlılığı eklenmedi.
+Windows PowerShell script politikası `npm` komutunu engellerse `npm.cmd` kullanın. Netlify, CI ve güncel yerel doğrulamalar Node 22 kullanır.
 
 Formlar, alıcı ve Netlify Forms yapılandırması doğrulanana kadar gönderime kapalıdır; kullanıcı telefon/WhatsApp kanalına yönlendirilir. `.env.example` yalnızca public yapılandırmayı gösterir. Yetkili önizleme testinde form algılama, alıcı, spam klasörü ve CV erişimi doğrulandıktan sonra build ortamına `VITE_NETLIFY_FORMS_ENABLED=true` ekleyin. Gerçek test mesajı için ayrıca onay alın. GitHub Actions ile derleniyorsa bu public değişkeni ilgili workflow'nun build ortamına da eklemek gerekir; Netlify panelindeki değişkenler bağımsız GitHub build'ine otomatik taşınmaz. CV üst sınırı 7 MB'dır; Netlify Forms'un 8 MB toplam istek sınırı için pay bırakılır. Gizli anahtarları `VITE_` değişkenlerine koymayın.
 
@@ -57,10 +59,15 @@ Bu adres build sırasında `index.html`, `robots.txt` ve `sitemap.xml` çıktıl
 GitHub Actions üzerinde CI, güvenlik kontrolü ve Netlify deploy iş akışı hazırdır.
 
 - Repository: `https://github.com/umutgecer01/karaoglugroup.git`
-- `main` branch'e push edildiğinde build ve güvenlik kontrolleri çalışır.
-- `.github/workflows/netlify-deploy.yml`, `dist/` çıktısını Netlify production ortamına gönderir.
-- Deploy için GitHub repository secrets alanında `NETLIFY_AUTH_TOKEN` ve `NETLIFY_SITE_ID` tanımlı olmalıdır.
+- Geliştirme dalı `release/karaoglu-final-2026-11-08`, inceleme kaydı PR #1'dir. Commit ve push sonrasında CI/CodeQL çalışır, `karaoglugroup` Netlify projesi yeni Deploy Preview üretir.
+- Tamamlanan değişikliği test edip kaydetmek ve GitHub'a göndermek için: `npm run sync:preview -- "Değişikliği açıklayan mesaj"`. PowerShell'de gerekirse `npm.cmd` kullanın. Script main/yanlış remote gönderimini, yerel araçları/credentials ve ham test çıktılarının kaydını engeller. GitHub kimlik doğrulaması yoksa token istemeden durur.
+- Script dosya kaydında arka planda çalışmaz; tamamlanan değişiklik için çağrılır. Codex çalışma kuralı `AGENTS.md` içinde her tamamlanan değişiklikte bu akışı uygulamasını belirtir. Commit geçmişi GitHub'da, preview/build geçmişi Netlify'da saklanır.
+- Production projesi `karaoglugroupnet`, ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`; eski Git build'leri kapalıdır. Yeni geliştirme/preview projesi ID'si `80b58d06-0cbb-432c-8193-17d34ba776df` olarak kalır.
+- `.github/workflows/netlify-deploy.yml` **yalnızca manuel** çalıştırılır; main push otomatik production yayını tetiklemez. Production için ayrıca açık kullanıcı onayı gerekir. Repo bağlantısı, secrets veya main merge bu senkronizasyonun parçası değildir.
+- GitHub Actions production credentials/environment henüz kurulmadı; hazırmış gibi değerlendirmeyin. Onaylı yayın mevcut yetkili Netlify CLI oturumuyla, doğru eski Project ID ve ayrı production-context paketle yapılabilir.
 - Netlify build ayarı `netlify.toml` içinde `npm run build` ve `dist` olarak yapılandırılmıştır.
+
+Son canlı yayın: [PRODUCTION_DEPLOYMENT_REPORT.md](reports/PRODUCTION_DEPLOYMENT_REPORT.md). Formlar teslimat/KVKK ve ayrı aktivasyon onayına kadar `false` kalır.
 
 ## Mobil Uyum
 

@@ -1,4 +1,4 @@
-# Karaoğlu Group - Canlı Netlify Yayını
+# Karaoğlu Group — GitHub kayıt, preview ve onaylı yayın
 
 ## Canlı Adres
 
@@ -11,21 +11,26 @@ Bu proje React + Vite ile hazırlanır ve Netlify üzerinde `dist/` çıktısın
 ## GitHub Akışı
 
 - Repository: `https://github.com/umutgecer01/karaoglugroup.git`
-- Ana branch: `main`
+- Geliştirme dalı: `release/karaoglu-final-2026-11-08`; PR #1 üzerinden incelenir.
+- Ana branch: `main`; doğrudan push veya otomatik merge yapılmaz.
 - CI: `.github/workflows/ci.yml`
 - Güvenlik kontrolü: `.github/workflows/security.yml`
 - Netlify deploy: `.github/workflows/netlify-deploy.yml`
 
 ## Netlify Deploy
 
-GitHub Actions ile production deploy çalışması için repository secrets alanında şu değerler tanımlı olmalıdır:
+Tamamlanan düzenlemeyi kaydetmek için `npm run sync:preview -- "Değişiklik açıklaması"` çalıştırılır. Node 22 kontrolleri geçerse commit/push yapılır. Mevcut PR güncellenir ve Netlify geliştirme projesi `80b58d06-0cbb-432c-8193-17d34ba776df` otomatik preview oluşturur.
+
+Güncel preview: `https://deploy-preview-1--karaoglugroup.netlify.app/`. Sonucun güncel commit'e ait olduğu PR durumundan doğrulanmalıdır.
+
+GitHub Actions production yayını **yalnızca manuel** workflow_dispatch ile mümkündür; mevcut hesapta aşağıdaki credentials/environment kurulumu yapılmadı:
 
 ```text
 NETLIFY_AUTH_TOKEN
 NETLIFY_SITE_ID
 ```
 
-Secrets tanımlıysa `main` branch'e yapılan push sonrasında GitHub Actions build alır ve Netlify production adresine deploy eder.
+Main push artık production deploy tetiklemez. Canlı site için her sürümde ayrıca açık kullanıcı onayı gerekir. Eski production Project ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`; eski Git build'leri kapalı tutulur. Onaylı canlı sürüm ayrı production-context paketle bu açık Project ID'ye gönderilir; preview noindex paketi kullanılmaz. Secrets, repo bağlantısı veya DNS bu otomasyon tarafından değiştirilmez.
 
 ## SEO ve Canlı URL
 
@@ -60,4 +65,4 @@ npm run build
 npm run lint:security
 ```
 
-Son güncelleme: 1 Temmuz 2026
+Son güncelleme: 9 Kasım 2026. Form flag'i `VITE_NETLIFY_FORMS_ENABLED=false` olarak korunur.
