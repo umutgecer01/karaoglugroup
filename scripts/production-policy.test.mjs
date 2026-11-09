@@ -96,4 +96,8 @@ test('workflow remains manual, serial and pinned; credentials are passed only to
   assert.match(workflow, /netlify-cli@27\.16\.2/); assert.doesNotMatch(workflow, /--prod\b|--auth[=\s]/);
   assert.match(workflow, /REVIEWED_PREVIEW_SHA:/); assert.match(workflow, /environment:\s+name: production/);
   assert.equal((workflow.match(/NETLIFY_AUTH_TOKEN:/g) || []).length, 1);
+  for (const name of ['ci', 'security', 'codeql']) {
+    const verificationWorkflow = await readFile(new URL(`../.github/workflows/${name}.yml`, import.meta.url), 'utf8');
+    assert.match(verificationWorkflow, /uses: actions\/checkout@v4\s+with:\s+persist-credentials: false/, `${name} must not leave the Git token available to application/dependency commands`);
+  }
 });
