@@ -41,4 +41,4 @@ if(staged.length){
   run([...(hasAuthor?[]:['-c','user.name=Codex','-c','user.email=codex@localhost']),'commit','-m',message]);
 }
 run(['push','origin','HEAD:refs/heads/'+branch]);
-console.log('GitHub release synchronized. Check PR #1 for the new Netlify preview. Production was not published.');
+console.log('GitHub release branch synchronized. Verify its matching same-project Deploy Preview before review. Production was not published.');
