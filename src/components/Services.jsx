@@ -27,7 +27,6 @@ export default function Services({ t, serviceId, onNavigate }) {
       <div className="grid gap-4" aria-label={t.services.galleryTitle}>
         {getServiceGallery(serviceId, active).map((image, index) => <figure key={image.src} className="overflow-hidden rounded border border-white/15 bg-black/10">
           <ResponsiveImage {...image} sizes="(min-width: 1024px) 550px, 100vw" className={`w-full ${image.fit === 'contain' ? 'max-h-[32rem] object-contain' : 'object-cover'}`} loading={index ? 'lazy' : 'eager'} fetchPriority={serviceId === 'agriculture' && index === 0 ? 'high' : undefined} />
-          {(serviceId === 'agriculture' || (serviceId === 'construction' && index >= 3)) && <figcaption className="border-t border-white/10 px-4 py-3 text-sm text-platinum/90">{image.label}</figcaption>}
         </figure>)}
       </div>
     </div>
