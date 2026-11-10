@@ -37,6 +37,18 @@ Dokuz görselin 768 px WebP toplamı 1.274.258, AVIF toplamı 796.372 bayt; AVIF
 
 Renk, gökyüzü, araç, kişi veya yapı değiştirilmedi; perspektif ve filtre uygulanmadı. Doğal görünüm korundu. Çıktılarda EXIF/XMP bulunmadığı kontrol edildi. Görsellerde boyutlar tanımlı; Tarım ilk görseli eager/high, alt görseller lazy. Detayda contain, ana sayfa kartında görsel bazında object-position ile cover kullanılıyor.
 
+Gerçek Netlify taslağının `/tr/` ana sayfasında Lighthouse 13.6.0, Chrome 157, Node 22; mobil varsayılan simülasyon ve masaüstü preset ile profil başına üç soğuk navigasyon yapıldı. Medyanlar:
+
+| Ölçüm | 9 Kasım önceki önizleme | Bu fotoğraf taslağı |
+| --- | --- | --- |
+| Mobil LCP | 2,035 sn | **1,992 sn** |
+| Masaüstü LCP | 0,559 sn | **0,492 sn** |
+| Mobil / masaüstü CLS | 0 / 0,0064 | **0 / 0,0064** |
+| Mobil / masaüstü performans puanı | 99 / 99 | **97 / 100** |
+| Mobil / masaüstü aktarım | 800.511 / 764.931 bayt | **846.640 / 771.644 bayt** |
+
+LCP hedefi iki profilde de 2,5 saniyenin altında. Mobil puan iki azaldı; aktarım yaklaşık %5,8 arttı. Sonuçlar farklı günlerde alınmış laboratuvar ölçümleridir; kontrollü aynı-oturum A/B veya saha verisi değildir. Tek bir puandan genel hız artışı iddia edilmez. Geçerli mobil LCP örnekleri 2,016 / 1,992 / 1,964; masaüstü 0,492 / 0,396 / 0,538 sn. Her iki profilde medyan TBT 0 ms. İlk ikinci mobil denemede Lighthouse `NO_NAVSTART` trace hatası verdi; başarısız kayıt saklandı, yalnızca o deneme tekrar edildi ve başarılı üç örneğin medyanı alındı. Erişilebilirlik/best practices puanları 100; SEO 63, preview noindex/robots korumasıyla birlikte değerlendirilmelidir. Production SEO hatasız veya saha INP başarılı sonucu çıkarılmadı.
+
 ## 5. Mobil sonuçlar
 
 54 sayfa × 11 genişlik: 320–1920 px aralığında **594/594** kontrol geçti. Yatay taşma ve görünür kırık görsel yok. 390 px ekran görüntüleri incelendi. Fiziksel telefon ve dokunmatik donanım testi yapılmadı.
@@ -61,7 +73,9 @@ TR/EN/AR'da aynı kaynak ve sıralama kullanılıyor. 36 detay görseli, 27 yeni
 
 Node 22.23.4: build başarılı; regresyon **29/29**, production statik kontroller **4/4**, lint/security ve npm audit başarılı, bilinen audit bulgusu **0**. Son kaynak üzerinde 594 responsive kontrol, 163 dahili kaynak kontrolü, SEO/dil/404 taraması geçti; runtime/console hatası yok. 71 medya çıktısı doğrulandı. Gerçek form gönderilmedi.
 
-Yerel ayrıntılı JSON/PNG kanıtları `reports/photo-integration/` altında tutulur ve Git'e eklenmez. Yeni gerçek cihaz, Safari/Firefox, form teslimatı ve saha INP ölçümü yapılmadı. Netlify önizleme/performance sonucu aşağıya ayrıca işlenecek; yerel sonuçlar uzak yayın sonucu sayılmıyor.
+Yerel ayrıntılı JSON/PNG kanıtları `reports/photo-integration/` altında tutulur ve Git'e eklenmez. Yeni gerçek cihaz, Safari/Firefox, form teslimatı ve saha INP ölçümü yapılmadı. Yerel sonuçlar uzak yayın sonucu sayılmıyor.
+
+Gerçek Netlify taslağında: **36/36** galeri görseli, **15/15** mobil/masaüstü yerleşim ve ana sayfa kaynak sıralama kontrolü; **71/71** görselin HTTP 200, dosya hash eşliği ve 30 günlük cache kontrolü başarılı. AVIF MIME doğru; TR/EN/AR kök sayfalarında canonical/hreflang/noindex ve güvenlik başlıkları; üç dil altında bilinmeyen adreslerde HTTP 404; sitemap/robots erişimi ve eski Tarım kaynağının 404 yanıtı doğrulandı. Tam 594 responsive paketinin uzak taslakta tekrar çalıştırıldığı iddia edilmez; bu paket son yerel kaynak üzerinde çalıştı.
 
 ## 11. Değiştirilen dosyalar
 
@@ -69,6 +83,8 @@ Yerel ayrıntılı JSON/PNG kanıtları `reports/photo-integration/` altında tu
 
 ## 12. Yayın için kalan işlemler
 
-Çalışma release dalında ve aynı eski Netlify projesinin önizlemesinde doğrulanacak. Production `b4753086-eb94-4a7e-b5f5-7270835fab3a` için yayın kilidi korunur. Main merge, production deploy, proje bağlantısı, secret, DNS değişikliği yapılmaz. `VITE_NETLIFY_FORMS_ENABLED=false` korunur.
+Kaynak commit'i `eef87c4d9ba02b03bc22e04293d037add55f6ea9` için aynı eski Netlify projesinde yalnızca taslak oluşturuldu: [İncelenen önizleme](https://6af328b0f1de1e9bed25263f--karaoglugroupnet.netlify.app/tr/). Site ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`, deployment `6af328b0f1de1e9bed25263f`, durum ready, context deploy-preview, published_at boş. Paket noindex ve formlar kapalı oluşturuldu; manifestte çıktı hash'leri tutuldu. Bu kalıcı deployment bağlantısında Drawer görsel müdahalesi görülmedi; CSP gevşetilmedi.
+
+Canlı deployment `6af18e98278ff0906ad9ca6a` değişmedi ve kilitli kaldı. Main merge, production deploy, proje bağlantısı, secret, DNS değişikliği yapılmadı. `VITE_NETLIFY_FORMS_ENABLED=false` korundu. [Release dalı](https://github.com/umutgecer01/karaoglugroup/tree/release/karaoglu-final-2026-11-08) ve [draft PR #1](https://github.com/umutgecer01/karaoglugroup/pull/1) üzerinden kayıt devam eder. Git bağlantılı PR önizlemesi ayrıca son push SHA'sıyla eşleştirilmeli; yukarıdaki taslak fotoğraf kaynak commit'ine aittir.
 
 Kişiler, görünür plakalar ve üçüncü taraf markalar için insan tarafından kullanım izni/gizlilik incelemesi gerekir. Dosya adları gerçek şirket tesisi veya hak sahipliği kanıtı değildir. Yayın için bu fotoğrafları kapsayan yeni açık kullanıcı onayı gerekir; eski sürüme verilen canlı yayın onayı bu sürüme taşınmadı.
