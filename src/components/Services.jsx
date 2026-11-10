@@ -25,8 +25,8 @@ export default function Services({ t, serviceId, onNavigate }) {
         {serviceId === 'automotive' && <a className="btn-secondary" href={company.sahibindenUrl} target="_blank" rel="noopener noreferrer"><Store size={17} />{t.portfolio.cta}</a>}
       </div>
       <div className="grid gap-4" aria-label={t.services.galleryTitle}>
-        {getServiceGallery(serviceId, active).map((image, index) => <figure key={image.src} className="overflow-hidden rounded border border-white/15 bg-black/10">
-          <ResponsiveImage {...image} sizes="(min-width: 1024px) 550px, 100vw" className={`w-full ${image.fit === 'contain' ? 'max-h-[32rem] object-contain' : 'object-cover'}`} loading={index ? 'lazy' : 'eager'} fetchPriority={serviceId === 'agriculture' && index === 0 ? 'high' : undefined} />
+        {getServiceGallery(serviceId, active).map((image, index) => <figure key={image.src} className="aspect-[4/3] overflow-hidden rounded border border-white/15 bg-black/10">
+          <ResponsiveImage {...image} sizes="(min-width: 1024px) 550px, 100vw" className="h-full w-full object-cover" loading={index ? 'lazy' : 'eager'} fetchPriority={serviceId === 'agriculture' && index === 0 ? 'high' : undefined} />
         </figure>)}
       </div>
     </div>

@@ -7,7 +7,6 @@ import { pageMetadata } from '../src/utils/metadata.js';
 import { tr } from '../src/data/translations/tr.js';
 import { en } from '../src/data/translations/en.js';
 import { ar } from '../src/data/translations/ar.js';
-import media from '../src/data/generatedMedia.json' with { type: 'json' };
 
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const template = await readFile('dist/index.html', 'utf8');
@@ -34,10 +33,8 @@ try {
       const alternates = [...meta.alternates, { lang: 'x-default', href: meta.alternates[0].href }];
       if (view === 'home') {
         html = html.replace('<script type="module" crossorigin ', '<script type="module" crossorigin fetchpriority="low" ');
-        const variants = media['/images/automotive-gallery-1.jpg'].variants;
-        const srcset = variants.map(image => `${image.src} ${image.width}w`).join(', ');
-        // Match the picture's source selection exactly; do not download a JPEG fallback as well.
-        html = html.replace('</head>', `<link rel="preload" as="image" type="image/webp" imagesrcset="${srcset}" imagesizes="(min-width: 1024px) 550px, calc(100vw - 32px)" fetchpriority="high" />\n</head>`);
+        // Load only the visible poster; the MP4 stays absent until the user presses play.
+        html = html.replace('</head>', '<link rel="preload" as="image" type="image/webp" href="/images/fleet-rental-video-poster-1280.webp" fetchpriority="high" />\n</head>');
       }
       html = html.replace(/<p id="startup-error"[\s\S]*?<\/p>/, `<p id="startup-error" hidden role="alert">${escape(content.ui.loadError)} <a href="">${escape(content.ui.reload)}</a></p>`);
       const noScript = { tr: 'Etkileşimli menüler için JavaScript gereklidir.', en: 'JavaScript is required for interactive menus.', ar: 'يلزم تفعيل جافاسكريبت لاستخدام القوائم التفاعلية.' };

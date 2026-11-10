@@ -1,4 +1,4 @@
-import ResponsiveImage from './ResponsiveImage.jsx';
+import FleetShowcaseVideo from './FleetShowcaseVideo.jsx';
 import { ArrowRight, MapPin } from "lucide-react";
 import { company } from "../data/company.js";
 import Reveal from "./Reveal.jsx";
@@ -36,20 +36,8 @@ export default function Hero({ t, onNavigate }) {
             </div>
           </Reveal>
 
-          <div className="hero-image-frame">
-            <ResponsiveImage
-              src="/images/automotive-gallery-1.jpg"
-              alt={t.ui.heroAlt}
-              sizes="(min-width: 1024px) 550px, calc(100vw - 32px)"
-              width="960"
-              height="540"
-              fetchPriority="high"
-              decoding="sync"
-            />
-            <div className="hero-image-caption">
-              <span className="eyebrow">Karaoğlu Group</span>
-              <span>{t.ui.heroCaption}</span>
-            </div>
+          <div className="hero-image-frame hero-video-frame">
+            <FleetShowcaseVideo t={t} />
           </div>
         </div>
       </div>

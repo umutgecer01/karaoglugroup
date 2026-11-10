@@ -1143,6 +1143,18 @@ section[id] {
   height: 100%;
 }
 
+.rental-panel picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.section-band figure > picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .service-showreel__viewport:hover .service-showreel__track,
 .service-showreel__viewport:focus-within .service-showreel__track { animation-play-state: paused; }
 
@@ -1348,6 +1360,10 @@ section[id] {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, transparent 48%, rgba(8, 20, 31, 0.9));
+  }
+
+  .hero-video-frame::after {
+    display: none;
   }
 
   .hero-image-caption {

@@ -51,7 +51,8 @@ test('all 54 generated pages expose matching metadata and remain form-disabled',
     assert.equal(preloads.length, view === 'home' ? 1 : 0, 'only home hero needs a preload');
     if (view === 'home') {
       assert.equal(preloads[0].type, 'image/webp');
-      assert.ok(preloads[0].imagesrcset && preloads[0].imagesizes);
+      assert.equal(preloads[0].href, '/images/fleet-rental-video-poster-1280.webp');
+      assert.match(html, /<source[^>]+fleet-rental-showcase\.mp4/);
     }
     count++;
   }

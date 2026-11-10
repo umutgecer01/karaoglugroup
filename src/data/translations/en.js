@@ -468,6 +468,18 @@ export const en = {
         ],
         "gallery": [
           {
+            "label": "Construction Fleet Operations",
+            "alt": "Heavy-duty crane truck and equipment positioned at a construction site"
+          },
+          {
+            "label": "Generator Transport Truck",
+            "alt": "Heavy-duty crane truck transporting a generator in an open yard"
+          },
+          {
+            "label": "Technical Service Vehicles",
+            "alt": "Technical service and maintenance vehicles lined up at a rainy site"
+          },
+          {
             "label": "Infrastructure Application Area",
             "alt": "Concrete pipe line placed during urban infrastructure works",
             "src": "/images/construction-1.jpg",
@@ -866,6 +878,7 @@ en.ui = {
   "video": "Fleet rental showcase video",
   "playVideo": "Play showcase video",
   "videoError": "The video could not load. Please try playing it again.",
+  "fleetImageAlt": "Corporate vehicle fleet lined up in a rainy city setting",
   "mapLoad": "Load map with Google Maps",
   "privacy": "Privacy and cookie preferences",
   "backServices": "All activities",
@@ -883,4 +896,3 @@ en.ui = {
 };
 
 Object.assign(en.ui, {"loadError":"The page could not load. Please try again.","reload":"Reload"});
-

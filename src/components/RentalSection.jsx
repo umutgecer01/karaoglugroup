@@ -1,35 +1,11 @@
 import { getServiceGallery } from '../data/serviceGallery.js';
 import ResponsiveImage from './ResponsiveImage.jsx';
 import { ArrowRight, Award, BriefcaseBusiness, FileText, Layers, Truck } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 import { company } from "../data/company.js";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
 
 const icons = [BriefcaseBusiness, Award, FileText, Layers, Truck];
-const rentalShowcaseVideo = "/videos/fleet-rental-showcase.mp4";
-function RentalShowcaseVideo({ t }) {
-  const videoRef = useRef(null);
-  const [loadVideo, setLoadVideo] = useState(false);
-  const [failed, setFailed] = useState(false);
-  useEffect(() => {
-    const node = videoRef.current;
-    if (!node || !loadVideo) return;
-    const observer = new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) node.pause(); });
-    observer.observe(node);
-    const visibility = () => { if (document.hidden) node.pause(); };
-    document.addEventListener('visibilitychange', visibility);
-    node.play().catch(() => {});
-    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', visibility); };
-  }, [loadVideo]);
-  return <div className="relative">
-    <video ref={videoRef} className="aspect-[1280/568] w-full object-cover" width="1280" height="568" controls={loadVideo} playsInline preload="none" poster="/images/fleet-rental-video-poster-1280.webp" aria-label={t.ui.video} onError={() => setFailed(true)}>
-      {loadVideo && <source src={rentalShowcaseVideo} type="video/mp4" />}
-    </video>
-    {!loadVideo && <button type="button" className="absolute inset-0 grid place-items-center bg-black/20" onClick={() => setLoadVideo(true)}><span className="btn-primary">{t.ui.playVideo}</span></button>}
-    {failed && <p role="alert" className="p-3 text-sm">{t.ui.videoError}</p>}
-  </div>;
-}
 
 export default function RentalSection({ t }) {
   const rentalImages = getServiceGallery("rental", t.services.items.rental);
@@ -57,7 +33,16 @@ export default function RentalSection({ t }) {
           <Reveal className="lg:col-span-2">
             <div className="grid gap-3 lg:grid-cols-[1.12fr_0.88fr]">
               <div className="relative overflow-hidden rounded-xl border border-white/12 bg-ink/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
-                <RentalShowcaseVideo t={t} />
+                <ResponsiveImage
+                  className="aspect-[3/2] w-full object-cover"
+                  src="/images/fleet-rental-city-fleet.png"
+                  alt={t.ui.fleetImageAlt}
+                  width={1536}
+                  height={1024}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/34 via-transparent to-ink/10" />
               </div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">

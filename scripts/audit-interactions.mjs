@@ -50,11 +50,7 @@ try {
   check('unverified forms are disabled with honest notice', await b.evaluate(`document.querySelector('#root form button[type="submit"]').disabled && document.body.innerText.includes('form is currently unavailable')`));
   check('external map is opt in', await b.evaluate(`!document.querySelector('iframe')`));
   await go('http://127.0.0.1:4175/en/fleet-rental/');
-  check('video is not downloaded before interaction', await b.evaluate(`!document.querySelector('video source') && !performance.getEntriesByType('resource').some(r=>r.name.endsWith('.mp4'))`));
-  await b.evaluate(`document.querySelector('video').parentElement.querySelector('button').click()`); await pause(700);
-  check('video gains native controls and no autoplay', await b.evaluate(`document.querySelector('video').controls && !document.querySelector('video').autoplay && !!document.querySelector('video source')`));
-  await b.evaluate('window.scrollTo(0,document.body.scrollHeight)');await pause(700);
-  check('video pauses outside viewport', await b.evaluate(`document.querySelector('video').paused`));
+  check('fleet rental uses the supplied image instead of video', await b.evaluate(`!document.querySelector('video') && document.querySelector('img[src*="fleet-rental-city-fleet.png"]')`));
 
   // Vite on 4180 is explicitly launched with Forms enabled. All POSTs are mocked.
   await b.send('Page.addScriptToEvaluateOnNewDocument', { source: `localStorage.setItem('karaoglu-privacy-consent','1'); window.__posts=0; const originalFetch=window.fetch.bind(window); window.fetch=(url,options)=>{ if(options?.method==='POST'){window.__posts++;window.__lastPost={url,options};return new Promise(resolve=>{window.__release=status=>resolve(new Response('',{status}));});}return originalFetch(url,options);};` });

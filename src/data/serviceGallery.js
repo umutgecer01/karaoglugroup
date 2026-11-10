@@ -17,6 +17,30 @@ export const serviceGalleries = {
   ],
   construction: [
     {
+      label: "Şantiye Araç Operasyonu",
+      alt: "Şantiye sahasında konumlandırılmış vinçli ağır hizmet aracı ve ekipmanlar",
+      src: "/images/construction/real/construction-truck-yard.jpg",
+      width: 1024,
+      height: 768,
+      position: "50% 52%",
+    },
+    {
+      label: "Jeneratör Taşıma Aracı",
+      alt: "Açık alanda jeneratör taşıyan vinçli ağır hizmet aracı",
+      src: "/images/construction/real/construction-generator-truck.jpg",
+      width: 768,
+      height: 1024,
+      position: "50% 52%",
+    },
+    {
+      label: "Teknik Servis Araçları",
+      alt: "Yağmurlu sahada sıralanmış teknik servis ve bakım araçları",
+      src: "/images/construction/real/construction-service-trucks.jpg",
+      width: 1024,
+      height: 768,
+      position: "50% 52%",
+    },
+    {
       label: "Altyapı Uygulama Alanı",
       alt: "Şehir içi altyapı çalışmasında yerleştirilen beton boru hattı",
       src: "/images/construction-1.jpg",
@@ -178,7 +202,16 @@ export const getServiceGallery = (serviceId, serviceContent = {}, placement = 'd
   const translatedGallery = Array.isArray(serviceContent.gallery) ? serviceContent.gallery : [];
   const images = (serviceGalleries[serviceId] || []).map((image, index) => {
     const translated = translatedGallery[index];
-    return translated && typeof translated === 'object' ? { ...image, ...translated } : image;
+    if (!translated || typeof translated !== 'object') return image;
+    return {
+      ...image,
+      ...translated,
+      src: image.src,
+      width: image.width,
+      height: image.height,
+      fit: image.fit,
+      position: image.position,
+    };
   });
   // Detail starts with grain transfer; the home agriculture group starts with wheat harvesting.
   return serviceId === 'agriculture' && placement === 'preview'

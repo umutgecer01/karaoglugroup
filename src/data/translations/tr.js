@@ -436,6 +436,18 @@ export const tr = {
         ],
         "gallery": [
           {
+            "label": "Şantiye Araç Operasyonu",
+            "alt": "Şantiye sahasında konumlandırılmış vinçli ağır hizmet aracı ve ekipmanlar"
+          },
+          {
+            "label": "Jeneratör Taşıma Aracı",
+            "alt": "Açık alanda jeneratör taşıyan vinçli ağır hizmet aracı"
+          },
+          {
+            "label": "Teknik Servis Araçları",
+            "alt": "Yağmurlu sahada sıralanmış teknik servis ve bakım araçları"
+          },
+          {
             "label": "Altyapı Uygulama Alanı",
             "alt": "Şehir içi altyapı çalışmasında yerleştirilen beton boru hattı",
             "src": "/images/construction-1.jpg",
@@ -871,6 +883,7 @@ tr.ui = {
   "video": "Filo kiralama tanıtım videosu",
   "playVideo": "Tanıtım videosunu oynat",
   "videoError": "Video yüklenemedi. Yeniden oynatmayı deneyebilirsiniz.",
+  "fleetImageAlt": "Yağmurlu şehir manzarasında sıralanmış kurumsal araç filosu",
   "mapLoad": "Google Haritalar ile haritayı yükle",
   "privacy": "Gizlilik ve çerez tercihleri",
   "backServices": "Tüm faaliyet alanları",
@@ -888,4 +901,3 @@ tr.ui = {
 };
 
 Object.assign(tr.ui, {"loadError":"Sayfa yüklenemedi. Lütfen yeniden deneyin.","reload":"Yeniden yükle"});
-
