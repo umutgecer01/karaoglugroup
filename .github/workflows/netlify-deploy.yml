@@ -95,7 +95,7 @@ jobs:
 
       - name: Preserve publication checkpoint and hash manifest
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: production-publication-${{ github.run_id }}
           path: |
