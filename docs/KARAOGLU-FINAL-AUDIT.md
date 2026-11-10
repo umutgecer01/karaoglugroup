@@ -55,7 +55,7 @@ Canlı `/tr/` yanıtı şu başlıkları içeriyor:
 - `X-Frame-Options: DENY`.
 - `Referrer-Policy: strict-origin-when-cross-origin`.
 
-Netlify yapılandırmasında ayrıca `X-Content-Type-Options` ve `Permissions-Policy` kuralları tanımlı. Bu iki başlık canlı yanıt üzerinden ayrıca değer kontrolüne alınmadı; aşağıdaki açık doğrulama maddesine bakın.
+Canlı yanıtta ayrıca `X-Content-Type-Options: nosniff` ve `Permissions-Policy` (sensör, kamera, mikrofon, geolocation, ödeme ve USB kapalı; clipboard-write self) doğrulandı.
 
 ## 5. Formlar, veri ve KVKK
 
@@ -100,7 +100,7 @@ Fotoğraf hakları, çalışan/ziyaretçi görüntü izinleri, araç plakaları 
 
 ## 11. GitHub, Netlify ve yayın güvenliği
 
-Başlangıçta GitHub main ve release dalı `838a208` idi. Önceki yayın kontrolünde Netlify production aynı kaynak commit'ine bağlı ve kilitliydi. Bu denetimde yalnızca production HTTP yanıtları okundu; deploy, unlock, domain/DNS değişikliği yapılmadı. Kod değişiklikleri PR ve aynı Netlify projesinin Deploy Preview kontrolü için release dalında hazırlanmalıdır. CI/Deploy Preview bu yeni değişiklikler için henüz çalıştırılmadı.
+Başlangıçta GitHub main ve release dalı `838a208` idi. Bu denetim sonunda `81dbe4d386b183ed8828da2560c65650675dbd58` commit'i yalnızca `release/karaoglu-final-2026-11-08` dalına gönderildi. GitHub API entegrasyonu PR oluşturma isteğini 403 `Resource not accessible by integration` ile reddetti; bu yüzden PR ve aynı commit'e ait Deploy Preview oluşmadı, CI/preview bu yeni değişiklikler için çalıştırılmadı. Önceki yayın kontrolünde Netlify production aynı kaynak commit'ine bağlı ve kilitliydi. Bu denetimde production deploy, unlock veya domain/DNS değişikliği yapılmadı.
 
 Eski PR #1 ve eski deploy bilgileri artık güncel süreç göstergesi değil. `AGENTS.md` içindeki yayın bilgisi bu nedenle güncellendi. `reports/PRODUCTION_DEPLOYMENT_REPORT.md` ve `reports/PHOTO_PUBLICATION_REPORT.md` tarihsel kayıt olarak ele alınmalı; bu denetimde geçmiş kayıtlar yeniden yazılmadı.
 
@@ -121,7 +121,6 @@ Eski PR #1 ve eski deploy bilgileri artık güncel süreç göstergesi değil. `
 | P1 | Erişilebilirlik/video metin alternatifi ve gerçek cihaz QA eksik. | Klavye/ekran okuyucu/axe ve video caption testi yok. | Tarayıcı erişimiyle manuel ve otomatik QA; video için altyazı veya transkript kararı. |
 | P1 | Kariyer verisi alıcısı, saklama ve KVKK belgeleri doğrulanmadı. | Formlar kapalı tutuluyor. | Şirket/hukuk onayı; veri akışı ve saklama politikasını doğrulama. |
 | P2 | Chrome tabanlı görsel, etkileşim, performans ve 594 responsive kontrol yapılmadı. | Ortam policy Chrome başlatmasını engelledi. | Chrome/CDP erişimi olan ortamda gerçek tarayıcı testlerini çalıştırma. |
-| P2 | Production `X-Content-Type-Options` ve `Permissions-Policy` değerleri doğrudan raporlanmadı. | Netlify config var; canlı header değeri bu rapor çalışmasında alınmadı. | Sonraki read-only header incelemesinde teyit. |
 | P2 | Şirket istatistikleri ve fotoğraf kullanım izinleri dış kanıtla doğrulanmadı. | Şirket içi belge/hak kayıtlarına erişim yok. | İlgili şirket sahibi onayı. |
 | P3 | React/React DOM 19.3.1 kullanılabilir, major paket güncellemeleri mevcut. | Mevcut aralıkta güncelleme veya major yükseltme denenmedi. | Ayrı uyumluluk değişikliği ve tam regresyon testi. |
 | P3 | Saha performans metrikleri bulunmuyor. | RUM/CrUX verisi bu denetim kapsamına bağlı değil. | Yayın sonrası gizlilik uyumlu gerçek kullanıcı ölçümü değerlendirmesi. |
@@ -154,7 +153,7 @@ Eski PR #1 ve eski deploy bilgileri artık güncel süreç göstergesi değil. `
 
 ## 17. Son karar
 
-**Kod inceleme ve Preview aşamasına hazır; production yayın onayı verilmiş değildir.** Önce release dalının GitHub/Deploy Preview kontrolü yapılmalı; production için ayrıca kullanıcı onayı ve gerekli görsel/a11y, hukuki içerik ve medya hakkı incelemeleri tamamlanmalıdır.
+**Yerel kalite kapıları geçti; ancak PR/Deploy Preview henüz yok ve production yayın onayı verilmiş değildir.** PR oluşturma denemesi GitHub entegrasyonunun 403 yanıtı nedeniyle başarısız oldu. GitHub'da PR açılmalı, aynı commit'in Deploy Preview'ı incelenmeli; production için ayrıca kullanıcı onayı ve gerekli görsel/a11y, hukuki içerik ve medya hakkı incelemeleri tamamlanmalıdır.
 
 ---
 
