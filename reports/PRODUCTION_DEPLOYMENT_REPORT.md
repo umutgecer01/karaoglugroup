@@ -1,6 +1,6 @@
 # KARAOĞLU GROUP — Onaylı production yayını
 
-> Güncel yayın: Kullanıcının “yayınla son halini” onayıyla 9 Kasım 2026 12:14:29 İstanbul saatinde `6ca07f9` kaynaklı yeni sürüm yayınlandı ve kilitlendi. Git build/preview entegrasyonu açık tutuldu. Bu dosyanın aşağıdaki bölümleri önceki `c45a5c0` yayınının tarihsel kaydıdır. Güncel ayrıntılar: [LATEST_PRODUCTION_RELEASE_REPORT.md](LATEST_PRODUCTION_RELEASE_REPORT.md).
+> Güncel yayın: Kullanıcının fotoğraf açıklamalarını kaldırıp canlıya alma talebiyle 10 Kasım 2026 17:35:29 İstanbul saatinde `d528863` kaynaklı sürüm yayınlandı ve kilitlendi. Altı yeni Tarım ve üç ek İnşaat görseli canlıdadır; görünür fotoğraf açıklamaları kaldırıldı. Git build/preview entegrasyonu açık tutuldu. Güncel ayrıntılar: [PHOTO_PUBLICATION_REPORT.md](PHOTO_PUBLICATION_REPORT.md). Aşağıdaki bölümler önceki yayınların tarihsel kaydıdır.
 
 9 Kasım 2026 — Europe/Istanbul
 
