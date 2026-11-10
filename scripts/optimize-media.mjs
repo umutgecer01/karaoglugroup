@@ -4,7 +4,8 @@ import { browserSession } from './browser-session.mjs';
 // Run with the local preview and headless Chrome on port 9222 (see reports).
 // Compression/resizing only: originals are retained as fallbacks.
 const browser = await browserSession();
-const manifest = {};
+// Keep separately imported, nested service images when refreshing root assets.
+const manifest = JSON.parse(await readFile('src/data/generatedMedia.json', 'utf8'));
 try {
   await browser.send('Page.navigate', { url: 'http://127.0.0.1:4173/' });
   for (const name of await readdir('public/images')) {

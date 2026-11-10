@@ -1,5 +1,7 @@
 # Medya kökeni, kullanım hakkı ve teknik envanter
 
+10 Kasım güncellemesi: Aşağıdaki 9 Kasım envanteri tarihsel durumdur. Eski üç Tarım kaynağı ve türevleri kaldırıldı; kullanıcının sağladığı altı Tarım ve üç ek İnşaat görseli responsive JPEG/WebP/AVIF çıktılarıyla entegre edildi. Mevcut İnşaat görselleri korundu. Yeni dosyaların kaynak, boyut, izin/gizlilik sınırları ve testleri [Fotoğraf entegrasyon raporunda](reports/PHOTO_INTEGRATION_REPORT.md) kayıtlıdır. Bu kaynaklar bağımsız olarak şirkete ait/gerçek tesis diye doğrulanmadı; kişiler, plakalar ve üçüncü taraf markaları için yayın öncesi insan kontrolü gerekir.
+
 9 Kasım 2026. Dosya bulunması, HTTP 200 dönmesi veya fotoğrafa benzemesi kullanım hakkı ve şirkete ait gerçek tesis/araç kanıtı sayılmadı. Görseller gerçek, stok veya yapay zekâ üretimi olarak sınıflandırılmadı; bunu doğrulayacak köken belgesi bulunmadı.
 
 ## C. Şirket teyidi gereken dosyalar

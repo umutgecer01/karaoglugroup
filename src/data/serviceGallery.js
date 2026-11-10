@@ -40,6 +40,33 @@ export const serviceGalleries = {
       height: 884,
       fit: "contain",
     },
+    {
+      "label": "Beton Yapı İç Detayı",
+      "alt": "Dairesel beton yapının içinde mavi merdivenler ve kat döşemeleri",
+      "src": "/images/construction/real/construction-tower-interior.jpg",
+      "width": 1448,
+      "height": 1086,
+      "fit": "contain",
+      "position": "50% 50%"
+    },
+    {
+      "label": "Beton Yapı Dış Görünümü",
+      "alt": "Çok katlı dairesel beton yapının dışarıdan görünümü",
+      "src": "/images/construction/real/construction-tower-exterior.jpg",
+      "width": 1086,
+      "height": 1448,
+      "fit": "contain",
+      "position": "50% 45%"
+    },
+    {
+      "label": "Saha Kurulumu",
+      "alt": "Vinç, kırmızı jeneratör ve çalışanların bulunduğu kurulum sahası",
+      "src": "/images/construction/real/construction-generator-installation.jpg",
+      "width": 1448,
+      "height": 1086,
+      "fit": "contain",
+      "position": "50% 55%"
+    }
   ],
   petroleum: [
     {
@@ -68,29 +95,59 @@ export const serviceGalleries = {
   ],
   agriculture: [
     {
-      label: "Bahçe ve Tarla Üretimi",
-      alt: "Karaoğlu Group bünyesindeki bahçe ve tarla üretim alanları",
-      src: "/images/agriculture-1.jpg",
-      width: 1408,
-      height: 530,
-      fit: "contain",
+      "label": "Hasat ve Ürün Nakliyesi",
+      "alt": "Kırmızı biçerdöverden yeşil kamyona tahıl aktarımı",
+      "src": "/images/agriculture/real/agriculture-grain-transfer.jpg",
+      "width": 1086,
+      "height": 1448,
+      "fit": "contain",
+    "position": "50% 40%"
     },
     {
-      label: "Mısır ve Buğday Tarlaları",
-      alt: "Mısır ve buğday ekili tarım arazilerinin genel görünümü",
-      src: "/images/agriculture-2.jpg",
-      width: 1408,
-      height: 622,
-      fit: "contain",
+      "label": "Tarımsal Hasat Faaliyetleri",
+      "alt": "Sarı biçerdöverin tarlada sarı kamyona tahıl aktarması",
+      "src": "/images/agriculture/real/agriculture-harvest-yellow.jpg",
+      "width": 1086,
+      "height": 1448,
+      "fit": "contain",
+    "position": "50% 52%"
     },
     {
-      label: "Sezonluk Üretim Alanları",
-      alt: "Dağ eteklerinde yer alan sezonluk tarımsal üretim alanları",
-      src: "/images/agriculture-3.jpg",
-      width: 1408,
-      height: 611,
-      fit: "contain",
+      "label": "Ayçiçeği Hasadı",
+      "alt": "Ayçiçeği tarlasında görünen sarı biçerdöver",
+      "src": "/images/agriculture/real/agriculture-sunflower-field.jpg",
+      "width": 1448,
+      "height": 1086,
+      "fit": "contain",
+      "position": "50% 55%"
     },
+    {
+      "label": "Buğday Hasadı",
+      "alt": "Buğday tarlasında çalışan kırmızı biçerdöver",
+      "src": "/images/agriculture/real/agriculture-wheat-harvest.jpg",
+      "width": 1086,
+      "height": 1448,
+      "fit": "contain",
+    "position": "50% 40%"
+    },
+    {
+      "label": "Tarımsal Ürün Depolama",
+      "alt": "Depo içinde düzenli istiflenmiş gübre çuvalları",
+      "src": "/images/agriculture/real/agriculture-fertilizer-storage.jpg",
+      "width": 1086,
+      "height": 1448,
+      "fit": "contain",
+      "position": "50% 55%"
+    },
+    {
+      "label": "Tarla Operasyonları",
+      "alt": "Yol kenarında sarı biçerdöverden kamyona ürün aktarımı",
+      "src": "/images/agriculture/real/agriculture-roadside-harvest.jpg",
+      "width": 1448,
+      "height": 1086,
+      "fit": "contain",
+      "position": "50% 55%"
+    }
   ],
   rental: [
     {
@@ -117,11 +174,14 @@ export const serviceGalleries = {
   ],
 };
 
-export const getServiceGallery = (serviceId, serviceContent = {}) => {
+export const getServiceGallery = (serviceId, serviceContent = {}, placement = 'detail') => {
   const translatedGallery = Array.isArray(serviceContent.gallery) ? serviceContent.gallery : [];
-  const translatedImages = translatedGallery.filter((item) => item && typeof item !== "string" && item.src);
-
-  return translatedImages.length
-    ? translatedImages.map((image, index) => ({ ...serviceGalleries[serviceId]?.[index], ...image }))
-    : serviceGalleries[serviceId] || [];
+  const images = (serviceGalleries[serviceId] || []).map((image, index) => {
+    const translated = translatedGallery[index];
+    return translated && typeof translated === 'object' ? { ...image, ...translated } : image;
+  });
+  // Detail starts with grain transfer; the home agriculture group starts with wheat harvesting.
+  return serviceId === 'agriculture' && placement === 'preview'
+    ? [images[3], ...images.filter((_, index) => index !== 3)].filter(Boolean)
+    : images;
 };

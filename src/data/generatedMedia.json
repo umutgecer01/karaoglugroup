@@ -1,61 +1,4 @@
 {
-  "/images/agriculture-1.jpg": {
-    "width": 1408,
-    "height": 530,
-    "originalBytes": 396123,
-    "variants": [
-      {
-        "src": "/images/agriculture-1-640.webp",
-        "width": 640,
-        "height": 241,
-        "bytes": 42322
-      },
-      {
-        "src": "/images/agriculture-1-1408.webp",
-        "width": 1408,
-        "height": 530,
-        "bytes": 214168
-      }
-    ]
-  },
-  "/images/agriculture-2.jpg": {
-    "width": 1408,
-    "height": 622,
-    "originalBytes": 462837,
-    "variants": [
-      {
-        "src": "/images/agriculture-2-640.webp",
-        "width": 640,
-        "height": 283,
-        "bytes": 53588
-      },
-      {
-        "src": "/images/agriculture-2-1408.webp",
-        "width": 1408,
-        "height": 622,
-        "bytes": 250804
-      }
-    ]
-  },
-  "/images/agriculture-3.jpg": {
-    "width": 1408,
-    "height": 611,
-    "originalBytes": 422893,
-    "variants": [
-      {
-        "src": "/images/agriculture-3-640.webp",
-        "width": 640,
-        "height": 278,
-        "bytes": 47218
-      },
-      {
-        "src": "/images/agriculture-3-1408.webp",
-        "width": 1408,
-        "height": 611,
-        "bytes": 227212
-      }
-    ]
-  },
   "/images/automotive-gallery-1.jpg": {
     "width": 960,
     "height": 540,
@@ -306,6 +249,459 @@
         "width": 960,
         "height": 404,
         "bytes": 77818
+      }
+    ]
+  },
+  "/images/agriculture/real/agriculture-harvest-yellow.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "originalBytes": 419717,
+    "variants": [
+      {
+        "src": "/images/agriculture/real/agriculture-harvest-yellow-480.webp",
+        "width": 480,
+        "height": 640,
+        "bytes": 80482
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-harvest-yellow-768.webp",
+        "width": 768,
+        "height": 1024,
+        "bytes": 186692
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-harvest-yellow-1086.webp",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 322638
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/agriculture/real/agriculture-harvest-yellow-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 49778
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-harvest-yellow-768.avif",
+        "width": 768,
+        "height": 1024,
+        "bytes": 113662
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-harvest-yellow-1086.avif",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 185840
+      }
+    ]
+  },
+  "/images/agriculture/real/agriculture-sunflower-field.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "originalBytes": 410625,
+    "variants": [
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 43276
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-768.webp",
+        "width": 768,
+        "height": 576,
+        "bytes": 107790
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-1200.webp",
+        "width": 1200,
+        "height": 900,
+        "bytes": 239762
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-1448.webp",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 321194
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-480.avif",
+        "width": 480,
+        "height": 360,
+        "bytes": 27043
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-768.avif",
+        "width": 768,
+        "height": 576,
+        "bytes": 65477
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-1200.avif",
+        "width": 1200,
+        "height": 900,
+        "bytes": 139549
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-sunflower-field-1448.avif",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 182016
+      }
+    ]
+  },
+  "/images/agriculture/real/agriculture-grain-transfer.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "originalBytes": 424411,
+    "variants": [
+      {
+        "src": "/images/agriculture/real/agriculture-grain-transfer-480.webp",
+        "width": 480,
+        "height": 640,
+        "bytes": 77154
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-grain-transfer-768.webp",
+        "width": 768,
+        "height": 1024,
+        "bytes": 189096
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-grain-transfer-1086.webp",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 332810
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/agriculture/real/agriculture-grain-transfer-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 49553
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-grain-transfer-768.avif",
+        "width": 768,
+        "height": 1024,
+        "bytes": 116901
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-grain-transfer-1086.avif",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 194959
+      }
+    ]
+  },
+  "/images/agriculture/real/agriculture-wheat-harvest.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "originalBytes": 386060,
+    "variants": [
+      {
+        "src": "/images/agriculture/real/agriculture-wheat-harvest-480.webp",
+        "width": 480,
+        "height": 640,
+        "bytes": 75516
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-wheat-harvest-768.webp",
+        "width": 768,
+        "height": 1024,
+        "bytes": 174992
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-wheat-harvest-1086.webp",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 288250
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/agriculture/real/agriculture-wheat-harvest-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 47962
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-wheat-harvest-768.avif",
+        "width": 768,
+        "height": 1024,
+        "bytes": 106530
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-wheat-harvest-1086.avif",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 172140
+      }
+    ]
+  },
+  "/images/agriculture/real/agriculture-fertilizer-storage.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "originalBytes": 388831,
+    "variants": [
+      {
+        "src": "/images/agriculture/real/agriculture-fertilizer-storage-480.webp",
+        "width": 480,
+        "height": 640,
+        "bytes": 67250
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-fertilizer-storage-768.webp",
+        "width": 768,
+        "height": 1024,
+        "bytes": 159434
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-fertilizer-storage-1086.webp",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 281008
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/agriculture/real/agriculture-fertilizer-storage-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 40846
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-fertilizer-storage-768.avif",
+        "width": 768,
+        "height": 1024,
+        "bytes": 98631
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-fertilizer-storage-1086.avif",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 176528
+      }
+    ]
+  },
+  "/images/agriculture/real/agriculture-roadside-harvest.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "originalBytes": 357318,
+    "variants": [
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 35054
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-768.webp",
+        "width": 768,
+        "height": 576,
+        "bytes": 88670
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-1200.webp",
+        "width": 1200,
+        "height": 900,
+        "bytes": 201670
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-1448.webp",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 271944
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-480.avif",
+        "width": 480,
+        "height": 360,
+        "bytes": 22545
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-768.avif",
+        "width": 768,
+        "height": 576,
+        "bytes": 56790
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-1200.avif",
+        "width": 1200,
+        "height": 900,
+        "bytes": 124605
+      },
+      {
+        "src": "/images/agriculture/real/agriculture-roadside-harvest-1448.avif",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 164774
+      }
+    ]
+  },
+  "/images/construction/real/construction-tower-interior.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "originalBytes": 417757,
+    "variants": [
+      {
+        "src": "/images/construction/real/construction-tower-interior-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 51452
+      },
+      {
+        "src": "/images/construction/real/construction-tower-interior-768.webp",
+        "width": 768,
+        "height": 576,
+        "bytes": 113086
+      },
+      {
+        "src": "/images/construction/real/construction-tower-interior-1200.webp",
+        "width": 1200,
+        "height": 900,
+        "bytes": 222086
+      },
+      {
+        "src": "/images/construction/real/construction-tower-interior-1448.webp",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 293312
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/construction/real/construction-tower-interior-480.avif",
+        "width": 480,
+        "height": 360,
+        "bytes": 31771
+      },
+      {
+        "src": "/images/construction/real/construction-tower-interior-768.avif",
+        "width": 768,
+        "height": 576,
+        "bytes": 69552
+      },
+      {
+        "src": "/images/construction/real/construction-tower-interior-1200.avif",
+        "width": 1200,
+        "height": 900,
+        "bytes": 139098
+      },
+      {
+        "src": "/images/construction/real/construction-tower-interior-1448.avif",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 182413
+      }
+    ]
+  },
+  "/images/construction/real/construction-tower-exterior.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "originalBytes": 363819,
+    "variants": [
+      {
+        "src": "/images/construction/real/construction-tower-exterior-480.webp",
+        "width": 480,
+        "height": 640,
+        "bytes": 66558
+      },
+      {
+        "src": "/images/construction/real/construction-tower-exterior-768.webp",
+        "width": 768,
+        "height": 1024,
+        "bytes": 148554
+      },
+      {
+        "src": "/images/construction/real/construction-tower-exterior-1086.webp",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 251526
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/construction/real/construction-tower-exterior-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 43204
+      },
+      {
+        "src": "/images/construction/real/construction-tower-exterior-768.avif",
+        "width": 768,
+        "height": 1024,
+        "bytes": 97768
+      },
+      {
+        "src": "/images/construction/real/construction-tower-exterior-1086.avif",
+        "width": 1086,
+        "height": 1448,
+        "bytes": 164998
+      }
+    ]
+  },
+  "/images/construction/real/construction-generator-installation.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "originalBytes": 412735,
+    "variants": [
+      {
+        "src": "/images/construction/real/construction-generator-installation-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 43454
+      },
+      {
+        "src": "/images/construction/real/construction-generator-installation-768.webp",
+        "width": 768,
+        "height": 576,
+        "bytes": 105944
+      },
+      {
+        "src": "/images/construction/real/construction-generator-installation-1200.webp",
+        "width": 1200,
+        "height": 900,
+        "bytes": 231070
+      },
+      {
+        "src": "/images/construction/real/construction-generator-installation-1448.webp",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 309604
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/construction/real/construction-generator-installation-480.avif",
+        "width": 480,
+        "height": 360,
+        "bytes": 28394
+      },
+      {
+        "src": "/images/construction/real/construction-generator-installation-768.avif",
+        "width": 768,
+        "height": 576,
+        "bytes": 71061
+      },
+      {
+        "src": "/images/construction/real/construction-generator-installation-1200.avif",
+        "width": 1200,
+        "height": 900,
+        "bytes": 151252
+      },
+      {
+        "src": "/images/construction/real/construction-generator-installation-1448.avif",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 199873
       }
     ]
   }

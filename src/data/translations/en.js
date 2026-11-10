@@ -487,6 +487,18 @@ export const en = {
             "src": "/images/construction-3.jpg",
             "width": 760,
             "height": 884
+          },
+          {
+            "label": "Concrete Structure Interior",
+            "alt": "Blue stairways and floor slabs inside a circular concrete structure"
+          },
+          {
+            "label": "Concrete Structure Exterior",
+            "alt": "Exterior view of a multi-storey circular concrete structure"
+          },
+          {
+            "label": "Site Setup",
+            "alt": "A crane, red generator and workers at an installation site"
           }
         ]
       },
@@ -532,25 +544,28 @@ export const en = {
         ],
         "gallery": [
           {
-            "label": "Orchard and Field Production",
-            "alt": "Orchard and field production areas operated by Karaoğlu Group",
-            "src": "/images/agriculture-1.jpg",
-            "width": 1408,
-            "height": 530
+            "label": "Harvest and Crop Transport",
+            "alt": "Grain being transferred from a red combine to a green truck"
           },
           {
-            "label": "Corn and Wheat Fields",
-            "alt": "General view of agricultural fields planted with corn and wheat",
-            "src": "/images/agriculture-2.jpg",
-            "width": 1408,
-            "height": 622
+            "label": "Agricultural Harvesting",
+            "alt": "A yellow combine transferring grain to a yellow truck in a field"
           },
           {
-            "label": "Seasonal Production Areas",
-            "alt": "Seasonal agricultural production areas located near mountain slopes",
-            "src": "/images/agriculture-3.jpg",
-            "width": 1408,
-            "height": 611
+            "label": "Sunflower Harvest",
+            "alt": "A yellow combine visible behind a field of sunflowers"
+          },
+          {
+            "label": "Wheat Harvest",
+            "alt": "A red combine harvesting in a wheat field"
+          },
+          {
+            "label": "Agricultural Storage",
+            "alt": "Fertilizer bags stacked inside a storage building"
+          },
+          {
+            "label": "Field Operations",
+            "alt": "A yellow combine unloading grain into a truck beside a road"
           }
         ]
       }

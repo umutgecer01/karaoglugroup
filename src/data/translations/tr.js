@@ -458,6 +458,18 @@ export const tr = {
             "width": 760,
             "height": 884,
             "fit": "contain"
+          },
+          {
+            "label": "Beton Yapı İç Detayı",
+            "alt": "Dairesel beton yapının içinde mavi merdivenler ve kat döşemeleri"
+          },
+          {
+            "label": "Beton Yapı Dış Görünümü",
+            "alt": "Çok katlı dairesel beton yapının dışarıdan görünümü"
+          },
+          {
+            "label": "Saha Kurulumu",
+            "alt": "Vinç, kırmızı jeneratör ve çalışanların bulunduğu kurulum sahası"
           }
         ]
       },
@@ -505,25 +517,28 @@ export const tr = {
         ],
         "gallery": [
           {
-            "label": "Bahçe ve Tarla Üretimi",
-            "alt": "Karaoğlu Group bünyesindeki bahçe ve tarla üretim alanları",
-            "src": "/images/agriculture-1.jpg",
-            "width": 1408,
-            "height": 530
+            "label": "Hasat ve Ürün Nakliyesi",
+            "alt": "Kırmızı biçerdöverden yeşil kamyona tahıl aktarımı"
           },
           {
-            "label": "Mısır ve Buğday Tarlaları",
-            "alt": "Mısır ve buğday ekili tarım arazilerinin genel görünümü",
-            "src": "/images/agriculture-2.jpg",
-            "width": 1408,
-            "height": 622
+            "label": "Tarımsal Hasat Faaliyetleri",
+            "alt": "Sarı biçerdöverin tarlada sarı kamyona tahıl aktarması"
           },
           {
-            "label": "Sezonluk Üretim Alanları",
-            "alt": "Dağ eteklerinde yer alan sezonluk tarımsal üretim alanları",
-            "src": "/images/agriculture-3.jpg",
-            "width": 1408,
-            "height": 611
+            "label": "Ayçiçeği Hasadı",
+            "alt": "Ayçiçeği tarlasında görünen sarı biçerdöver"
+          },
+          {
+            "label": "Buğday Hasadı",
+            "alt": "Buğday tarlasında çalışan kırmızı biçerdöver"
+          },
+          {
+            "label": "Tarımsal Ürün Depolama",
+            "alt": "Depo içinde düzenli istiflenmiş gübre çuvalları"
+          },
+          {
+            "label": "Tarla Operasyonları",
+            "alt": "Yol kenarında sarı biçerdöverden kamyona ürün aktarımı"
           }
         ]
       },

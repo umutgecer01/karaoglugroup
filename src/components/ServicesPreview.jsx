@@ -30,7 +30,7 @@ export default function ServicesPreview({ t, onNavigate }) {
       serviceDefinitions.flatMap((service) => {
         const item = t.services.items[service.id];
 
-        return getServiceGallery(service.id, item).map((image, imageIndex) => ({
+        return getServiceGallery(service.id, item, 'preview').map((image, imageIndex) => ({
           ...image,
           id: `${service.id}-${image.src}-${imageIndex}`,
           serviceTitle: item?.title || image.label,
@@ -77,6 +77,7 @@ export default function ServicesPreview({ t, onNavigate }) {
                             sizes="(min-width: 1024px) 400px, (min-width: 640px) 320px, 80vw"
                             width={image.width}
                             height={image.height}
+                            position={image.position}
                             loading="lazy"
                             decoding="async"
                             fetchPriority="low"
