@@ -704,5 +704,147 @@
         "bytes": 199873
       }
     ]
+  },
+  "/images/fleet-rental-city-fleet.png": {
+    "width": 1024,
+    "height": 768,
+    "variants": [
+      {
+        "src": "/images/fleet-rental-city-fleet-480.webp",
+        "width": 480,
+        "bytes": 37352
+      },
+      {
+        "src": "/images/fleet-rental-city-fleet-768.webp",
+        "width": 768,
+        "bytes": 81434
+      },
+      {
+        "src": "/images/fleet-rental-city-fleet-1024.webp",
+        "width": 1024,
+        "bytes": 134808
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/fleet-rental-city-fleet-480.avif",
+        "width": 480,
+        "bytes": 22914
+      },
+      {
+        "src": "/images/fleet-rental-city-fleet-768.avif",
+        "width": 768,
+        "bytes": 49784
+      },
+      {
+        "src": "/images/fleet-rental-city-fleet-1024.avif",
+        "width": 1024,
+        "bytes": 82282
+      }
+    ]
+  },
+  "/images/construction/real/construction-truck-yard.jpg": {
+    "width": 1024,
+    "height": 768,
+    "variants": [
+      {
+        "src": "/images/construction/real/construction-truck-yard-480.webp",
+        "width": 480,
+        "bytes": 40654
+      },
+      {
+        "src": "/images/construction/real/construction-truck-yard-768.webp",
+        "width": 768,
+        "bytes": 99350
+      },
+      {
+        "src": "/images/construction/real/construction-truck-yard-1024.webp",
+        "width": 1024,
+        "bytes": 180064
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/construction/real/construction-truck-yard-480.avif",
+        "width": 480,
+        "bytes": 26968
+      },
+      {
+        "src": "/images/construction/real/construction-truck-yard-768.avif",
+        "width": 768,
+        "bytes": 65095
+      },
+      {
+        "src": "/images/construction/real/construction-truck-yard-1024.avif",
+        "width": 1024,
+        "bytes": 120749
+      }
+    ]
+  },
+  "/images/construction/real/construction-generator-truck.jpg": {
+    "width": 768,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/images/construction/real/construction-generator-truck-480.webp",
+        "width": 480,
+        "bytes": 56798
+      },
+      {
+        "src": "/images/construction/real/construction-generator-truck-768.webp",
+        "width": 768,
+        "bytes": 154344
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/construction/real/construction-generator-truck-480.avif",
+        "width": 480,
+        "bytes": 37061
+      },
+      {
+        "src": "/images/construction/real/construction-generator-truck-768.avif",
+        "width": 768,
+        "bytes": 99101
+      }
+    ]
+  },
+  "/images/construction/real/construction-service-trucks.jpg": {
+    "width": 1024,
+    "height": 768,
+    "variants": [
+      {
+        "src": "/images/construction/real/construction-service-trucks-480.webp",
+        "width": 480,
+        "bytes": 29392
+      },
+      {
+        "src": "/images/construction/real/construction-service-trucks-768.webp",
+        "width": 768,
+        "bytes": 68484
+      },
+      {
+        "src": "/images/construction/real/construction-service-trucks-1024.webp",
+        "width": 1024,
+        "bytes": 116956
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/images/construction/real/construction-service-trucks-480.avif",
+        "width": 480,
+        "bytes": 18633
+      },
+      {
+        "src": "/images/construction/real/construction-service-trucks-768.avif",
+        "width": 768,
+        "bytes": 43167
+      },
+      {
+        "src": "/images/construction/real/construction-service-trucks-1024.avif",
+        "width": 1024,
+        "bytes": 77795
+      }
+    ]
   }
 }

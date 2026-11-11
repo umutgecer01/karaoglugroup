@@ -51,7 +51,7 @@ export default function QuickContact({ t }) {
             {!formsEnabled && <p role="status" className="mt-3 text-sm leading-7 text-orange-200">{t.ui.formsUnavailable}</p>}
             <p className="mt-2 text-sm leading-7 text-steel">{t.heroForm.subtitle}</p>
             <form
-              className="mt-5 grid gap-4 sm:grid-cols-2"
+              className="mt-5 grid gap-4 lg:grid-cols-2"
               name={CONTACT_FORM_NAME}
               method="POST"
               data-netlify="true"
@@ -78,12 +78,12 @@ export default function QuickContact({ t }) {
                 <input name="phone" maxLength={32} required aria-invalid={!!errors.phone} aria-describedby={errors.phone ? 'quick-phone-error' : undefined} type="tel" autoComplete="tel" placeholder={t.heroForm.phonePlaceholder} />
                 {errors.phone ? <small id="quick-phone-error" className="text-sm font-semibold text-orange-200">{errors.phone}</small> : null}
               </label>
-              <label className="form-field sm:col-span-2">
+              <label className="form-field lg:col-span-2">
                 <span>{t.heroForm.email}</span>
                 <input name="email" maxLength={254} required aria-invalid={!!errors.email} aria-describedby={errors.email ? 'quick-email-error' : undefined} type="email" autoComplete="email" placeholder={t.heroForm.emailPlaceholder} />
                 {errors.email ? <small id="quick-email-error" className="text-sm font-semibold text-orange-200">{errors.email}</small> : null}
               </label>
-              <label className="form-field sm:col-span-2">
+              <label className="form-field lg:col-span-2">
                 <span>{t.heroForm.service}</span>
                 <select name="service" required aria-invalid={!!errors.service} aria-describedby={errors.service ? 'quick-service-error' : undefined} defaultValue="">
                   <option value="" disabled>{t.heroForm.servicePlaceholder}</option>
@@ -93,27 +93,27 @@ export default function QuickContact({ t }) {
                 </select>
                 {errors.service ? <small id="quick-service-error" className="text-sm font-semibold text-orange-200">{errors.service}</small> : null}
               </label>
-              <label className="form-field sm:col-span-2">
+              <label className="form-field lg:col-span-2">
                 <span>{t.heroForm.message}</span>
                 <textarea name="message" maxLength={5000} rows="3" placeholder={t.heroForm.messagePlaceholder} />
               </label>
-              <label className="form-consent sm:col-span-2">
+              <label className="form-consent lg:col-span-2">
                 <input type="checkbox" name="consent" required aria-invalid={!!errors.consent} aria-describedby={errors.consent ? 'quick-consent-error' : undefined} value="accepted" />
                 <span>{t.heroForm.consentLabel}</span>
                 {errors.consent ? <small id="quick-consent-error">{errors.consent}</small> : null}
               </label>
-              <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70 sm:col-span-2" type="submit" disabled={isSubmitting || !formsEnabled}>
+              <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70 lg:col-span-2" type="submit" disabled={isSubmitting || !formsEnabled}>
                 {isSubmitting ? t.common.sending : t.heroForm.submit}
                 <Send size={17} />
               </button>
               {status === "success" ? (
-                <p role="status" className="flex items-start gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm font-semibold text-emerald-100 sm:col-span-2">
+                <p role="status" className="flex items-start gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm font-semibold text-emerald-100 lg:col-span-2">
                   <CheckCircle2 size={19} />
                   {t.heroForm.success}
                 </p>
               ) : null}
               {status === "error" ? (
-                <p role="alert" className="flex items-start gap-3 rounded-xl border border-orange-300/25 bg-orange-300/10 px-4 py-3 text-sm font-semibold text-orange-100 sm:col-span-2">
+                <p role="alert" className="flex items-start gap-3 rounded-xl border border-orange-300/25 bg-orange-300/10 px-4 py-3 text-sm font-semibold text-orange-100 lg:col-span-2">
                   <AlertCircle size={19} />
                   {t.common.submitError}
                 </p>

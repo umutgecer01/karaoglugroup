@@ -50,13 +50,13 @@ try {
   const videoState = await b.evaluate(`({preload:document.querySelector('video').preload,paused:document.querySelector('video').paused,controls:document.querySelector('video').controls,poster:document.querySelector('video').poster})`);
   assert.equal(videoState.preload,'none');
   assert.equal(videoState.paused,true);
-  assert.equal(videoState.controls,true);
+  assert.equal(videoState.controls,false);
   const videoRequestsBeforePlay = b.events.filter(e => e.method === 'Network.requestWillBeSent' && e.params.request.url.includes('/videos/fleet-rental-showcase.mp4'));
   assert.equal(videoRequestsBeforePlay.length,0,'hero video must not download before a user gesture');
   const poster = videoState.poster;
   assert.equal((await fetch(poster)).status,200);
   await b.evaluate(`document.querySelector('video').scrollIntoView({block:'center',behavior:'instant'})`);
-  const pos=await b.evaluate(`(()=>{const r=document.querySelector('video').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()`);
+  const pos=await b.evaluate(`(()=>{const r=document.querySelector('video').parentElement.querySelector('button').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()`);
   for(const type of ['mousePressed','mouseReleased']) await b.send('Input.dispatchMouseEvent',{type,...pos,button:'left',clickCount:1});
   await waitFor(() => document.querySelector('video').currentTime > 0);
   const playing=await b.evaluate(`({time:document.querySelector('video').currentTime,controls:document.querySelector('video').controls,paused:document.querySelector('video').paused})`);

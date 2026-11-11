@@ -52,7 +52,8 @@ test('all 54 generated pages expose matching metadata and remain form-disabled',
     if (view === 'home') {
       assert.equal(preloads[0].type, 'image/webp');
       assert.equal(preloads[0].href, '/images/fleet-rental-video-poster-1280.webp');
-      assert.match(html, /<source[^>]+fleet-rental-showcase\.mp4/);
+      assert.doesNotMatch(html, /<source[^>]+fleet-rental-showcase\.mp4/);
+      assert.match(html, /<video[^>]+preload="none"/);
     }
     count++;
   }

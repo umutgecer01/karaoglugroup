@@ -103,7 +103,7 @@ export default function Career({ t }) {
                   <input name="bot-field" aria-label="Bot" tabIndex="-1" autoComplete="off" />
                 </label>
               </p>
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid min-w-0 gap-5 lg:grid-cols-2">
                 <Field label={t.career.fields.name} error={errors.name}>
                   <input name="name" maxLength={120} required type="text" autoComplete="name" placeholder={t.career.placeholders.name} />
                 </Field>
@@ -142,13 +142,13 @@ export default function Career({ t }) {
                 <textarea name="message" maxLength={5000} rows="4" placeholder={t.career.placeholders.message} />
               </Field>
 
-              <div className="rounded-xl border border-dashed border-white/20 bg-white/[0.04] p-4 text-sm text-steel">
+              <div className="career-cv-upload min-w-0 rounded-xl border border-dashed border-white/20 bg-white/[0.04] p-4 text-sm text-steel">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
                     <Upload className="text-amber" size={20} />
                     <label id="career-cv-label" htmlFor="career-cv" className="font-semibold text-white">{t.career.fields.cv}</label>
                   </div>
-                  <span className="text-xs uppercase tracking-[0.08em] text-platinum/70">
+                  <span dir="auto" className="min-w-0 text-xs leading-5 text-platinum/70 [overflow-wrap:anywhere]">
                     {cvName || t.career.fields.cvPlaceholder}
                   </span>
                 </div>

@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import { writeFile } from 'node:fs/promises';
 import { browserSession, pause } from './browser-session.mjs';
+import { pagePath } from '../src/utils/routes.js';
 
 const b = await browserSession();
 const checks = [];
+const waitFor = async fn => { for(let attempt=0;attempt<100;attempt++){ if(await b.call(fn)) return; await pause(50); } throw new Error('Interaction readiness timeout: '+fn.toString()); };
 const check = (name, actual, expected = true) => { assert.deepEqual(actual, expected, name); checks.push(name); };
 const go = async url => { await b.send('Page.navigate', { url }); await pause(1000); };
 try {
@@ -32,15 +34,17 @@ try {
   check('outside click closes menu', await b.evaluate(`!document.getElementById('mobile-navigation')`));
   await b.evaluate(`document.querySelector('[aria-controls="mobile-navigation"]').click()`); await pause(50);
   await b.evaluate(`document.querySelector('#mobile-navigation a[href="/tr/iletisim/"]').click()`);
-  await pause(450);
+  await waitFor(() => !document.getElementById('mobile-navigation') && location.pathname==='/tr/iletisim/');
   check('navigation closes menu and updates URL', await b.evaluate(`!document.getElementById('mobile-navigation') && location.pathname==='/tr/iletisim/'`));
   await b.evaluate(`document.querySelector('[aria-controls="mobile-navigation"]').click()`); await pause(50);
   await b.evaluate(`const s=document.querySelector('#mobile-navigation select');s.value='en';s.dispatchEvent(new Event('change',{bubbles:true}))`);
-  await pause(450);
+  await waitFor(() => location.pathname==='/en/contact/' && document.documentElement.lang==='en' && document.title.includes('Contact') && document.querySelector('meta[property="og:locale"]').content==='en_GB');
   check('language switch preserves page and translates SEO', await b.evaluate(`location.pathname==='/en/contact/' && document.documentElement.lang==='en' && document.title.includes('Contact') && document.querySelector('meta[property="og:locale"]').content==='en_GB'`));
   await b.evaluate('history.back()'); await pause(300);
+  await waitFor(() => location.pathname==='/tr/iletisim/' && document.documentElement.lang==='tr');
   check('back restores Turkish contact', await b.evaluate(`location.pathname==='/tr/iletisim/' && document.documentElement.lang==='tr'`));
   await b.evaluate('history.forward()'); await pause(300);
+  await waitFor(() => location.pathname==='/en/contact/' && document.documentElement.lang==='en');
   check('forward restores English contact', await b.evaluate(`location.pathname==='/en/contact/' && document.documentElement.lang==='en'`));
   await go('http://127.0.0.1:4175/');
   check('stored language survives returning to root', await b.evaluate(`location.pathname==='/en/' && document.documentElement.lang==='en'`));
@@ -49,8 +53,8 @@ try {
   await go('http://127.0.0.1:4175/en/contact/');
   check('unverified forms are disabled with honest notice', await b.evaluate(`document.querySelector('#root form button[type="submit"]').disabled && document.body.innerText.includes('form is currently unavailable')`));
   check('external map is opt in', await b.evaluate(`!document.querySelector('iframe')`));
-  await go('http://127.0.0.1:4175/en/fleet-rental/');
-  check('fleet rental uses the supplied image instead of video', await b.evaluate(`!document.querySelector('video') && document.querySelector('img[src*="fleet-rental-city-fleet.png"]')`));
+  await go('http://127.0.0.1:4175'+pagePath('rental','en'));
+  check('fleet rental uses the supplied image instead of video', await b.evaluate(`!document.querySelector('video') && !!document.querySelector('img[src*="fleet-rental-city-fleet.png"]')`));
 
   // Vite on 4180 is explicitly launched with Forms enabled. All POSTs are mocked.
   await b.send('Page.addScriptToEvaluateOnNewDocument', { source: `localStorage.setItem('karaoglu-privacy-consent','1'); window.__posts=0; const originalFetch=window.fetch.bind(window); window.fetch=(url,options)=>{ if(options?.method==='POST'){window.__posts++;window.__lastPost={url,options};return new Promise(resolve=>{window.__release=status=>resolve(new Response('',{status}));});}return originalFetch(url,options);};` });

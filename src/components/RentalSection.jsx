@@ -34,11 +34,12 @@ export default function RentalSection({ t }) {
             <div className="grid gap-3 lg:grid-cols-[1.12fr_0.88fr]">
               <div className="relative overflow-hidden rounded-xl border border-white/12 bg-ink/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
                 <ResponsiveImage
-                  className="aspect-[3/2] w-full object-cover"
+                  className="aspect-[4/3] w-full object-contain"
                   src="/images/fleet-rental-city-fleet.png"
+                  sizes="(min-width: 1024px) 560px, calc(100vw - 64px)"
                   alt={t.ui.fleetImageAlt}
-                  width={1536}
-                  height={1024}
+                  width={1024}
+                  height={768}
                   loading="eager"
                   decoding="async"
                   fetchPriority="high"

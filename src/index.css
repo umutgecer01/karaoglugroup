@@ -1519,6 +1519,24 @@ section[id] {
 .hero-section { content-visibility: visible; }
 picture { display: block; }
 .form-field input, .form-field select, .form-field textarea { min-width: 0; font-size: 16px; }
+.career-layout > *, .contact-layout > *, .quick-contact-layout > *,
+.career-form-panel form, .contact-form-panel form, .quick-contact-form form,
+.form-field, .career-cv-upload { min-width: 0; }
+.form-field input, .form-field select, .form-field textarea,
+.career-cv-upload input { width: 100%; box-sizing: border-box; }
+.form-field > span, .form-field small, .form-consent span,
+.form-consent small, .career-cv-upload { overflow-wrap: anywhere; }
+.form-consent { grid-template-columns: 1rem minmax(0, 1fr); }
+.career-cv-upload input[type="file"] { min-width: 0; overflow: hidden; text-overflow: ellipsis; padding: .5rem; }
+.career-cv-upload input[type="file"]::file-selector-button { max-width: 100%; margin-inline-end: .5rem; }
+.career-form-panel, .contact-form-panel, .quick-contact-form { scroll-margin-block-start: 6rem; }
+.form-field input, .form-field select, .form-field textarea { scroll-margin-block: 6rem; }
+@media (max-width: 1023px) {
+  .career-layout, .contact-layout { grid-template-columns: minmax(0, 1fr); }
+  .career-form-panel, .contact-form-panel, .quick-contact-form { padding: 1rem; }
+  .career-form-panel button[type="submit"], .contact-form-panel button[type="submit"],
+  .quick-contact-form button[type="submit"] { width: 100%; }
+}
 .form-field [aria-invalid="true"], .form-consent [aria-invalid="true"] { border-color: #fdba74; }
 .footer-social, footer a { min-height: 44px; }
 @media (max-width: 767px) { .section-band { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; } }

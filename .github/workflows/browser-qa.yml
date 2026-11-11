@@ -1,0 +1,97 @@
+name: Browser, media and accessibility QA
+
+on:
+  push:
+    branches: ['release/**', 'feature/**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-qa-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VITE_NETLIFY_FORMS_ENABLED: 'false'
+      VITE_SITE_URL: 'https://karaoglugroupnet.netlify.app/'
+      RELEASE_REPORT_DIR: 'reports/final-release'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build statically rendered site
+        run: npm run build
+      - name: Static regression and security checks
+        run: |
+          npm test
+          npm run security:check
+          node --test scripts/release-static.test.mjs
+      - name: Start test server and headless Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .audit/chrome-profile reports/final-release
+          nohup node scripts/serve-audit.mjs dist 4175 >.audit/static-server.log 2>&1 &
+          VITE_NETLIFY_FORMS_ENABLED=true nohup node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4180 --strictPort >.audit/mock-server.log 2>&1 &
+          google-chrome --version
+          nohup google-chrome \
+            --headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu \
+            --remote-debugging-address=127.0.0.1 \
+            --remote-debugging-port=9222 \
+            --user-data-dir="$PWD/.audit/chrome-profile" \
+            about:blank >.audit/chrome.log 2>&1 &
+          for n in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:4175/tr/ >/dev/null && \
+               curl -fsS http://127.0.0.1:9222/json/version >/dev/null && \
+               curl -fsS http://127.0.0.1:4180/tr/ >/dev/null; then
+              echo 'Local site + Chrome CDP are ready.'
+              exit 0
+            fi
+            sleep 1
+          done
+          cat .audit/static-server.log || true
+          cat .audit/chrome.log || true
+          exit 1
+      - name: Real photos, responsive sources and localized fleet sections
+        run: node scripts/audit-real-media.mjs
+      - name: 54 pages by 11 viewport widths (existing tests)
+        run: node scripts/audit-pages.mjs
+      - name: Language transitions and video interactions
+        run: node scripts/release-behavior.mjs
+      - name: Mobile forms, mocked transport and keyboard navigation
+        run: |
+          node scripts/audit-mobile-forms.mjs
+          node scripts/audit-interactions.mjs
+          node scripts/audit-keyboard.mjs
+      - name: Automated WCAG-tagged checks with axe-core
+        run: node scripts/audit-accessibility.mjs
+      - name: Performance samples (laboratory, not field data)
+        if: success()
+        run: node scripts/release-performance.mjs after 4175 3
+      - name: Lighthouse three-run mobile and desktop medians
+        if: success()
+        run: node scripts/audit-lighthouse.mjs
+      - name: Save reports even if a test fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: karaoglu-browser-qa-${{ github.run_id }}
+          path: |
+            reports/page-audit.json
+            reports/final-release/
+            .audit/chrome.log
+            .audit/static-server.log
+          if-no-files-found: warn
+          retention-days: 14
