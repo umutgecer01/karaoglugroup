@@ -56,7 +56,7 @@ export default function Career({ t }) {
                 <BriefcaseBusiness size={24} />
               </span>
               <p className="eyebrow">{t.career.whyTitle}</p>
-              <div className="career-steps" aria-label={t.career.applicationStepsLabel}>
+              <div className="career-steps" role="group" aria-label={t.career.applicationStepsLabel}>
                 {t.career.applicationSteps.map((step, index) => {
                   const icons = [Users, ClipboardCheck, Upload];
                   const Icon = icons[index] || ClipboardCheck;
