@@ -11,6 +11,11 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test scripts/core.test.mjs scripts/sync-preview.test.mjs scripts/forms-readiness.test.mjs scripts/motion-preference.test.mjs scripts/production-policy.test.mjs",
     "sync:preview": "node scripts/sync-preview.mjs",
+    "qa:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-local-qa.ps1",
+    "qa:media": "node scripts/audit-real-media.mjs",
+    "qa:forms": "node scripts/audit-mobile-forms.mjs",
+    "qa:a11y": "node scripts/audit-accessibility.mjs",
+    "qa:lighthouse": "node scripts/audit-lighthouse.mjs",
     "lint:security": "eslint src eslint.config.js vite.config.js tailwind.config.js postcss.config.js --max-warnings=0",
     "security:audit": "npm audit --audit-level=moderate",
     "security:check": "npm run security:audit && npm run lint:security"
@@ -25,9 +30,11 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "autoprefixer": "^10.4.20",
+    "axe-core": "4.14.0",
     "eslint": "^10.6.0",
     "eslint-plugin-no-unsanitized": "^4.1.5",
     "eslint-plugin-security": "^4.0.1",
+    "lighthouse": "13.6.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"
   },

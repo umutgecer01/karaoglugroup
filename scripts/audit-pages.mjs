@@ -2,11 +2,13 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { pagePath, pagePaths } from '../src/utils/routes.js';
 import { browserSession, pause } from './browser-session.mjs';
+import { prepareReports, navigate } from './qa-helpers.mjs';
 
 const base = 'http://127.0.0.1:4175';
 const browser = await browserSession();
 const results = [];
 const widths = [320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1920];
+await prepareReports();
 await browser.send('Page.addScriptToEvaluateOnNewDocument', { source: "localStorage.setItem('karaoglu-privacy-consent','{\"choice\":\"necessary\"}')" });
 try {
   for (const language of ['tr', 'en', 'ar']) {
@@ -18,7 +20,7 @@ try {
       assert.match(html, /data-ssr="true"/);
       assert.equal((html.match(/<h1[ >]/g) || []).length, 1, path + ' static H1');
       assert.ok(!html.includes('/src/') && !html.includes('$RC='), path + ' no dev assets or inline patches');
-      await browser.send('Page.navigate', { url: base + path });
+      await navigate(browser, path);
       for (let attempt = 0; attempt < 40; attempt++) {
         await pause(75);
         if (await browser.evaluate(`document.readyState === 'complete' && !!document.querySelector('h1')`)) break;
@@ -37,6 +39,7 @@ try {
         page.sizes.push({ width, ...state });
       }
       results.push(page);
+      await writeFile(`${process.env.RELEASE_REPORT_DIR || 'reports'}/page-audit-checkpoint.json`, JSON.stringify({ pages: results, completedChecks: results.length * widths.length }, null, 2));
       console.log('PASS', path, widths.length, 'widths');
     }
   }

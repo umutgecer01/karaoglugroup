@@ -56,7 +56,7 @@ export default function ServicesPreview({ t, onNavigate }) {
 
         {showreelItems.length ? (
           <Reveal delay={120} className="mt-10">
-            <div ref={showreelRef} className="service-showreel" aria-label={t.services.galleryTitle || t.services.eyebrow}>
+            <div ref={showreelRef} className="service-showreel" role="group" aria-label={t.services.galleryTitle || t.services.eyebrow}>
               <div className="service-showreel__viewport" tabIndex={0} role="region" aria-label={t.services.galleryTitle}>
                 <div
                   className="service-showreel__track"

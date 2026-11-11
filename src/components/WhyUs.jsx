@@ -48,7 +48,7 @@ export default function WhyUs({ t }) {
           {metrics.map((metric) => (
             <div key={`${metric.value}-${metric.label}`} className="min-w-0 rounded-lg border border-white/14 bg-white/[0.07] p-4 shadow-[0_14px_34px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(185,101,50,0.10)]">
               <span className="block text-2xl font-bold text-white sm:text-3xl">{metric.value}</span>
-              <span className="mt-2 block min-w-0 break-words text-[0.68rem] font-semibold uppercase leading-5 tracking-[0.04em] text-sun/90 sm:text-xs sm:tracking-[0.08em]">{metric.label}</span>
+              <span className="mt-2 block min-w-0 break-words text-[0.68rem] font-semibold uppercase leading-5 tracking-[0.04em] text-orange-200 sm:text-xs sm:tracking-[0.08em]">{metric.label}</span>
             </div>
           ))}
         </div>

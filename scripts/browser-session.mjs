@@ -14,7 +14,15 @@ export async function browserSession() {
       pending.delete(message.id);
       if (message.error) entry?.reject(new Error(JSON.stringify(message.error)));
       else entry?.resolve(message.result);
-    } else events.push(message);
+    } else {
+      events.push(message);
+      if (message.method === 'Fetch.requestPaused') {
+        const { requestId, request } = message.params;
+        const url = new URL(request.url);
+        const safe = ['GET', 'HEAD'].includes(request.method) && ['127.0.0.1', 'localhost'].includes(url.hostname);
+        send(safe ? 'Fetch.continueRequest' : 'Fetch.failRequest', safe ? { requestId } : { requestId, errorReason: 'BlockedByClient' }).catch(() => {});
+      }
+    }
   };
   const send = (method, params = {}) => new Promise((resolve, reject) => {
     const requestId = ++id;
@@ -30,6 +38,7 @@ export async function browserSession() {
   await send('Page.bringToFront');
   await send('Runtime.enable');
   await send('Network.enable');
+  await send('Fetch.enable', { patterns: [{ urlPattern: '*', requestStage: 'Request' }] });
   // QA must never send a form or request an embedded external map.
   await send('Network.setBlockedURLs', { urls: ['*google.com*', '*googleapis.com*', '*gstatic.com*'] });
   return { send, evaluate, call: (fn, ...args) => callBrowserFunction(send, fn, args), events, close: async () => { socket.close(); await fetch(`http://127.0.0.1:9222/json/close/${target.id}`); } };

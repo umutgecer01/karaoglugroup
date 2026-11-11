@@ -93,7 +93,7 @@ export default function Contact({ t }) {
                   <input name="bot-field" aria-label="Bot" tabIndex="-1" autoComplete="off" />
                 </label>
               </p>
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid min-w-0 gap-5 lg:grid-cols-2">
                 <Field label={t.contact.form.name} error={errors.name}>
                   <input name="name" maxLength={120} required type="text" autoComplete="name" placeholder={t.contact.form.namePlaceholder} />
                 </Field>

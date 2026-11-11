@@ -868,6 +868,8 @@ export const tr = {
 };
 
 tr.ui = {
+  "videoDescriptionTitle": "Videonun görsel açıklaması",
+  "videoDescription": "On saniyelik sessiz videoda, üzerinde Karaoğlu Otomotiv yazan ofis binasının önünde karşılıklı park edilmiş binek ve ticari araçlar görülür. Kamera araç sıralarını ve binayı gösterdikten sonra koyu renkli bir otomobilin ön kısmına yaklaşır.",
   "locale": "tr",
   "skip": "İçeriğe geç",
   "openMenu": "Menüyü aç",

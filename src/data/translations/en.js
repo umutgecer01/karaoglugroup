@@ -863,6 +863,8 @@ export const en = {
 };
 
 en.ui = {
+  "videoDescriptionTitle": "Visual description of the video",
+  "videoDescription": "The ten-second silent video shows passenger cars and commercial vehicles parked in two facing rows outside an office bearing the Karaoğlu Otomotiv sign. The camera shows the rows and building, then moves closer to the front of a dark car.",
   "locale": "en",
   "skip": "Skip to content",
   "openMenu": "Open menu",

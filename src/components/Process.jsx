@@ -11,7 +11,7 @@ export default function Process({ t }) {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.process.steps.map((step, index) => (
             <Reveal key={step} delay={index * 70} className="premium-card relative overflow-hidden p-6">
-              <span className="text-sm font-bold text-sun">0{index + 1}</span>
+              <span className="text-sm font-bold text-orange-200">0{index + 1}</span>
               <h3 className="mt-5 min-h-[56px] text-xl font-semibold leading-7 text-white">{step}</h3>
               <div className="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-sun/55 to-transparent" />
             </Reveal>

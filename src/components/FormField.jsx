@@ -2,7 +2,7 @@ import { cloneElement, useId } from 'react';
 
 export function Field({ label, error, children }) {
   const id = useId();
-  return <label className="form-field" htmlFor={id}>
+  return <label className="form-field min-w-0" htmlFor={id}>
     <span>{label}</span>
     {cloneElement(children, { id, 'aria-invalid': !!error, 'aria-describedby': error ? `${id}-error` : undefined })}
     {error ? <small id={`${id}-error`} className="text-sm font-semibold text-orange-200">{error}</small> : null}

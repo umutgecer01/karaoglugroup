@@ -17,6 +17,7 @@ const Corporate = lazy(() => import('./components/Corporate.jsx'));
 const CorporatePreview = lazy(() => import('./components/CorporatePreview.jsx'));
 const Services = lazy(() => import('./components/Services.jsx'));
 const ServicesPreview = lazy(() => import('./components/ServicesPreview.jsx'));
+const HomeFleetFeature = lazy(() => import('./components/HomeFleetFeature.jsx'));
 const Career = lazy(() => import('./components/Career.jsx'));
 const Process = lazy(() => import('./components/Process.jsx'));
 const Contact = lazy(() => import('./components/Contact.jsx'));
@@ -111,6 +112,7 @@ export default function App({ initialRoute = { view: 'home', language: 'tr' }, i
         <Hero t={t} onNavigate={navigate} />
         <CorporatePreview t={t} onNavigate={navigate} />
         <ServicesPreview t={t} onNavigate={navigate} />
+        <HomeFleetFeature t={t} onNavigate={navigate} />
         <WhyUs t={t} />
         <Process t={t} />
         <ChairmanMessage t={t} compact onOpen={() => navigate('corporate-chairman')} />
