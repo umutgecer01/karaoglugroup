@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, 'feature/**', 'release/**']
   pull_request:
-    branches: [main]
+    branches: [main, 'release/**']
 
 jobs:
   build:
@@ -39,3 +39,14 @@ jobs:
 
       - name: Release HTML and metadata checks
         run: node --test scripts/release-static.test.mjs
+
+      - name: Validate proposed domain locally without deployment
+        env:
+          VITE_SITE_URL: 'https://karaoglugroupglobal.com/'
+          VITE_NETLIFY_FORMS_ENABLED: 'false'
+          VITE_CONTACT_FORMS_ENABLED: 'false'
+          VITE_CAREER_FORMS_ENABLED: 'false'
+          CONTEXT: 'production'
+        run: |
+          npm run build
+          node --test scripts/release-static.test.mjs

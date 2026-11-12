@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cvValidationError, isAllowedCvFile, MAX_CV_SIZE_BYTES } from '../src/utils/netlifyForms.js';
+import {
+  cvValidationError, isAllowedCvFile, MAX_CV_SIZE_BYTES,
+  resolveFormFlags, isFormNameEnabled, CONTACT_FORM_NAME, CAREER_FORM_NAME,
+} from '../src/utils/netlifyForms.js';
 
 test('CV validation distinguishes missing, empty, disallowed and oversized uploads', () => {
   for (const file of [null, undefined, { name: '' }, { name: 'cv.pdf', size: 0 }, { name: 'cv.pdf', size: -1 }, { name: 'cv.pdf', size: NaN }]) {
@@ -26,4 +29,32 @@ test('CV picker accepts supported documents while rejecting a conflicting browse
   }
   assert.equal(isAllowedCvFile({ name: {} }), false);
   assert.equal(isAllowedCvFile({}), false);
+});
+
+test('forms stay closed unless global and per-form switches are explicitly true', () => {
+  const off = resolveFormFlags({});
+  assert.deepEqual(off, { contact: false, career: false });
+  assert.deepEqual(resolveFormFlags({
+    VITE_NETLIFY_FORMS_ENABLED: 'true',
+  }), off);
+  const contactOnly = resolveFormFlags({
+    VITE_NETLIFY_FORMS_ENABLED: 'true',
+    VITE_CONTACT_FORMS_ENABLED: 'true',
+    VITE_CAREER_FORMS_ENABLED: 'false',
+  });
+  assert.deepEqual(contactOnly, { contact: true, career: false });
+  assert.equal(isFormNameEnabled(CONTACT_FORM_NAME, contactOnly), true);
+  assert.equal(isFormNameEnabled(CAREER_FORM_NAME, contactOnly), false);
+  assert.equal(isFormNameEnabled('unexpected-form', contactOnly), false);
+  const careerOnly = resolveFormFlags({
+    VITE_NETLIFY_FORMS_ENABLED: 'true',
+    VITE_CONTACT_FORMS_ENABLED: 'false',
+    VITE_CAREER_FORMS_ENABLED: 'true',
+  });
+  assert.deepEqual(careerOnly, { contact: false, career: true });
+  assert.deepEqual(resolveFormFlags({
+    VITE_NETLIFY_FORMS_ENABLED: 'false',
+    VITE_CONTACT_FORMS_ENABLED: 'true',
+    VITE_CAREER_FORMS_ENABLED: 'true',
+  }), off);
 });

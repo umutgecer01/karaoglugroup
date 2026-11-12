@@ -1,4 +1,4 @@
-import { formsEnabled } from '../utils/netlifyForms.js';
+import { contactFormsEnabled } from '../utils/netlifyForms.js';
 import { useFormSubmission } from '../utils/useFormSubmission.js';
 import { AlertCircle, CheckCircle2, MapPin, MessageCircle, Phone, Send, Store } from "lucide-react";
 import { company } from "../data/company.js";
@@ -48,7 +48,7 @@ export default function QuickContact({ t }) {
 
           <Reveal delay={100} className="quick-contact-form p-5 sm:p-6">
             <h3 className="text-xl font-semibold text-white">{t.heroForm.title}</h3>
-            {!formsEnabled && <p role="status" className="mt-3 text-sm leading-7 text-orange-200">{t.ui.formsUnavailable}</p>}
+            {!contactFormsEnabled && <p role="status" className="mt-3 text-sm leading-7 text-orange-200">{t.ui.formsUnavailable}</p>}
             <p className="mt-2 text-sm leading-7 text-steel">{t.heroForm.subtitle}</p>
             <form
               className="mt-5 grid gap-4 lg:grid-cols-2"
@@ -102,7 +102,7 @@ export default function QuickContact({ t }) {
                 <span>{t.heroForm.consentLabel}</span>
                 {errors.consent ? <small id="quick-consent-error">{errors.consent}</small> : null}
               </label>
-              <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70 lg:col-span-2" type="submit" disabled={isSubmitting || !formsEnabled}>
+              <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70 lg:col-span-2" type="submit" disabled={isSubmitting || !contactFormsEnabled}>
                 {isSubmitting ? t.common.sending : t.heroForm.submit}
                 <Send size={17} />
               </button>

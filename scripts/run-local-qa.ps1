@@ -17,11 +17,13 @@ $qaBrowser=@("$env:ProgramFiles\Google\Chrome\Application\chrome.exe","${env:Pro
 if(-not $qaBrowser){throw 'Chrome or Edge is required.'}
 New-Item -ItemType Directory -Force '.audit/fix-qa','reports/final-release' | Out-Null
 $previousForms=$env:VITE_NETLIFY_FORMS_ENABLED
+$previousContactForms=$env:VITE_CONTACT_FORMS_ENABLED
+$previousCareerForms=$env:VITE_CAREER_FORMS_ENABLED
 $previousContext=$env:CONTEXT
 $previousChrome=$env:CHROME_PATH
 $previousReportDir=$env:RELEASE_REPORT_DIR
 $env:RELEASE_REPORT_DIR='reports/final-release'
-$env:VITE_NETLIFY_FORMS_ENABLED='false';$env:CONTEXT='production';$env:CHROME_PATH=$qaBrowser
+$env:VITE_NETLIFY_FORMS_ENABLED='false';$env:VITE_CONTACT_FORMS_ENABLED='false';$env:VITE_CAREER_FORMS_ENABLED='false';$env:CONTEXT='production';$env:CHROME_PATH=$qaBrowser
 $ownedProcesses=@()
 $steps=@()
 function RunChecked([string[]]$CommandArgs){
@@ -52,8 +54,10 @@ try {
   if(Get-NetTCPConnection -LocalPort 4180 -State Listen -ErrorAction SilentlyContinue){throw 'Mock test port 4180 is already in use; stopped.'}
   # Only the local mock server sees true; production build and persisted configuration stay false.
   $env:VITE_NETLIFY_FORMS_ENABLED='true'
+  $env:VITE_CONTACT_FORMS_ENABLED='true'
+  $env:VITE_CAREER_FORMS_ENABLED='true'
   $ownedProcesses+=Start-Process $qaNode -ArgumentList @('node_modules/vite/bin/vite.js','--host','127.0.0.1','--port','4180','--strictPort') -WindowStyle Hidden -PassThru -RedirectStandardOutput '.audit/fix-qa/mock.log' -RedirectStandardError '.audit/fix-qa/mock-error.log'
-  $env:VITE_NETLIFY_FORMS_ENABLED='false';WaitReady 'http://127.0.0.1:4180/tr/'
+  $env:VITE_NETLIFY_FORMS_ENABLED='false';$env:VITE_CONTACT_FORMS_ENABLED='false';$env:VITE_CAREER_FORMS_ENABLED='false';WaitReady 'http://127.0.0.1:4180/tr/'
   foreach($task in $Tasks){
     if($task -notin @('audit-real-media','audit-mobile-forms','audit-pages','audit-interactions','release-behavior','audit-keyboard','audit-accessibility')){throw 'Unknown QA task'}
     RunChecked -CommandArgs @("scripts/$task.mjs")
@@ -61,5 +65,5 @@ try {
   if(-not $SkipPerformance){RunChecked -CommandArgs @('scripts/release-performance.mjs','after','4175','3');RunChecked -CommandArgs @('scripts/audit-lighthouse.mjs')}
 } finally {
   foreach($process in $ownedProcesses){if(-not $process.HasExited){Stop-Process -Id $process.Id -ErrorAction SilentlyContinue}}
-  $env:VITE_NETLIFY_FORMS_ENABLED=$previousForms;$env:CONTEXT=$previousContext;$env:CHROME_PATH=$previousChrome;$env:RELEASE_REPORT_DIR=$previousReportDir;$env:Path=$previousPath
+  $env:VITE_NETLIFY_FORMS_ENABLED=$previousForms;$env:VITE_CONTACT_FORMS_ENABLED=$previousContactForms;$env:VITE_CAREER_FORMS_ENABLED=$previousCareerForms;$env:CONTEXT=$previousContext;$env:CHROME_PATH=$previousChrome;$env:RELEASE_REPORT_DIR=$previousReportDir;$env:Path=$previousPath
 }

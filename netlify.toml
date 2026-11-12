@@ -5,6 +5,8 @@
 [build.environment]
   NODE_VERSION = "22"
   VITE_NETLIFY_FORMS_ENABLED = "false"
+  VITE_CONTACT_FORMS_ENABLED = "false"
+  VITE_CAREER_FORMS_ENABLED = "false"
   VITE_SITE_URL = "https://karaoglugroupnet.netlify.app/"
 
 [[redirects]]
