@@ -2,7 +2,7 @@ name: Browser, media and accessibility QA
 
 on:
   push:
-    branches: ['release/**', 'feature/**']
+    branches: [main, 'release/**', 'feature/**']
   pull_request:
     branches: [main, 'release/**']
 

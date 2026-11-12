@@ -10,7 +10,7 @@ import {
 import { readJson } from './production-preflight.mjs';
 
 const sha = 'a'.repeat(40), previewSha = 'b'.repeat(40);
-const approved = () => ({ GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_REPOSITORY: REPOSITORY, GITHUB_REF: 'refs/heads/main', PUBLISH_CONFIRMATION: CONFIRMATION, EXPECTED_SHA: sha, REVIEWED_PREVIEW_SHA: previewSha, GITHUB_SHA: sha, NETLIFY_SITE_ID: PRODUCTION_SITE_ID, VITE_NETLIFY_FORMS_ENABLED: 'false', VITE_SITE_URL: `${PRODUCTION_URL}/`, CONTEXT: 'production', GITHUB_TOKEN: 'test-placeholder' });
+const approved = () => ({ GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_REPOSITORY: REPOSITORY, GITHUB_REF: 'refs/heads/main', PUBLISH_CONFIRMATION: CONFIRMATION, EXPECTED_SHA: sha, REVIEWED_PREVIEW_SHA: previewSha, GITHUB_SHA: sha, NETLIFY_SITE_ID: PRODUCTION_SITE_ID, VITE_NETLIFY_FORMS_ENABLED: 'false', VITE_CONTACT_FORMS_ENABLED: 'false', VITE_CAREER_FORMS_ENABLED: 'false', VITE_SITE_URL: `${PRODUCTION_URL}/`, CONTEXT: 'production', GITHUB_TOKEN: 'test-placeholder' });
 const site = () => ({ id: PRODUCTION_SITE_ID, name: 'karaoglugroupnet', ssl_url: PRODUCTION_URL, build_settings: { repo_path: REPOSITORY, repo_branch: 'main', stop_builds: false }, published_deploy: { id: 'c'.repeat(24), state: 'ready', locked: true } });
 const html = `<html><head><meta name="robots" content="index, follow"><link rel="canonical" href="${PRODUCTION_URL}/tr/"></head><form name="corporate-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" noValidate=""><input name="form-name" value="corporate-contact"><button type="submit" disabled="">Send</button></form></html>`;
 
@@ -20,6 +20,9 @@ test('production dispatch rejects wrong branch, repository, commit, project, con
     assert.throws(() => validateDispatch({ ...approved(), [key]: value }, sha), key);
   }
   assert.throws(() => validateDispatch(approved(), previewSha));
+  for (const key of ['VITE_NETLIFY_FORMS_ENABLED', 'VITE_CONTACT_FORMS_ENABLED', 'VITE_CAREER_FORMS_ENABLED']) {
+    for (const value of ['true', '', undefined]) assert.throws(() => validateDispatch({ ...approved(), [key]: value }, sha), `${key}=${value}`);
+  }
 });
 
 test('main must be the exact tested preview tree even when merge commit SHA differs', () => {
@@ -37,9 +40,11 @@ test('environment review protection is checked rather than assumed from environm
 });
 
 test('latest exact-main checks must all pass and high or critical open alerts block publication', () => {
-  const checks = ['Build site', 'Security checks', 'Analyze JavaScript', 'CodeQL'].map((name, id) => ({ id, name, status: 'completed', conclusion: 'success' }));
+  const checks = ['Build site', 'Security checks', 'Analyze JavaScript', 'CodeQL', 'browser-qa'].map((name, id) => ({ id, name, status: 'completed', conclusion: 'success' }));
   assert.doesNotThrow(() => validateChecks(checks));
   assert.throws(() => validateChecks(checks.slice(0, 2)));
+  assert.throws(() => validateChecks(checks.filter(check => check.name !== 'browser-qa')));
+  assert.throws(() => validateChecks([...checks, { id: 101, name: 'browser-qa', status: 'completed', conclusion: 'failure' }]));
   assert.throws(() => validateChecks([...checks, { id: 100, name: 'CodeQL', status: 'completed', conclusion: 'failure' }]));
   assert.throws(() => validateChecks(checks.map(check => check.name === 'CodeQL' ? { ...check, status: 'in_progress' } : check)));
   assert.doesNotThrow(() => validateAlerts([]));
@@ -96,6 +101,9 @@ test('workflow remains manual, serial and pinned; credentials are passed only to
   assert.match(workflow, /netlify-cli@27\.16\.2/); assert.doesNotMatch(workflow, /--prod\b|--auth[=\s]/);
   assert.match(workflow, /REVIEWED_PREVIEW_SHA:/); assert.match(workflow, /environment:\s+name: production/);
   assert.equal((workflow.match(/NETLIFY_AUTH_TOKEN:/g) || []).length, 1);
+  for (const key of ['VITE_NETLIFY_FORMS_ENABLED', 'VITE_CONTACT_FORMS_ENABLED', 'VITE_CAREER_FORMS_ENABLED']) assert.ok(workflow.includes(`${key}: 'false'`));
+  const browserWorkflow = await readFile(new URL('../.github/workflows/browser-qa.yml', import.meta.url), 'utf8');
+  assert.match(browserWorkflow, /push:\s+branches: \[main,/);
   for (const name of ['ci', 'security', 'codeql']) {
     const verificationWorkflow = await readFile(new URL(`../.github/workflows/${name}.yml`, import.meta.url), 'utf8');
     assert.match(verificationWorkflow, /uses: actions\/checkout@v4\s+with:\s+persist-credentials: false/, `${name} must not leave the Git token available to application/dependency commands`);
