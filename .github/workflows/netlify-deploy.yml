@@ -42,6 +42,8 @@ jobs:
     env:
       VITE_SITE_URL: https://karaoglugroupnet.netlify.app/
       VITE_NETLIFY_FORMS_ENABLED: 'false'
+      VITE_CONTACT_FORMS_ENABLED: 'false'
+      VITE_CAREER_FORMS_ENABLED: 'false'
       CONTEXT: production
       NETLIFY_SITE_ID: b4753086-eb94-4a7e-b5f5-7270835fab3a
       PUBLISH_CONFIRMATION: ${{ inputs.confirmation }}

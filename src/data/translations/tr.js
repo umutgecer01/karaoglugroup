@@ -589,6 +589,7 @@ export const tr = {
     }
   },
   "portfolio": {
+    "approvedTitle": "Doğrulanmış Referanslar",
     "eyebrow": "Referanslarımız",
     "title": "Referanslarımız",
     "description": "Karaoğlu Group'un farklı sektörlerde yürüttüğü faaliyetleri, iş birliklerini ve operasyonel deneyimini özetleyen kurumsal referans alanı.",

@@ -1,4 +1,4 @@
-import { formsEnabled } from '../utils/netlifyForms.js';
+import { careerFormsEnabled } from '../utils/netlifyForms.js';
 import { useFormSubmission } from '../utils/useFormSubmission.js';
 import { Field, ConsentField } from './FormField.jsx';
 import { AlertCircle, BriefcaseBusiness, CheckCircle2, ClipboardCheck, Send, Upload, Users } from "lucide-react";
@@ -83,7 +83,7 @@ export default function Career({ t }) {
 
           <Reveal delay={120} className="career-form-panel p-5 sm:p-7">
             <h3 className="text-2xl font-semibold text-white">{t.career.formTitle}</h3>
-            {!formsEnabled && <p role="status" className="mt-3 text-sm leading-7 text-orange-200">{t.ui.formsUnavailable}</p>}
+            {!careerFormsEnabled && <p role="status" className="mt-3 text-sm leading-7 text-orange-200">{t.ui.formsUnavailable}</p>}
             <p className="mt-2 text-sm leading-7 text-steel">{t.career.formIntro}</p>
             <form
               className="mt-6 grid gap-5"
@@ -167,7 +167,7 @@ export default function Career({ t }) {
 
               <ConsentField label={t.career.fields.consentLabel} error={errors.consent} />
 
-              <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70" type="submit" disabled={isSubmitting || !formsEnabled}>
+              <button className="btn-primary justify-center disabled:cursor-wait disabled:opacity-70" type="submit" disabled={isSubmitting || !careerFormsEnabled}>
                 {isSubmitting ? t.common.sending : t.career.fields.submit}
                 <Send size={17} />
               </button>

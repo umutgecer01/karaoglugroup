@@ -6,6 +6,9 @@ export const company = {
   slogan: "1993'ten Beri Güven, Kalite ve Hizmet",
   phone: "0544 443 80 00",
   phoneHref: "tel:+905444438000",
+  // Add the verified Google Workspace mailbox only after it can send and receive.
+  email: null,
+  emailHref: null,
   whatsapp: "0544 443 80 00",
   whatsappUrl: "https://wa.me/905444438000",
   sahibindenUrl: "https://karaogluotomotivadana.sahibinden.com/",

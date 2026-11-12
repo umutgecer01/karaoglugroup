@@ -7,6 +7,8 @@ import { tr } from '../src/data/translations/tr.js';
 import { en } from '../src/data/translations/en.js';
 import { ar } from '../src/data/translations/ar.js';
 import { decodeHtmlEntities as unescape } from './html-entities.mjs';
+import { SITE_URL, SITE_IMAGE_URL } from '../site.config.mjs';
+import { company } from '../src/data/company.js';
 
 const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(match => [match[1].toLowerCase(), match[2]]));
 test('preview headers retain security/cache rules and production has no preview header file', async () => {
@@ -19,15 +21,20 @@ test('all 54 generated pages expose matching metadata and remain form-disabled',
   let count = 0;
   for (const [language, content] of Object.entries({ tr, en, ar })) for (const view of [...Object.keys(pagePaths), 'not-found']) {
     const html = await readFile(`dist${pagePath(view, language)}index.html`, 'utf8');
-    const expected = pageMetadata(view, language, content, undefined, ['deploy-preview','branch-deploy'].includes(process.env.CONTEXT));
+    const expected = pageMetadata(view, language, content, SITE_URL, ['deploy-preview','branch-deploy'].includes(process.env.CONTEXT));
     assert.equal(unescape(html.match(/<title>(.*?)<\/title>/)[1]), expected.title);
     assert.match(html, new RegExp(`<html lang="${language}" dir="${language === 'ar' ? 'rtl' : 'ltr'}">`));
     const metas = [...html.matchAll(/<meta\b[^>]*>/g)].map(match => attrs(match[0]));
-    for (const [key, value] of [['description', expected.description], ['og:title', expected.title], ['og:description', expected.description], ['og:url', expected.canonical], ['og:locale', expected.locale], ['twitter:title', expected.title], ['robots', expected.robots]]) {
+    for (const [key, value] of [['description', expected.description], ['og:title', expected.title], ['og:description', expected.description], ['og:url', expected.canonical], ['og:locale', expected.locale], ['og:image', SITE_IMAGE_URL], ['twitter:image', SITE_IMAGE_URL], ['twitter:title', expected.title], ['googlebot', expected.robots], ['robots', expected.robots]]) {
       const meta = metas.find(item => item.name === key || item.property === key);
       assert.equal(unescape(meta?.content || ''), value, `${language}/${view} ${key}`);
     }
     const links = [...html.matchAll(/<link\b[^>]*>/g)].map(match => attrs(match[0]));
+    const organization = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    assert.equal(organization.url, SITE_URL);
+    assert.equal(organization.logo, `${SITE_URL}images/karaoglu-logo.jpeg`);
+    assert.equal(organization.email, undefined, 'unverified mailbox must not enter structured data');
+    assert.doesNotMatch(html, /href="mailto:/, 'unverified mailbox must not be advertised');
     assert.equal(links.find(item => item.rel === 'canonical').href, expected.canonical);
     for (const alternate of expected.alternates) assert.equal(links.find(item => item.hreflang === alternate.lang).href, alternate.href);
     assert.ok(!html.includes('Bot alanı'), 'hidden field must not introduce Turkish into other locales');
@@ -59,6 +66,11 @@ test('all 54 generated pages expose matching metadata and remain form-disabled',
   }
   assert.equal(count, 54);
 });
+
+test('corporate mailbox remains unpublished pending Workspace verification', () => {
+  assert.equal(company.email, null);
+  assert.equal(company.emailHref, null);
+});
 test('static detection stubs contain the complete form field union', async () => {
   const html = await readFile('dist/index.html', 'utf8');
   const stubs = [...html.matchAll(/<form\b([^>]*)>([\s\S]*?)<\/form>/g)].filter(match => /\bhidden(?:="")?(?:\s|$)/.test(match[1]));
@@ -71,8 +83,11 @@ test('static detection stubs contain the complete form field union', async () =>
 test('sitemap and robots match all 51 canonical content pages, excluding 404', async () => {
   const sitemap = await readFile('dist/sitemap.xml', 'utf8');
   assert.equal([...sitemap.matchAll(/<loc>/g)].length, 51);
-  for (const language of ['tr','en','ar']) for (const view of Object.keys(pagePaths)) assert.ok(sitemap.includes(`<loc>https://karaoglugroupnet.netlify.app${pagePath(view, language)}</loc>`));
+  for (const language of ['tr','en','ar']) for (const view of Object.keys(pagePaths)) assert.ok(sitemap.includes(`<loc>${SITE_URL.replace(/\/$/, '')}${pagePath(view, language)}</loc>`));
   assert.ok(!sitemap.includes('/404/'));
-  assert.match(await readFile('dist/robots.txt', 'utf8'), /Sitemap: https:\/\/karaoglugroupnet.netlify.app\/sitemap.xml/);
-  assert.match(await readFile('netlify.toml', 'utf8'), /VITE_NETLIFY_FORMS_ENABLED = "false"/);
+  assert.ok((await readFile('dist/robots.txt', 'utf8')).includes(`Sitemap: ${SITE_URL}sitemap.xml`));
+  const config = await readFile('netlify.toml', 'utf8');
+  for (const key of ['VITE_NETLIFY_FORMS_ENABLED', 'VITE_CONTACT_FORMS_ENABLED', 'VITE_CAREER_FORMS_ENABLED']) {
+    assert.ok(config.includes(`${key} = "false"`), `${key} must default to false`);
+  }
 });

@@ -584,6 +584,7 @@ export const en = {
     }
   },
   "portfolio": {
+    "approvedTitle": "Verified References",
     "eyebrow": "References",
     "title": "References",
     "description": "A corporate overview of Karaoğlu Group's sector experience, business collaborations and operational capabilities.",

@@ -1,5 +1,13 @@
 # Kontrollü production yayın rehberi
 
+## 12 Kasım 2026 operasyon notu
+
+Bu görevde kullanıcı koşullu merge/yayın ve eksik güvenli yapılandırmaları tamamlama yetkisi verdi. Tekrarlanan sohbet onayı gerekmez; gerçek bağımsız inceleme ve environment onayı gereklidir. İlk API okumasında main/release koruması ve production environment yoktu; bağımsız reviewer platformun başlangıç ayarlarından kaynaklanmıyordu. Mevcut yayın ön kontrolü ve kullanıcı talimatı bağımsız onayı şart koşar. Main ve release artık yöneticiler dahil bir onay, son push için farklı onaylayan kişi, güncel testler ve çözümlenmiş konuşmalar gerektirir; force push/silme yasaktır. Reviewer veya secret uydurulmaz.
+
+Production workflow üç form bayrağını açıkça `false` tutar. Ön kontrol tam main SHA'sı için Browser QA dahil kontrolleri arar; browser workflow main push'larında da çalışır. Netlify'da release dalı branch deploy listesine eklendi; PR #11'in release tabanlı preview üretmesine hazırlık sağlandı. Production branch, repo, domain, secret ve build komutu değiştirilmedi; mevcut deployment kilitlidir.
+
+Bu not aşağıdaki tarihsel hazırlık açıklamalarının üzerine geçer. Environment/reviewer/secret adımları tamamlanmış değildir; bağımsız şirket yetkilisi olmadan yayın başlatılmaz.
+
 ## Güncel durum ve tek kanal
 
 Kalıcı kaynak [umutgecer01/karaoglugroup](https://github.com/umutgecer01/karaoglugroup), production projesi **karaoglugroupnet**, Project ID **b4753086-eb94-4a7e-b5f5-7270835fab3a**, adres **https://karaoglugroupnet.netlify.app/**.

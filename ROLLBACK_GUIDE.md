@@ -6,8 +6,8 @@ Bu belge uygulanabilir hazırlık prosedürüdür; **bu çalışma rollback yapm
 
 - Hedef site: `karaoglugroupnet`, ID `b4753086-eb94-4a7e-b5f5-7270835fab3a`.
 - Başlangıç canlı URL: https://karaoglugroupnet.netlify.app/.
-- Şu anki çalışan yayın: `6af18e98278ff0906ad9ca6a`, kaynak `6ca07f9`, kilitli.
-- Korunan önceki çalışan yayın: `6af17892dbe0ae394ffc49ca`, kaynak `c45a5c0`; yetkili GET deploy API'si ready ve aynı site kimliğini döndürdü.
+- 12 Kasım 2026 API kontrolündeki çalışan yayın: `6af3680cd9b11a5369e06045`, kaynak `838a208275d9fcd5c8b4083458c05ef9239c51bb`, `ready`. Bu işlemde mevcut yayın yeniden kilitlendi ve `locked=true` doğrulandı; içerik değiştirilmedi.
+- Korunan tarihsel yayınlar: `6af18e98278ff0906ad9ca6a` ve `6af17892dbe0ae394ffc49ca`; güncel site deployment listesinde `ready`. Bunlar otomatik seçilecek rollback hedefi değildir. Her geri dönüşte hedef deployment ve içeriği yeniden doğrulanmalıdır.
 - Daha eski `6a462f368c237a00082c4a7b` bu çalışma için varsayılan geri dönüş hedefi değildir.
 
 ## Ön kontrol ve onay

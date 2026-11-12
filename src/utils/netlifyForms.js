@@ -2,7 +2,25 @@ export const CONTACT_FORM_NAME = "corporate-contact";
 export const CAREER_FORM_NAME = "career-application";
 // Leave room for multipart fields below Netlify Forms' 8 MB request limit.
 export const MAX_CV_SIZE_BYTES = 7 * 1024 * 1024;
-export const formsEnabled = import.meta.env?.VITE_NETLIFY_FORMS_ENABLED === 'true';
+// The global gate remains mandatory. Both form types require separate explicit approval.
+export function resolveFormFlags(env = {}) {
+  const master = env?.VITE_NETLIFY_FORMS_ENABLED === 'true';
+  return {
+    contact: master && env?.VITE_CONTACT_FORMS_ENABLED === 'true',
+    career: master && env?.VITE_CAREER_FORMS_ENABLED === 'true',
+  };
+}
+const activation = resolveFormFlags(import.meta.env);
+export const contactFormsEnabled = activation.contact;
+export const careerFormsEnabled = activation.career;
+// Backwards compatible aggregate used by the existing production-disabled test.
+export const formsEnabled = contactFormsEnabled || careerFormsEnabled;
+
+export function isFormNameEnabled(name, flags = activation) {
+  if (name === CONTACT_FORM_NAME) return flags.contact === true;
+  if (name === CAREER_FORM_NAME) return flags.career === true;
+  return false;
+}
 
 const acceptedCvExtensions = [".pdf", ".doc", ".docx"];
 const acceptedCvTypes = {
@@ -43,6 +61,9 @@ export async function submitNetlifyForm(form, { multipart = false } = {}) {
     throw new Error('Netlify Forms must be verified and enabled before accepting submissions.');
   }
   const formData = new FormData(form);
+  if (!isFormNameEnabled(formData.get('form-name'))) {
+    throw new Error('This form type is not enabled for submissions.');
+  }
   if (formData.get('bot-field')) throw new Error('Spam submission rejected.');
   const request = {
     method: "POST",

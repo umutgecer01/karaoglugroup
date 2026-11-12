@@ -14,13 +14,13 @@ Her yeni canlı sürüm için ayrıca doldurun. Eski başarılı test sonucu yen
 
 ## Kaynak ve test
 
-- [ ] Main'in **tam SHA'sı** için CI Build site, Security checks ve Analyze JavaScript başarılı.
+- [ ] Main'in **tam SHA'sı** için CI Build site, Security checks, Analyze JavaScript ve browser-qa başarılı.
 - [ ] Aynı SHA için CodeQL analiz kaydı hata içermiyor, kurallar çalışmış; varsa findings check başarılı.
 - [ ] Main üzerinde açık high/critical Code Scanning bulgusu yok.
 - [ ] Aynı projede incelenen tam PR head SHA için başarılı Netlify Deploy Preview var.
 - [ ] Node 22 `npm ci`, `npm test`, production guard testleri, `security:check`, build ve release-static testleri başarılı.
 - [ ] Üç dil, gerekli responsive/etkileşim/SEO/404/görsel/video kontrolleri ilgili değişiklik için yapıldı; yapılmayanlar N/A olarak işaretlendi.
-- [ ] Production build `CONTEXT=production`, eski site URL'si, `VITE_NETLIFY_FORMS_ENABLED=false`; preview `_headers` yok, içerik indexable.
+- [ ] Production build `CONTEXT=production`, mevcut Netlify site URL'si; `VITE_NETLIFY_FORMS_ENABLED=false`, `VITE_CONTACT_FORMS_ENABLED=false`, `VITE_CAREER_FORMS_ENABLED=false`; preview `_headers` yok, içerik indexable.
 - [ ] Değişen kurumsal/hukuki içerik için yetkili teyit var; kaynak/hak iddiası uydurulmadı.
 
 ## Manuel yayın

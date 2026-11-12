@@ -13,7 +13,7 @@ export function validateDispatch(env, checkedOutSha) {
   for (const key of ['EXPECTED_SHA', 'REVIEWED_PREVIEW_SHA']) requireValue(/^[0-9a-f]{40}$/.test(env[key] || ''), `${key} must be a full lowercase commit SHA.`);
   requireValue(env.EXPECTED_SHA === checkedOutSha && env.EXPECTED_SHA === env.GITHUB_SHA, 'Selected, expected and checked-out SHAs must match.');
   requireValue(env.NETLIFY_SITE_ID === PRODUCTION_SITE_ID, 'Wrong production Project ID.');
-  requireValue(env.VITE_NETLIFY_FORMS_ENABLED === 'false', 'Forms must remain disabled.');
+  for (const key of ['VITE_NETLIFY_FORMS_ENABLED', 'VITE_CONTACT_FORMS_ENABLED', 'VITE_CAREER_FORMS_ENABLED']) requireValue(env[key] === 'false', `${key} must remain explicitly false.`);
   requireValue(env.CONTEXT === 'production' && env.VITE_SITE_URL === `${PRODUCTION_URL}/`, 'Production build context and URL are required.');
   requireValue(Boolean(env.GITHUB_TOKEN), 'GitHub read token is missing.');
 }
@@ -32,7 +32,7 @@ export function validateEnvironment(environment) {
 export function validateChecks(checks) {
   const latest = new Map();
   for (const check of checks) if (!latest.has(check.name) || latest.get(check.name).id < check.id) latest.set(check.name, check);
-  for (const name of ['Build site', 'Security checks', 'Analyze JavaScript']) {
+  for (const name of ['Build site', 'Security checks', 'Analyze JavaScript', 'browser-qa']) {
     const check = latest.get(name);
     requireValue(check?.status === 'completed' && check.conclusion === 'success', `Exact main commit needs a successful ${name} check.`);
   }

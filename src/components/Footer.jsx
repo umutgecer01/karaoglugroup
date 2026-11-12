@@ -1,5 +1,5 @@
 import { pagePath } from '../utils/routes.js';
-import { ArrowRight, Facebook, Instagram, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 const logo = "/images/karaoglu-logo.jpeg";
 import { company } from "../data/company";
 
@@ -87,6 +87,12 @@ const Footer = ({ t, onNavigate, onPrivacy }) => {
               <Phone size={16} className="text-gold" />
               <span>{company.phone}</span>
             </a>
+            {company.email && company.emailHref && (
+              <a href={company.emailHref} className="flex items-center gap-3 transition hover:text-gold">
+                <Mail size={16} className="text-gold" />
+                <span>{company.email}</span>
+              </a>
+            )}
             <div className="flex items-start gap-3">
               <MapPin size={16} className="mt-0.5 shrink-0 text-gold" />
               <span>{company.address}</span>

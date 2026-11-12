@@ -1,5 +1,6 @@
 import { ArrowRight, Building2, Car, Fuel, Leaf, Store, Truck } from "lucide-react";
 import { company } from "../data/company.js";
+import { publishableReferences } from "../data/approvedReferences.js";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
 
@@ -14,6 +15,7 @@ const iconMap = {
 
 export default function VehiclePortfolio({ t }) {
   const items = t?.portfolio?.items || [];
+  const references = publishableReferences();
 
   return (
     <section id="portfoy" className="section-band bg-white/[0.025]">
@@ -34,6 +36,23 @@ export default function VehiclePortfolio({ t }) {
             </p>
           </Reveal>
         ) : null}
+
+        {references.length > 0 && (
+          <section className="mt-12" aria-label={t.portfolio.approvedTitle}>
+            <h2 className="text-center text-2xl font-semibold text-white">{t.portfolio.approvedTitle}</h2>
+            <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {references.map(reference => (
+                <article key={reference.id} className="premium-card flex h-full flex-col gap-3 p-6">
+                  {reference.logoSrc && <img src={reference.logoSrc} alt={reference.name}
+                    width="160" height="64" className="h-16 max-w-full object-contain object-left" loading="lazy" decoding="async" />}
+                  <h3 className="text-xl font-semibold text-white">{reference.name}</h3>
+                  <p className="text-sm font-medium text-amber">{reference.sector?.[t.ui.locale] || ''}</p>
+                  <p className="text-sm leading-7 text-steel">{reference.description?.[t.ui.locale] || ''}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item, index) => {

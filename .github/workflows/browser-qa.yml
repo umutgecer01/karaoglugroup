@@ -2,9 +2,9 @@ name: Browser, media and accessibility QA
 
 on:
   push:
-    branches: ['release/**', 'feature/**']
+    branches: [main, 'release/**', 'feature/**']
   pull_request:
-    branches: [main]
+    branches: [main, 'release/**']
 
 permissions:
   contents: read
@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 30
     env:
       VITE_NETLIFY_FORMS_ENABLED: 'false'
+      VITE_CONTACT_FORMS_ENABLED: 'false'
+      VITE_CAREER_FORMS_ENABLED: 'false'
       VITE_SITE_URL: 'https://karaoglugroupnet.netlify.app/'
       RELEASE_REPORT_DIR: 'reports/final-release'
     steps:
@@ -44,7 +46,7 @@ jobs:
           set -euo pipefail
           mkdir -p .audit/chrome-profile reports/final-release
           nohup node scripts/serve-audit.mjs dist 4175 >.audit/static-server.log 2>&1 &
-          VITE_NETLIFY_FORMS_ENABLED=true nohup node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4180 --strictPort >.audit/mock-server.log 2>&1 &
+          VITE_NETLIFY_FORMS_ENABLED=true VITE_CONTACT_FORMS_ENABLED=true VITE_CAREER_FORMS_ENABLED=true nohup node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4180 --strictPort >.audit/mock-server.log 2>&1 &
           google-chrome --version
           nohup google-chrome \
             --headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu \
